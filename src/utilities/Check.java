@@ -24,6 +24,8 @@ public class Check
     {
       if (haystack[i].equals(needle)) return true;
     }
-    return false;
+    boolean answer = false;
+    return answer;
   }
 }
+// imma try this again (jaxson)
