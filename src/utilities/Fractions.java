@@ -16,13 +16,15 @@ public class Fractions
 		if(numerator == null || denominator == null)
 		{
 			throw new IllegalArgumentException();
+		} else if(numerator < 0 && denominator < 0)
+		{
+			numerator *= -1;
+			denominator *= -1;
 		}
 		
 		this.wholeNumber = wholeNumber;
 		this.numerator = numerator;
 		this.denominator = denominator;
-		
-		setSign();
 	}
 	
 	public Integer getNumerator()
@@ -47,19 +49,6 @@ public class Fractions
 			throw new IllegalArgumentException();
 		}
 		return number *= -1;
-	}
-	
-	/**
-	 * Sets the Fraction to positive if both numerator and denominator
-	 * are negative.
-	 */
-	public void setSign()
-	{
-		if(this.numerator < 0 && this.denominator < 0)
-		{
-			this.numerator *= -1;
-			this.denominator *= -1;
-		}
 	}
 	
 	public void setDenominator(Integer number)
