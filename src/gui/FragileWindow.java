@@ -44,8 +44,8 @@ public class FragileWindow extends JFrame {
 		helpMenu.add(helpItem);
 
 		// also display in a different class
-		JTextField display = new JTextField();
-		display.setEditable(false);
+		Container display = new DisplayDriver();
+		//display.setEditable(false);
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		frame.add(display, BorderLayout.NORTH);
 
@@ -82,6 +82,7 @@ public class FragileWindow extends JFrame {
 						button.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								System.out.println(((JButton) e.getSource()).getText() + " pressed!");
+								DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
 							}
 						});
 					} else {
@@ -97,12 +98,16 @@ public class FragileWindow extends JFrame {
 									System.out.println("Backspace pressed!");
 								} else if (buttonText.equals("+")) {
 									System.out.println("+ pressed!");
+									DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("-")) {
 									System.out.println("- pressed!");
+									DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("x")) {
 									System.out.println("x pressed!");
+									DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("\u00F7")) {
 									System.out.println("\u00F7 pressed!");
+									DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("=")) {
 									System.out.println("= pressed!");
 								} else if (buttonText.equals("\u00B1")) {
