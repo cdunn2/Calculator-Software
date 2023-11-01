@@ -15,12 +15,21 @@ public class FragileWindow extends JFrame {
 		frame.setSize(400, 500);
 		frame.setLayout(new BorderLayout());
 
+		// all the menu stuff should be in a separate class
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		JMenu fileMenu = new JMenu("File");
+		JMenu viewMenu = new JMenu("View");
+		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(fileMenu);
+		menuBar.add(viewMenu);
+		menuBar.add(helpMenu);
 
 		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenuItem pieItem = new JMenuItem("Pie Chart");
+		JMenuItem aboutItem = new JMenuItem("About");
+		JMenuItem helpItem = new JMenuItem("Help");
+		// move the behavior to a different (action listener) class(es)
 		exitItem.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(final ActionEvent e) 
@@ -30,7 +39,11 @@ public class FragileWindow extends JFrame {
 		});
 
 		fileMenu.add(exitItem);
+		viewMenu.add(pieItem);
+		helpMenu.add(aboutItem);
+		helpMenu.add(helpItem);
 
+		// also display in a different class
 		JTextField display = new JTextField();
 		display.setEditable(false);
 		display.setFont(new Font("Arial", Font.BOLD, 24));
