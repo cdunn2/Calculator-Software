@@ -62,6 +62,8 @@ public class Calculations
 	
 	public static Fractions division(Fractions number1, Fractions number2)
 	{
+		Fractions reciprocal;
+		
 		if(number1 == null || number2 == null)
 		{
 			throw new IllegalArgumentException();
@@ -70,7 +72,15 @@ public class Calculations
 		Fractions one = Calculations.improper(number1);
 		Fractions two = Calculations.improper(number2);
 		
-		Fractions reciprocal = new Fractions(two.getDenominator(), two.getNumerator());
+		if (two.getNumerator() < 0)
+		{
+			reciprocal = new Fractions(two.getDenominator() * -1, two.getNumerator() * -1);
+		} else
+		{
+			reciprocal = new Fractions(two.getDenominator(), two.getNumerator());
+		}
+		
+		
 		
 		return Calculations.multiplication(one, reciprocal);
 	}
