@@ -12,6 +12,7 @@ public class DisplayDriver extends Container
 	static JLabel bottom_text;
 	static String botmtext = "";
 	String toptext = "";
+	static String curFocus = "W";
 	
 	public DisplayDriver() {
 		super();
@@ -32,14 +33,25 @@ public class DisplayDriver extends Container
 		try {
 			int num = Integer.parseInt(buttonpressed);
 
-			//System.out.print(bottom_text.getText());
 			if (bottom_text.getText().isBlank())
 			{
-				bottom_text.setText(String.format("%d  / ", num));
+				bottom_text.setText(String.format("%d /", num));
 
 				botmtext = bottom_text.getText();
 			} else {
-				bottom_text.setText(botmtext + buttonpressed);
+			  //Check where focus is and insert number in the appropriate spot.
+			  if(curFocus == "W") {
+			    System.out.println(curFocus);
+			    bottom_text.setText(botmtext.substring(0, botmtext.indexOf(" ")) + buttonpressed + botmtext.substring(botmtext.indexOf(" ")));
+			  }
+			  else if (curFocus == "N") {
+			    System.out.println("N");
+			    bottom_text.setText(botmtext.substring(0, botmtext.indexOf("/")) + buttonpressed + botmtext.substring(botmtext.indexOf("/")));
+			  }
+			  else if(curFocus == "D") {
+			    System.out.println("D");
+          bottom_text.setText(botmtext + buttonpressed);
+			  }
 				botmtext = bottom_text.getText();
 			}
 
@@ -54,6 +66,15 @@ public class DisplayDriver extends Container
 				top_text.setText(botmtext);
 				botmtext = "";
 				bottom_text.setText(botmtext);
+			}
+			else if (buttonpressed.equals("Pos")) {
+			  //Check where focus currently is and update it accordingly.
+			  if(curFocus == "W")
+			    curFocus = "N";
+			  else if(curFocus == "N")
+			    curFocus = "D";
+			  else if(curFocus == "D")
+			    curFocus = "W";
 			}
 		}
 	}

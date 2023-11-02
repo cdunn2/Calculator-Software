@@ -89,6 +89,7 @@ public class FragileWindow extends JFrame {
 									System.out.println("\u00B1 pressed!");
 								} else if (buttonText.equals("Pos")) { // This one is temporary
 									System.out.println("Position pressed!");
+									DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
 								}
 							}
 						});
