@@ -83,6 +83,11 @@ public class Calculations
 		
 		Integer numerator = (whole * bottom) + top;
 		
+		if (mixedNumber.getIsNegative() == true)
+		{
+			numerator *= -1;
+		}
+		
 		return new Fractions(numerator, bottom);
 	}
 	
@@ -106,9 +111,18 @@ public class Calculations
 	        }
 	    } 
 	    
+	    Boolean isNegative = false;
 	    Integer numerator = improper.getNumerator() / newNum1;
+	    if (numerator < 0)
+	    {
+	    	numerator *= -1;
+	    	isNegative = true;
+	    }
+	    
 	    Integer denominator = improper.getDenominator()/ newNum1;
 	    Integer whole = (numerator - (numerator % denominator)) / denominator;
-	    return new Fractions(whole, numerator % denominator, denominator);
+	    
+	    
+	    return new Fractions(isNegative, whole, numerator % denominator, denominator);
 	}
 }
