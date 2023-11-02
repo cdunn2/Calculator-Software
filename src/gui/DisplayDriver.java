@@ -16,6 +16,8 @@ public class DisplayDriver extends Container
 	String toptext = "";
 	static String curFocus = "W";
 	private static final String FOCUS = "[]";
+	private static Fractions op1;
+	private static Fractions op2;
 	
 	public DisplayDriver() {
 		super();
@@ -43,6 +45,7 @@ public class DisplayDriver extends Container
 
 				botmtext = bottom_text.getText();
 			} else {
+			  //places number before the "[]" in the string.
 			  bottom_text.setText(botmtext.substring(0, botmtext.indexOf("[]")) + buttonpressed + botmtext.substring(botmtext.indexOf("[]")));
 				botmtext = bottom_text.getText();
 			}
@@ -60,6 +63,13 @@ public class DisplayDriver extends Container
 				botmtext = "[] /";
 				bottom_text.setText(botmtext);
 				curFocus = "W";
+			}
+			else if (buttonpressed.equals("\u00B1")) {
+			  if(botmtext.substring(0, 1).equals("-"))
+			    botmtext = botmtext.replace("-", "");
+			  else
+			    botmtext = "-" + botmtext;
+			  bottom_text.setText(botmtext);
 			}
 			else if (buttonpressed.equals("Pos")) {
 			  //Check where focus currently is and update it accordingly.
