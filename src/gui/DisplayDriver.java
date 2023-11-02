@@ -90,24 +90,20 @@ public class DisplayDriver extends Container
 			}
 			else if (buttonpressed.equals("Pos")) {
 			  //Check where focus currently is and update it accordingly.
+			  botmtext = botmtext.replace("[]", "");
 			  if(curFocus == "W") {
-			    curFocus = "N";
-			    botmtext = botmtext.replace("[]", "");
+			    curFocus = "N";	    
 			    botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
-			    bottom_text.setText(botmtext);
 			  }
 			  else if(curFocus == "N") {
 			    curFocus = "D";
-			    botmtext = botmtext.replace("[]", "");
           botmtext = botmtext + "[]";
-          bottom_text.setText(botmtext);
 			  }
 			  else if(curFocus == "D") {
 			    curFocus = "W";
-          botmtext = botmtext.replace("[]", "");
           botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
-          bottom_text.setText(botmtext);
 			  }
+			  bottom_text.setText(botmtext);
 			}
 			else if (buttonpressed.equals("=")) {
 			  Fractions ans = null;
@@ -136,43 +132,35 @@ public class DisplayDriver extends Container
 			    bottom_text.setText(botmtext);
 			    
 			  } catch (StringIndexOutOfBoundsException ex) {
+			    botmtext = botmtext.replace("[]", "");
 			    if(curFocus == "W") {
 			      curFocus = "D";
-	          botmtext = botmtext.replace("[]", "");
-	          botmtext = botmtext + "[]";
-	          bottom_text.setText(botmtext);
+	          botmtext = botmtext + "[]";   
 	        }
 	        else if(curFocus == "N") {
 	          curFocus = "W";
-	          botmtext = botmtext.replace("[]", "");
 	          botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
-	          bottom_text.setText(botmtext);
 	        }
 	        else if(curFocus == "D") {
 	          curFocus = "N";
-	          botmtext = botmtext.replace("[]", "");
 	          botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
-	          bottom_text.setText(botmtext);
 	        }
+			    bottom_text.setText(botmtext);
 			  } catch (NumberFormatException ex2) {
+			    botmtext = botmtext.replace("[]", "");
 			    if(curFocus == "W") {
             curFocus = "D";
-            botmtext = botmtext.replace("[]", "");
             botmtext = botmtext + "[]";
-            bottom_text.setText(botmtext);
           }
           else if(curFocus == "N") {
             curFocus = "W";
-            botmtext = botmtext.replace("[]", "");
             botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
-            bottom_text.setText(botmtext);
           }
           else if(curFocus == "D") {
             curFocus = "N";
-            botmtext = botmtext.replace("[]", "");
-            botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
-            bottom_text.setText(botmtext);
+            botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));      
           }
+			    bottom_text.setText(botmtext);
 			  }
 			}
 		}
