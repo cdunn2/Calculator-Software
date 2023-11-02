@@ -11,7 +11,6 @@ public class AboutWindow  extends JFrame {
 	public AboutWindow() {
 		super("About Fragile");
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400, 200);
 		
         JPanel panel = new JPanel();
