@@ -20,6 +20,7 @@ public class FragileWindow extends JFrame {
 
 		// also display in a different class
 		Container display = new DisplayDriver();
+		display.isVisible();
 		//display.setEditable(false);
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		frame.add(display, BorderLayout.NORTH);
@@ -106,7 +107,6 @@ public class FragileWindow extends JFrame {
 	
 	private static void createMenu()
 	{
-		// all the menu stuff should be in a separate class
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		JMenu fileMenu = new JMenu("File");
