@@ -26,8 +26,8 @@ public class AboutWindow  extends JFrame {
 
         //icon
         ImageIcon logoIcon = new ImageIcon("icon.png");
-        JLabel logoLabel = new JLabel(logoIcon, SwingConstants.CENTER);
-        panel.add(logoLabel);
+        JLabel iconLabel = new JLabel(logoIcon, SwingConstants.CENTER);
+        panel.add(iconLabel);
 
         //version
         JLabel versionLabel = new JLabel("Fragile v1.0", SwingConstants.CENTER);
@@ -50,7 +50,7 @@ public class AboutWindow  extends JFrame {
         panel.add(line_four);
         
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         versionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         line_one.setAlignmentX(Component.CENTER_ALIGNMENT);
         line_two.setAlignmentX(Component.CENTER_ALIGNMENT);
