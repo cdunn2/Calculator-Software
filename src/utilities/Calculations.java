@@ -92,9 +92,14 @@ public class Calculations
 	}
 	
 	public static Fractions simplify(Fractions improper)
-	{
+	{		
 		int newNum1 = improper.getNumerator();
 	    int newNum2 = improper.getDenominator();
+	    
+	    if (newNum1 == 0)
+	    {
+	    	return new Fractions(false, 0, 0, 1);
+	    }
 
 	    if (newNum1 < 0){
 	        newNum1 = newNum1 * -1;
