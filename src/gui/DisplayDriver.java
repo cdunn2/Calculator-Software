@@ -5,19 +5,23 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import utilities.Fractions;
+
 public class DisplayDriver extends Container
 {
 	private static final long serialVersionUID = 1L;
 	static JLabel top_text;
 	static JLabel bottom_text;
-	static String botmtext = "";
+	static String botmtext;
 	String toptext = "";
 	static String curFocus = "W";
+	private static final String FOCUS = "[]";
 	
 	public DisplayDriver() {
 		super();
 		top_text = new JLabel(" ");
-		bottom_text = new JLabel(" ");
+		bottom_text = new JLabel("[] /");
+		botmtext = bottom_text.getText();
 		bottom_text.setHorizontalAlignment(SwingConstants.RIGHT);
 		top_text.setHorizontalAlignment(SwingConstants.LEFT);
 		setLayout(new GridLayout(2,1));
@@ -33,25 +37,13 @@ public class DisplayDriver extends Container
 		try {
 			int num = Integer.parseInt(buttonpressed);
 
-			if (bottom_text.getText().isBlank())
+			if (bottom_text.getText() == "[] /")
 			{
-				bottom_text.setText(String.format("%d /", num));
+				bottom_text.setText(String.format("%d[] /", num));
 
 				botmtext = bottom_text.getText();
 			} else {
-			  //Check where focus is and insert number in the appropriate spot.
-			  if(curFocus == "W") {
-			    System.out.println(curFocus);
-			    bottom_text.setText(botmtext.substring(0, botmtext.indexOf(" ")) + buttonpressed + botmtext.substring(botmtext.indexOf(" ")));
-			  }
-			  else if (curFocus == "N") {
-			    System.out.println("N");
-			    bottom_text.setText(botmtext.substring(0, botmtext.indexOf("/")) + buttonpressed + botmtext.substring(botmtext.indexOf("/")));
-			  }
-			  else if(curFocus == "D") {
-			    System.out.println("D");
-          bottom_text.setText(botmtext + buttonpressed);
-			  }
+			  bottom_text.setText(botmtext.substring(0, botmtext.indexOf("[]")) + buttonpressed + botmtext.substring(botmtext.indexOf("[]")));
 				botmtext = bottom_text.getText();
 			}
 
@@ -63,18 +55,32 @@ public class DisplayDriver extends Container
 			{
 				bottom_text.setText(botmtext + buttonpressed);
 				botmtext = bottom_text.getText();
+				botmtext = botmtext.replace("[]", "");
 				top_text.setText(botmtext);
-				botmtext = "";
+				botmtext = "[] /";
 				bottom_text.setText(botmtext);
+				curFocus = "W";
 			}
 			else if (buttonpressed.equals("Pos")) {
 			  //Check where focus currently is and update it accordingly.
-			  if(curFocus == "W")
+			  if(curFocus == "W") {
 			    curFocus = "N";
-			  else if(curFocus == "N")
+			    botmtext = botmtext.replace("[]", "");
+			    botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
+			    bottom_text.setText(botmtext);
+			  }
+			  else if(curFocus == "N") {
 			    curFocus = "D";
-			  else if(curFocus == "D")
+			    botmtext = botmtext.replace("[]", "");
+          botmtext = botmtext + "[]";
+          bottom_text.setText(botmtext);
+			  }
+			  else if(curFocus == "D") {
 			    curFocus = "W";
+          botmtext = botmtext.replace("[]", "");
+          botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
+          bottom_text.setText(botmtext);
+			  }
 			}
 		}
 	}
