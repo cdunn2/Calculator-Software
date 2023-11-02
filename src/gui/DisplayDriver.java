@@ -15,8 +15,8 @@ public class DisplayDriver extends Container
 	
 	public DisplayDriver() {
 		super();
-		top_text = new JLabel();
-		bottom_text = new JLabel();
+		top_text = new JLabel(" ");
+		bottom_text = new JLabel(" ");
 		bottom_text.setHorizontalAlignment(SwingConstants.RIGHT);
 		top_text.setHorizontalAlignment(SwingConstants.LEFT);
 		setLayout(new GridLayout(2,1));
@@ -33,7 +33,7 @@ public class DisplayDriver extends Container
 			int num = Integer.parseInt(buttonpressed);
 
 			//System.out.print(bottom_text.getText());
-			if (bottom_text.getText().isEmpty())
+			if (bottom_text.getText().isBlank())
 			{
 				bottom_text.setText(String.format("%d  / ", num));
 

@@ -20,7 +20,6 @@ public class FragileWindow extends JFrame {
 
 		// also display in a different class
 		Container display = new DisplayDriver();
-		display.isVisible();
 		//display.setEditable(false);
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		frame.add(display, BorderLayout.NORTH);
