@@ -106,6 +106,10 @@ public class DisplayDriver extends Container
 			  bottom_text.setText(botmtext);
 			}
 			else if (buttonpressed.equals("=")) {
+			  if(operationComplete) {
+			    //Unsure what to do here, this prevents errors being thrown.
+			    return;
+			  }
 			  Fractions ans = null;
 			  System.out.println(operator);
 			  botmtext = botmtext.replace("[]", "");
