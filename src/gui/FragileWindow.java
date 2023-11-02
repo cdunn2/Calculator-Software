@@ -8,40 +8,15 @@ import java.awt.event.ActionListener;
 public class FragileWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static JFrame frame = new JFrame("Fragile Calculator");
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Fragile Calculator");
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 500);
 		frame.setLayout(new BorderLayout());
 
-		// all the menu stuff should be in a separate class
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		JMenu fileMenu = new JMenu("File");
-		JMenu viewMenu = new JMenu("View");
-		JMenu helpMenu = new JMenu("Help");
-		menuBar.add(fileMenu);
-		menuBar.add(viewMenu);
-		menuBar.add(helpMenu);
-
-		JMenuItem exitItem = new JMenuItem("Exit");
-		JMenuItem pieItem = new JMenuItem("Pie Chart");
-		JMenuItem aboutItem = new JMenuItem("About");
-		JMenuItem helpItem = new JMenuItem("Help");
-		// move the behavior to a different (action listener) class(es)
-		exitItem.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(final ActionEvent e) 
-			{
-				System.exit(0);
-			}
-		});
-
-		fileMenu.add(exitItem);
-		viewMenu.add(pieItem);
-		helpMenu.add(aboutItem);
-		helpMenu.add(helpItem);
+		createMenu();
 
 		// also display in a different class
 		Container display = new DisplayDriver();
@@ -127,5 +102,35 @@ public class FragileWindow extends JFrame {
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 
 		frame.setVisible(true);
+	}
+	
+	private static void createMenu()
+	{
+		// all the menu stuff should be in a separate class
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		JMenu fileMenu = new JMenu("File");
+		JMenu viewMenu = new JMenu("View");
+		JMenu helpMenu = new JMenu("Help");
+		menuBar.add(fileMenu);
+		menuBar.add(viewMenu);
+		menuBar.add(helpMenu);
+
+		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenuItem pieItem = new JMenuItem("Pie Chart");
+		JMenuItem aboutItem = new JMenuItem("About");
+		JMenuItem helpItem = new JMenuItem("Help");
+
+		fileMenu.add(exitItem);
+		viewMenu.add(pieItem);
+		helpMenu.add(aboutItem);
+		helpMenu.add(helpItem);
+		
+		MenuListener listener = new MenuListener();
+
+        exitItem.addActionListener(listener);
+        pieItem.addActionListener(listener);
+        aboutItem.addActionListener(listener);
+        helpItem.addActionListener(listener);
 	}
 }
