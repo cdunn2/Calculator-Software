@@ -56,7 +56,7 @@ public class FragileWindow extends JFrame {
 					if (button.getText().matches("\\d")) {
 						button.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								System.out.println(((JButton) e.getSource()).getText() + " pressed!");
+								//System.out.println(((JButton) e.getSource()).getText() + " pressed!");
 								DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
 							}
 						});
@@ -84,7 +84,7 @@ public class FragileWindow extends JFrame {
 									System.out.println("\u00F7 pressed!");
 									DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("=")) {
-									System.out.println("= pressed!");
+	                 DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("\u00B1")) {
 								  DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("Pos")) { // This one is temporary

@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import utilities.Calculations;
 import utilities.Fractions;
 
 public class DisplayDriver extends Container
@@ -18,6 +19,8 @@ public class DisplayDriver extends Container
 	private static final String FOCUS = "[]";
 	private static Fractions op1;
 	private static Fractions op2;
+	private static String operator;
+	private static Boolean operationComplete = false;
 	
 	public DisplayDriver() {
 		super();
@@ -49,6 +52,10 @@ public class DisplayDriver extends Container
 			  bottom_text.setText(botmtext.substring(0, botmtext.indexOf("[]")) + buttonpressed + botmtext.substring(botmtext.indexOf("[]")));
 				botmtext = bottom_text.getText();
 			}
+			if(operationComplete) {
+        operationComplete = false;
+        top_text.setText("");
+      }
 
 
 		}
@@ -56,13 +63,23 @@ public class DisplayDriver extends Container
 			if (buttonpressed.equals("x") || buttonpressed.equals("-") || buttonpressed.equals("+")
 					|| buttonpressed.equals("\u00F7") )
 			{
-				bottom_text.setText(botmtext + buttonpressed);
-				botmtext = bottom_text.getText();
-				botmtext = botmtext.replace("[]", "");
-				top_text.setText(botmtext);
-				botmtext = "[] /";
-				bottom_text.setText(botmtext);
-				curFocus = "W";
+			  operator = buttonpressed;
+			  if(operationComplete) {
+			    operationComplete = false;
+			    op1 = Fractions.parseFractions(top_text.getText());
+			    top_text.setText(top_text.getText() + operator);
+			  }
+			  else { 
+	        botmtext = bottom_text.getText();
+	        botmtext = botmtext.replace("[]", "");
+	        op1 = Fractions.parseFractions(botmtext);
+	        top_text.setText(Fractions.parseFractions(botmtext).toString() + operator);
+			  }
+			  botmtext = "[] /";
+        bottom_text.setText(botmtext);
+        curFocus = "W";
+			  
+				
 			}
 			else if (buttonpressed.equals("\u00B1")) {
 			  if(botmtext.substring(0, 1).equals("-"))
@@ -91,6 +108,25 @@ public class DisplayDriver extends Container
           botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
           bottom_text.setText(botmtext);
 			  }
+			}
+			else if (buttonpressed.equals("=")) {
+			  Fractions ans = null;
+			  System.out.println(operator);
+			  botmtext = botmtext.replace("[]", "");
+			  op2 = Fractions.parseFractions(botmtext);
+			  if(operator.equals("+"))
+			    ans = Calculations.addition(op1, op2);
+			  else if (operator.equals("-"))
+			    ans = Calculations.subtraction(op1, op2);
+			  else if (operator.equals("x"))
+			    ans = Calculations.multiplication(op1,  op2);
+			  else if (operator.equals("\u00F7"))
+			    ans = Calculations.division(op1, op2);
+			  top_text.setText(ans.toString());
+			  operationComplete = true;
+			  botmtext = "[] /";
+        bottom_text.setText(botmtext);
+        curFocus = "W";
 			}
 		}
 	}

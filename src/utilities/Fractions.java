@@ -98,4 +98,31 @@ public class Fractions
 			this.isNegative = false;
 		}
 	}
+	//Helper method to convert a string to a fraction.
+	public static Fractions parseFractions(String s) {
+	  boolean isNegative = false;
+	  int numerator = -1;
+	  int denominator = -1;
+	  int whole = -1;
+	  //if fraction is negative
+	  if(s.substring(0, 1).equals("-")) {
+	    whole = Integer.parseInt(s.substring(1, s.indexOf(" ")));
+	    isNegative = true;
+	  }
+	  else {
+	    whole = Integer.parseInt(s.substring(0, s.indexOf(" ")));
+	    isNegative = false;
+	  }
+	  numerator = Integer.parseInt(s.substring(s.indexOf(" ")+1, s.indexOf("/")));
+    denominator = Integer.parseInt(s.substring(s.indexOf("/") + 1));
+    return new Fractions(isNegative, whole, numerator, denominator);
+	}
+	
+	public String toString() {
+	  String str = "";
+	  if(this.isNegative)
+	    str += "-";
+	  str += this.wholeNumber + " " + this.numerator + "/" + this.denominator;
+	  return str;
+	}
 }
