@@ -110,26 +110,26 @@ public class FragileWindow extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		JMenu fileMenu = new JMenu("File");
-		JMenu viewMenu = new JMenu("View");
+		//JMenu viewMenu = new JMenu("View");			I took out the pie chart because we will not complete it this sprint
 		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(fileMenu);
-		menuBar.add(viewMenu);
+		//menuBar.add(viewMenu);
 		menuBar.add(helpMenu);
 
 		JMenuItem exitItem = new JMenuItem("Exit");
-		JMenuItem pieItem = new JMenuItem("Pie Chart");
+		//JMenuItem pieItem = new JMenuItem("Pie Chart");
 		JMenuItem aboutItem = new JMenuItem("About");
 		JMenuItem helpItem = new JMenuItem("Help");
 
 		fileMenu.add(exitItem);
-		viewMenu.add(pieItem);
+		//viewMenu.add(pieItem);
 		helpMenu.add(aboutItem);
 		helpMenu.add(helpItem);
 		
 		MenuListener listener = new MenuListener();
 
         exitItem.addActionListener(listener);
-        pieItem.addActionListener(listener);
+        //pieItem.addActionListener(listener);
         aboutItem.addActionListener(listener);
         helpItem.addActionListener(listener);
 	}
