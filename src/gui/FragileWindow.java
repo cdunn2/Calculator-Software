@@ -70,7 +70,7 @@ public class FragileWindow extends JFrame {
 								} else if (buttonText.equals("C")) {
 									System.out.println("Clear pressed!");
 								} else if (buttonText.equals("\u2190")) {
-									System.out.println("Backspace pressed!");
+								  DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("+")) {
 									System.out.println("+ pressed!");
 									DisplayDriver.bottomManager(buttonText);

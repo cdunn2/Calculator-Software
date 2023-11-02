@@ -128,6 +128,53 @@ public class DisplayDriver extends Container
         bottom_text.setText(botmtext);
         curFocus = "W";
 			}
+			else if (buttonpressed.equals("\u2190")) {
+			  try {
+			    Integer.parseInt(String.valueOf(botmtext.charAt(botmtext.indexOf("[")-1)));
+			    System.out.println(Integer.parseInt(String.valueOf(botmtext.charAt(botmtext.indexOf("[")-1))));
+			    botmtext = botmtext.substring(0, botmtext.indexOf("[")-1) + botmtext.substring(botmtext.indexOf("["));
+			    bottom_text.setText(botmtext);
+			    
+			  } catch (StringIndexOutOfBoundsException ex) {
+			    if(curFocus == "W") {
+			      curFocus = "D";
+	          botmtext = botmtext.replace("[]", "");
+	          botmtext = botmtext + "[]";
+	          bottom_text.setText(botmtext);
+	        }
+	        else if(curFocus == "N") {
+	          curFocus = "W";
+	          botmtext = botmtext.replace("[]", "");
+	          botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
+	          bottom_text.setText(botmtext);
+	        }
+	        else if(curFocus == "D") {
+	          curFocus = "N";
+	          botmtext = botmtext.replace("[]", "");
+	          botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
+	          bottom_text.setText(botmtext);
+	        }
+			  } catch (NumberFormatException ex2) {
+			    if(curFocus == "W") {
+            curFocus = "D";
+            botmtext = botmtext.replace("[]", "");
+            botmtext = botmtext + "[]";
+            bottom_text.setText(botmtext);
+          }
+          else if(curFocus == "N") {
+            curFocus = "W";
+            botmtext = botmtext.replace("[]", "");
+            botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
+            bottom_text.setText(botmtext);
+          }
+          else if(curFocus == "D") {
+            curFocus = "N";
+            botmtext = botmtext.replace("[]", "");
+            botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
+            bottom_text.setText(botmtext);
+          }
+			  }
+			}
 		}
 	}
 }
