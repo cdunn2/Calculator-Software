@@ -65,6 +65,7 @@ public class FragileWindow extends JFrame {
 							public void actionPerformed(ActionEvent e) {
 								String buttonText = ((JButton) e.getSource()).getText();
 								// I'm so sorry for what I'm about to do
+								/*
 								if (buttonText.equals("R")) {
 									System.out.println("Reset pressed!");
 								} else if (buttonText.equals("C")) {
@@ -89,8 +90,10 @@ public class FragileWindow extends JFrame {
 								  DisplayDriver.bottomManager(buttonText);
 								} else if (buttonText.equals("Pos")) { // This one is temporary
 									System.out.println("Position pressed!");
-									DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
-								}
+									*/
+									
+								
+								DisplayDriver.bottomManager(buttonText);
 							}
 						});
 					}

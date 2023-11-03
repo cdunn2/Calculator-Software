@@ -106,15 +106,32 @@ public class Fractions
 	  int whole = -1;
 	  //if fraction is negative
 	  if(s.substring(0, 1).equals("-")) {
+	    try {
 	    whole = Integer.parseInt(s.substring(1, s.indexOf(" ")));
+	    } catch(NumberFormatException e) {
+	      whole = 0;
+	    }
 	    isNegative = true;
 	  }
 	  else {
+	    try {
 	    whole = Integer.parseInt(s.substring(0, s.indexOf(" ")));
+	    } catch(NumberFormatException e) {
+	      whole = 0;
+	    }
 	    isNegative = false;
 	  }
+	  try {
 	  numerator = Integer.parseInt(s.substring(s.indexOf(" ")+1, s.indexOf("/")));
+	  }
+	  catch(NumberFormatException e) {
+	    numerator = 0;
+	  }
+	  try {
     denominator = Integer.parseInt(s.substring(s.indexOf("/") + 1));
+	  } catch(NumberFormatException e) {
+	    denominator = 1;
+	  }
     return new Fractions(isNegative, whole, numerator, denominator);
 	}
 	

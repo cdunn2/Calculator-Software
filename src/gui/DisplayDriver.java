@@ -13,7 +13,7 @@ public class DisplayDriver extends Container
 	private static final long serialVersionUID = 1L;
 	static JLabel top_text;
 	static JLabel bottom_text;
-	static String botmtext;
+	//static String botmtext;
 	String toptext = "";
 	static String curFocus = "W";
 	private static final String FOCUS = "[]";
@@ -26,7 +26,7 @@ public class DisplayDriver extends Container
 		super();
 		top_text = new JLabel(" ");
 		bottom_text = new JLabel("[] /");
-		botmtext = bottom_text.getText();
+		//botmtext = bottom_text.getText();
 		bottom_text.setHorizontalAlignment(SwingConstants.RIGHT);
 		top_text.setHorizontalAlignment(SwingConstants.LEFT);
 		setLayout(new GridLayout(2,1));
@@ -45,12 +45,10 @@ public class DisplayDriver extends Container
 			if (bottom_text.getText() == "[] /")
 			{
 				bottom_text.setText(String.format("%d[] /", num));
-
-				botmtext = bottom_text.getText();
 			} else {
 			  //places number before the "[]" in the string.
-			  bottom_text.setText(botmtext.substring(0, botmtext.indexOf("[]")) + buttonpressed + botmtext.substring(botmtext.indexOf("[]")));
-				botmtext = bottom_text.getText();
+			  bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf("[]")) + 
+			      buttonpressed + bottom_text.getText().substring(bottom_text.getText().indexOf("[]")));
 			}
 			if(operationComplete) {
         operationComplete = false;
@@ -70,40 +68,38 @@ public class DisplayDriver extends Container
 			    top_text.setText(top_text.getText() + operator);
 			  }
 			  else { 
-	        botmtext = bottom_text.getText();
-	        botmtext = botmtext.replace("[]", "");
-	        op1 = Fractions.parseFractions(botmtext);
-	        top_text.setText(Fractions.parseFractions(botmtext).toString() + operator);
+	        bottom_text.setText(bottom_text.getText().replace("[]", ""));
+	        op1 = Fractions.parseFractions(bottom_text.getText());
+	        top_text.setText(Fractions.parseFractions(bottom_text.getText()).toString() + operator);
 			  }
-			  botmtext = "[] /";
-        bottom_text.setText(botmtext);
+			  bottom_text.setText("[] /");
         curFocus = "W";
 			  
 				
 			}
 			else if (buttonpressed.equals("\u00B1")) {
-			  if(botmtext.substring(0, 1).equals("-"))
-			    botmtext = botmtext.replace("-", "");
+			  if(bottom_text.getText().substring(0, 1).equals("-"))
+			    bottom_text.setText(bottom_text.getText().replace("-", ""));
 			  else
-			    botmtext = "-" + botmtext;
-			  bottom_text.setText(botmtext);
+			    bottom_text.setText("-" + bottom_text.getText());
 			}
 			else if (buttonpressed.equals("Pos")) {
 			  //Check where focus currently is and update it accordingly.
-			  botmtext = botmtext.replace("[]", "");
+			  bottom_text.setText(bottom_text.getText().replace("[]", ""));
 			  if(curFocus == "W") {
 			    curFocus = "N";	    
-			    botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
+			    bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf("/")) + "[]" + 
+			        bottom_text.getText().substring(bottom_text.getText().indexOf("/")));
 			  }
 			  else if(curFocus == "N") {
 			    curFocus = "D";
-          botmtext = botmtext + "[]";
+			    bottom_text.setText(bottom_text.getText() + "[]");
 			  }
 			  else if(curFocus == "D") {
 			    curFocus = "W";
-          botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
+			    bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf(" ")) + "[]" + 
+			        bottom_text.getText().substring(bottom_text.getText().indexOf(" ")));
 			  }
-			  bottom_text.setText(botmtext);
 			}
 			else if (buttonpressed.equals("=")) {
 			  if(operationComplete) {
@@ -112,8 +108,8 @@ public class DisplayDriver extends Container
 			  }
 			  Fractions ans = null;
 			  System.out.println(operator);
-			  botmtext = botmtext.replace("[]", "");
-			  op2 = Fractions.parseFractions(botmtext);
+			  bottom_text.setText(bottom_text.getText().replace("[]", ""));
+			  op2 = Fractions.parseFractions(bottom_text.getText());
 			  if(operator.equals("+"))
 			    ans = Calculations.addition(op1, op2);
 			  else if (operator.equals("-"))
@@ -124,48 +120,56 @@ public class DisplayDriver extends Container
 			    ans = Calculations.division(op1, op2);
 			  top_text.setText(ans.toString());
 			  operationComplete = true;
-			  botmtext = "[] /";
-        bottom_text.setText(botmtext);
+			  bottom_text.setText("[] /");
         curFocus = "W";
 			}
 			else if (buttonpressed.equals("\u2190")) {
 			  try {
-			    Integer.parseInt(String.valueOf(botmtext.charAt(botmtext.indexOf("[")-1)));
-			    System.out.println(Integer.parseInt(String.valueOf(botmtext.charAt(botmtext.indexOf("[")-1))));
-			    botmtext = botmtext.substring(0, botmtext.indexOf("[")-1) + botmtext.substring(botmtext.indexOf("["));
-			    bottom_text.setText(botmtext);
+			    Integer.parseInt(String.valueOf(bottom_text.getText().charAt(bottom_text.getText().indexOf("[")-1)));
+			    System.out.println(Integer.parseInt(String.valueOf(bottom_text.getText().charAt(bottom_text.getText().indexOf("[")-1))));
+			    bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf("[")-1) + 
+			        bottom_text.getText().substring(bottom_text.getText().indexOf("[")));
 			    
 			  } catch (StringIndexOutOfBoundsException ex) {
-			    botmtext = botmtext.replace("[]", "");
+			    bottom_text.setText(bottom_text.getText().replace("[]", ""));
 			    if(curFocus == "W") {
 			      curFocus = "D";
-	          botmtext = botmtext + "[]";   
+			      bottom_text.setText(bottom_text.getText() + "[]");   
 	        }
 	        else if(curFocus == "N") {
 	          curFocus = "W";
-	          botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
+	          bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf(" ")) + "[]" + 
+	              bottom_text.getText().substring(bottom_text.getText().indexOf(" ")));
 	        }
 	        else if(curFocus == "D") {
 	          curFocus = "N";
-	          botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));
+	          bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf("/")) + "[]" + 
+	              bottom_text.getText().substring(bottom_text.getText().indexOf("/")));
 	        }
-			    bottom_text.setText(botmtext);
 			  } catch (NumberFormatException ex2) {
-			    botmtext = botmtext.replace("[]", "");
+			    bottom_text.setText(bottom_text.getText().replace("[]", ""));
 			    if(curFocus == "W") {
             curFocus = "D";
-            botmtext = botmtext + "[]";
+            bottom_text.setText(bottom_text.getText() + "[]");
           }
           else if(curFocus == "N") {
             curFocus = "W";
-            botmtext = (botmtext.substring(0, botmtext.indexOf(" ")) + "[]" + botmtext.substring(botmtext.indexOf(" ")));
+            bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf(" ")) + "[]" + 
+                bottom_text.getText().substring(bottom_text.getText().indexOf(" ")));
           }
           else if(curFocus == "D") {
             curFocus = "N";
-            botmtext = (botmtext.substring(0, botmtext.indexOf("/")) + "[]" + botmtext.substring(botmtext.indexOf("/")));      
+            bottom_text.setText(bottom_text.getText().substring(0, bottom_text.getText().indexOf("/")) + "[]" + 
+                bottom_text.getText().substring(bottom_text.getText().indexOf("/")));      
           }
-			    bottom_text.setText(botmtext);
 			  }
+			} else if (buttonpressed.equals("C")) {
+			  bottom_text.setText("[] /");
+        curFocus = "W";
+			} else if (buttonpressed.equals("R")) {
+			  bottom_text.setText("[] /");
+        curFocus = "W";
+        top_text.setText("");
 			}
 		}
 	}
