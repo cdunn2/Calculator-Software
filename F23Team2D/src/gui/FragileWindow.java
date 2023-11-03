@@ -9,8 +9,10 @@ public class FragileWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static JFrame frame = new JFrame("Fragile Calculator");
+	private static JLabel logoLabel;
+	
 
-	public static void main(String[] args) {
+public static void main(String[] args) {
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 500);
@@ -18,12 +20,20 @@ public class FragileWindow extends JFrame {
 
 		createMenu();
 
+		// Fragile logo
+		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/Fragile_Logo.png"));
+		logoLabel = new JLabel(logoIcon);
+		JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		logoPanel.add(logoLabel);
+
+		JPanel topPanel = new JPanel(new BorderLayout());
+		topPanel.add(logoPanel, BorderLayout.NORTH);
+
 		// also display in a different class
 		Container display = new DisplayDriver();
-		//display.setEditable(false);
 		display.setFont(new Font("Arial", Font.BOLD, 24));
-		frame.add(display, BorderLayout.NORTH);
-
+		topPanel.add(display, BorderLayout.CENTER);
+		frame.add(topPanel, BorderLayout.NORTH);
 
 		JPanel buttonsPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gb = new GridBagConstraints();
@@ -53,28 +63,17 @@ public class FragileWindow extends JFrame {
 
 				if (!buttons[i][j].isEmpty()) {
 					JButton button = new JButton(buttons[i][j]);
-					if (button.getText().matches("\\d")) {
-						button.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
-							}
-						});
-					} else {
-						button.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								String buttonText = ((JButton) e.getSource()).getText();
-								DisplayDriver.bottomManager(buttonText);
-							}
-						});
-					}
-
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
+						}
+					});
 					buttonsPanel.add(button, gb);
 				}
 			}
 		}
 
 		frame.add(buttonsPanel, BorderLayout.CENTER);
-
 		frame.setVisible(true);
 	}
 	
