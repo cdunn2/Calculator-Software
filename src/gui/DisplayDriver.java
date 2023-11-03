@@ -107,10 +107,12 @@ public class DisplayDriver extends Container
 			    return;
 			  }
 			  Fractions ans = null;
-			  System.out.println(operator);
 			  bottom_text.setText(bottom_text.getText().replace("[]", ""));
 			  op2 = Fractions.parseFractions(bottom_text.getText());
-			  if(operator.equals("+"))
+			  if(operator == null) {
+			    ans = Fractions.parseFractions(bottom_text.getText());
+			  }
+			  else if(operator.equals("+"))
 			    ans = Calculations.addition(op1, op2);
 			  else if (operator.equals("-"))
 			    ans = Calculations.subtraction(op1, op2);

@@ -56,7 +56,6 @@ public class FragileWindow extends JFrame {
 					if (button.getText().matches("\\d")) {
 						button.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								//System.out.println(((JButton) e.getSource()).getText() + " pressed!");
 								DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
 							}
 						});
@@ -64,35 +63,6 @@ public class FragileWindow extends JFrame {
 						button.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								String buttonText = ((JButton) e.getSource()).getText();
-								// I'm so sorry for what I'm about to do
-								/*
-								if (buttonText.equals("R")) {
-									System.out.println("Reset pressed!");
-								} else if (buttonText.equals("C")) {
-									System.out.println("Clear pressed!");
-								} else if (buttonText.equals("\u2190")) {
-								  DisplayDriver.bottomManager(buttonText);
-								} else if (buttonText.equals("+")) {
-									System.out.println("+ pressed!");
-									DisplayDriver.bottomManager(buttonText);
-								} else if (buttonText.equals("-")) {
-									System.out.println("- pressed!");
-									DisplayDriver.bottomManager(buttonText);
-								} else if (buttonText.equals("x")) {
-									System.out.println("x pressed!");
-									DisplayDriver.bottomManager(buttonText);
-								} else if (buttonText.equals("\u00F7")) {
-									System.out.println("\u00F7 pressed!");
-									DisplayDriver.bottomManager(buttonText);
-								} else if (buttonText.equals("=")) {
-	                 DisplayDriver.bottomManager(buttonText);
-								} else if (buttonText.equals("\u00B1")) {
-								  DisplayDriver.bottomManager(buttonText);
-								} else if (buttonText.equals("Pos")) { // This one is temporary
-									System.out.println("Position pressed!");
-									*/
-									
-								
 								DisplayDriver.bottomManager(buttonText);
 							}
 						});
