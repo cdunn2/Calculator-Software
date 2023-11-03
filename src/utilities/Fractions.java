@@ -142,4 +142,12 @@ public class Fractions
 	  str += this.wholeNumber + " " + this.numerator + "/" + this.denominator;
 	  return str;
 	}
+	
+	public boolean equals(Fractions other) {
+	  if(this.isNegative == other.getIsNegative() && this.wholeNumber == other.getWholeNumber() && 
+	      this.numerator == other.getNumerator() && this.denominator == other.getDenominator()){
+	    return true;
+	  }
+	  return false;
+	}
 }

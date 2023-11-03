@@ -1,5 +1,7 @@
 package testing;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -99,5 +101,88 @@ public class FractionsTest {
 		
 		Fractions.changeSign(negWhole);
 		assertEquals(negWhole.getIsNegative(), false);
+	}
+	
+	@Test
+	public void testParseFractions() {
+	  String str = "1 2/3";
+	  Fractions actual = new Fractions(false, 1, 2, 3);
+	  assertTrue(actual.equals(Fractions.parseFractions(str)));
+	  str = " 2/3";
+	  actual = new Fractions(false, 0, 2, 3);
+	  assertTrue(actual.equals(Fractions.parseFractions(str)));
+	  str = "1 /3";
+	  actual = new Fractions(false, 1, 0, 3);
+	  assertTrue(actual.equals(Fractions.parseFractions(str)));
+	  str = "1 2/";
+	  actual = new Fractions(false, 1, 2, 1);
+	  assertTrue(actual.equals(Fractions.parseFractions(str)));
+	  str = "-1 2/3";
+	  actual = new Fractions(true, 1, 2, 3);
+	  assertTrue(actual.equals(Fractions.parseFractions(str)));
+	  str = "- 2/3";
+	  actual = new Fractions(true, 0, 2, 3);
+	  assertTrue(actual.equals(Fractions.parseFractions(str)));
+	}
+	
+	@Test
+	public void testToString() {
+	  Fractions frac = new Fractions(false, 1, 2, 3);
+	  assertEquals("1 2/3", frac.toString());
+	  frac = new Fractions(true, 1, 2, 3);
+	  assertEquals("-1 2/3", frac.toString());
+	}
+	
+	@Test
+	public void testEquals() {
+	  Fractions f1 = new Fractions(false, 10, 10, 10);
+	  Fractions f2 = new Fractions(true, 11, 11, 11);
+	  //0000
+	  assertFalse(f1.equals(f2));
+	  //0001
+	  f1 = new Fractions(false, 10, 10, 11);
+	  assertFalse(f1.equals(f2));
+	  //0010
+	  f1 = new Fractions(false, 10, 11, 10);
+	  assertFalse(f1.equals(f2));
+	  //0011
+	  f1 = new Fractions(false, 10, 11, 11);
+	  assertFalse(f1.equals(f2));
+	  //0100
+	  f1 = new Fractions(false, 11, 10, 10);
+	  assertFalse(f1.equals(f2));
+	  //0101
+	  f1 = new Fractions(false, 11, 10, 11);
+	  assertFalse(f1.equals(f2));
+	  //0110
+	  f1 = new Fractions(false, 11, 11, 10);
+	  assertFalse(f1.equals(f2));
+	  //0111
+	  f1 = new Fractions(false, 11, 11, 11);
+	  assertFalse(f1.equals(f2));
+	  //1000
+	  f1 = new Fractions(true, 10, 10, 10);
+	  assertFalse(f1.equals(f2));
+	  //1001
+	  f1 = new Fractions(true, 10, 10, 11);
+	  assertFalse(f1.equals(f2));
+	  //1010
+	  f1 = new Fractions(true, 10, 11, 10);
+	  assertFalse(f1.equals(f2));
+	  //1011
+	  f1 = new Fractions(true, 10, 11, 11);
+	  assertFalse(f1.equals(f2));
+	  //1100
+	  f1 = new Fractions(true, 11, 10, 10);
+	  assertFalse(f1.equals(f2));
+	  //1101
+	  f1 = new Fractions(true, 11, 10, 11);
+	  assertFalse(f1.equals(f2));
+	  //1110
+	  f1 = new Fractions(true, 11, 11, 10);
+	  assertFalse(f1.equals(f2));
+	  //1111
+	  f1 = new Fractions(true, 11, 11, 11);
+	  assertTrue(f1.equals(f2));
 	}
 }
