@@ -54,8 +54,6 @@ public class DisplayDriver extends Container
         operationComplete = false;
         top_text.setText("");
       }
-
-
 		}
 		catch (NumberFormatException e) {
 			if (buttonpressed.equals("x") || buttonpressed.equals("-") || buttonpressed.equals("+")

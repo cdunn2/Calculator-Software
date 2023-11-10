@@ -17,6 +17,7 @@ public static void main(String[] args) {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 500);
 		frame.setLayout(new BorderLayout());
+		//frame.setResizable(false);
 
 		createMenu();
 
