@@ -17,10 +17,19 @@ public class Calculations
 		Fractions newTwo = new Fractions(two.getNumerator() * one.getDenominator(),
 				two.getDenominator() * one.getDenominator());
 		
-		Fractions result = new Fractions(newOne.getNumerator() + newTwo.getNumerator(),
-				newOne.getDenominator());
+		Integer numerator = newOne.getNumerator() + newTwo.getNumerator();
+		Integer denominator = newOne.getDenominator();
+		Boolean isNegative = false;
 		
-		return Calculations.simplify(result);
+		if (numerator < 0)
+	    {
+	    	isNegative = true;
+	    	numerator *= -1;
+	    }
+		
+		Fractions result = new Fractions(isNegative, numerator, denominator);
+		
+		return result;
 	}
 	
 	public static Fractions subtraction(Fractions number1, Fractions number2)
@@ -38,10 +47,19 @@ public class Calculations
 		Fractions newTwo = new Fractions(two.getNumerator() * one.getDenominator(),
 				two.getDenominator() * one.getDenominator());
 		
-		Fractions result = new Fractions(newOne.getNumerator() - newTwo.getNumerator(),
-				newOne.getDenominator());
+		Integer numerator = newOne.getNumerator() - newTwo.getNumerator();
+		Integer denominator = newOne.getDenominator();
+		Boolean isNegative = false;
 		
-		return Calculations.simplify(result);
+		if (numerator < 0)
+	    {
+	    	isNegative = true;
+	    	numerator *= -1;
+	    }
+		
+		Fractions result = new Fractions(isNegative, numerator, denominator);
+		
+		return result;
 	}
 	
 	public static Fractions multiplication(Fractions number1, Fractions number2)
@@ -54,10 +72,21 @@ public class Calculations
 		Fractions one = Calculations.improper(number1);
 		Fractions two = Calculations.improper(number2);
 		
-		Fractions result = new Fractions(one.getNumerator() * two.getNumerator(),
-				one.getDenominator() * two.getDenominator());
+		Integer numerator = one.getNumerator() * two.getNumerator();
+		Integer denominator = one.getDenominator() * two.getDenominator();
+		Boolean isNegative = false;
 		
-		return Calculations.simplify(result);
+		
+		
+		if (numerator < 0)
+	    {
+	    	isNegative = true;
+	    	numerator *= -1;
+	    }
+		
+		Fractions result = new Fractions(isNegative, numerator, denominator);
+		
+		return result;
 	}
 	
 	public static Fractions division(Fractions number1, Fractions number2)
@@ -80,8 +109,6 @@ public class Calculations
 			reciprocal = new Fractions(two.getDenominator(), two.getNumerator());
 		}
 		
-		
-		
 		return Calculations.multiplication(one, reciprocal);
 	}
 	
@@ -101,42 +128,39 @@ public class Calculations
 		return new Fractions(numerator, bottom);
 	}
 	
-	public static Fractions simplify(Fractions improper)
+	public static Fractions reduce(Fractions irreduced)
 	{		
-		int newNum1 = improper.getNumerator();
-	    int newNum2 = improper.getDenominator();
+		int newNum1 = irreduced.getNumerator();
+	    int newNum2 = irreduced.getDenominator();
 	    
 	    if (newNum1 == 0)
 	    {
 	    	return new Fractions(false, 0, 0, 1);
 	    }
-
-	    if (newNum1 < 0){
-	        newNum1 = newNum1 * -1;
-	    }
-	    if (newNum2 < 0){
-	        newNum2 = newNum2 * -1;
-	    }
 	    
 	    while (newNum1 != newNum2){
 	        if (newNum1 > newNum2){
 	            newNum1 -= newNum2;
-	        } else if (newNum2 > newNum1){
+	        } else
+	        {
 	            newNum2 -= newNum1;
 	        }
 	    } 
 	    
-	    Boolean isNegative = false;
-	    Integer numerator = improper.getNumerator() / newNum1;
-	    if (numerator < 0)
-	    {
-	    	numerator *= -1;
-	    	isNegative = true;
-	    }
+	    Boolean isNegative = irreduced.getIsNegative();
+	    Integer numerator = irreduced.getNumerator() / newNum1;
 	    
-	    Integer denominator = improper.getDenominator()/ newNum1;
+	    Integer denominator = irreduced.getDenominator()/ newNum1;	    
+	    
+	    return new Fractions(isNegative, numerator, denominator);
+	}
+	
+	public static Fractions proper(Fractions improper)
+	{		
+		Integer numerator = improper.getNumerator();
+		Integer denominator = improper.getDenominator();
 	    Integer whole = (numerator - (numerator % denominator)) / denominator;
-	    
+	    boolean isNegative = improper.getIsNegative();
 	    
 	    return new Fractions(isNegative, whole, numerator % denominator, denominator);
 	}

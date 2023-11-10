@@ -24,23 +24,43 @@ public class CalculationsTest
 	}
 	
 	@Test
-	public void simplifyTest()
+	public void reduceTest()
 	{
 		Fractions improper = new Fractions(true, 192, 52);
 		
-		Fractions newFraction = Calculations.simplify(Calculations.improper(improper));
+		Fractions newFraction = Calculations.reduce(improper);
 		assertEquals(newFraction.getIsNegative(), true);
-		assertEquals(newFraction.getWholeNumber(), 3);
-		assertEquals(newFraction.getNumerator(), 9);
+		assertEquals(newFraction.getWholeNumber(), 0);
+		assertEquals(newFraction.getNumerator(), 48);
 		assertEquals(newFraction.getDenominator(), 13);
 		
 		Fractions normal = new Fractions(52, 192);
 
-		Fractions newFraction3= Calculations.simplify(normal);
+		Fractions newFraction2= Calculations.reduce(normal);
+		assertEquals(newFraction2.getIsNegative(), false);
+		assertEquals(newFraction2.getWholeNumber(), 0);
+		assertEquals(newFraction2.getNumerator(), 13);
+		assertEquals(newFraction2.getDenominator(), 48);
+		
+		Fractions zero = new Fractions(0, 192);
+
+		Fractions newFraction3= Calculations.reduce(zero);
 		assertEquals(newFraction3.getIsNegative(), false);
 		assertEquals(newFraction3.getWholeNumber(), 0);
-		assertEquals(newFraction3.getNumerator(), 13);
-		assertEquals(newFraction3.getDenominator(), 48);
+		assertEquals(newFraction3.getNumerator(), 0);
+		assertEquals(newFraction3.getDenominator(), 1);
+	}
+	
+	@Test
+	public void properTest()
+	{
+		Fractions improper = new Fractions(false, 48,13);
+		Fractions newFraction = Calculations.proper(improper);
+
+		assertEquals(newFraction.getIsNegative(), false);
+		assertEquals(newFraction.getWholeNumber(), 3);
+		assertEquals(newFraction.getNumerator(), 9);
+		assertEquals(newFraction.getDenominator(), 13);
 	}
 	
 	@Test
@@ -59,9 +79,18 @@ public class CalculationsTest
 		Fractions result = Calculations.multiplication(one, two);
 		
 		assertEquals(result.getIsNegative(), true);
-		assertEquals(result.getWholeNumber(), 16);
-		assertEquals(result.getNumerator(), 2);
-		assertEquals(result.getDenominator(), 3);
+		assertEquals(result.getWholeNumber(), 0);
+		assertEquals(result.getNumerator(), 800);
+		assertEquals(result.getDenominator(), 48);
+		
+		Fractions one2 = new Fractions(false, 3, 1, 8);
+		Fractions two2 = new Fractions(false, 5, 2, 6);
+		Fractions result2 = Calculations.multiplication(one2, two2);
+		
+		assertEquals(result2.getIsNegative(), false);
+		assertEquals(result2.getWholeNumber(), 0);
+		assertEquals(result2.getNumerator(), 800);
+		assertEquals(result2.getDenominator(), 48);
 	}
 	
 	@Test
@@ -80,15 +109,25 @@ public class CalculationsTest
 		Fractions result = Calculations.addition(one, two);
 		
 		assertEquals(result.getIsNegative(), true);
-		assertEquals(result.getWholeNumber(), 7);
-		assertEquals(result.getNumerator(), 139);
+		assertEquals(result.getWholeNumber(), 0);
+		assertEquals(result.getNumerator(), 1119);
 		assertEquals(result.getDenominator(), 140);
+		
+		Fractions one2 = new Fractions(false, 14, 17, 20);
+		Fractions two2 = new Fractions(false, 6, 6, 7);
+		
+		Fractions result2 = Calculations.addition(one2, two2);
+		
+		assertEquals(result2.getIsNegative(), false);
+		assertEquals(result2.getWholeNumber(), 0);
+		assertEquals(result2.getNumerator(), 3039);
+		assertEquals(result2.getDenominator(), 140);
 	}
 	
 	@Test
 	public void subTest()
 	{
-		Fractions one = new Fractions(false, 2, 5, 8);
+		Fractions one = new Fractions(false, 4, 5, 16);
 		Fractions two = new Fractions(false, 2, 5, 8);
 		
 		assertThrows(IllegalArgumentException.class, () -> 
@@ -102,15 +141,25 @@ public class CalculationsTest
 		
 		assertEquals(result.getIsNegative(), false);
 		assertEquals(result.getWholeNumber(), 0);
-		assertEquals(result.getNumerator(), 0);
-		assertEquals(result.getDenominator(), 1);
+		assertEquals(result.getNumerator(), 216);
+		assertEquals(result.getDenominator(), 128);
+		
+		Fractions one2 = new Fractions(true, 4, 5, 16);
+		Fractions two2 = new Fractions(false, 2, 5, 8);
+		
+		Fractions result2 = Calculations.subtraction(one2, two2);
+		
+		assertEquals(result2.getIsNegative(), true);
+		assertEquals(result2.getWholeNumber(), 0);
+		assertEquals(result2.getNumerator(), 888);
+		assertEquals(result2.getDenominator(), 128);
 	}
 	
 	@Test
 	public void divTest()
 	{
-		Fractions one = new Fractions(true, 0, 1, 6303);
-		Fractions two = new Fractions(false, 0, 4607, 4);
+		Fractions one = new Fractions(true, 2, 5, 8);
+		Fractions two = new Fractions(false, 0, 3, 4);
 		
 		assertThrows(IllegalArgumentException.class, () -> 
 		{Calculations.division(one, null);});
@@ -123,7 +172,16 @@ public class CalculationsTest
 		
 		assertEquals(result.getIsNegative(), true);
 		assertEquals(result.getWholeNumber(), 0);
-		assertEquals(result.getNumerator(), 4);
-		assertEquals(result.getDenominator(), 29037921);
+		assertEquals(result.getNumerator(), 84);
+		assertEquals(result.getDenominator(), 24);
+		
+		Fractions one2 = new Fractions(true, 2, 5, 8);
+		Fractions two2 = new Fractions(true, 0, 3, 4);
+		Fractions result2 = Calculations.division(one2, two2);
+		
+		assertEquals(result2.getIsNegative(), false);
+		assertEquals(result2.getWholeNumber(), 0);
+		assertEquals(result2.getNumerator(), 84);
+		assertEquals(result2.getDenominator(), 24);
 	}
 }
