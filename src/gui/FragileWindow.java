@@ -43,9 +43,9 @@ public static void main(String[] args) {
 		gb.weighty = 1.0;
 
 		String[][] buttons = {
-				{"R", "C", "\u2190", "+", "\u00B1"},
-				{"7", "8", "9", "-"},
-				{"4", "5", "6", "x"},
+				{"R", "C", "\u2190", "+", "\u21F9","\u00B1"},
+				{"7", "8", "9", "-", "x\u207F", "Inv"},
+				{"4", "5", "6", "x", "", "\u2193"},
 				{"1", "2", "3", "\u00F7"},
 				{"0", "", "Pos", "="}
 		};
@@ -64,6 +64,7 @@ public static void main(String[] args) {
 
 				if (!buttons[i][j].isEmpty()) {
 					JButton button = new JButton(buttons[i][j]);
+					button.setBackground(Color.white);
 					button.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
@@ -83,7 +84,7 @@ public static void main(String[] args) {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		JMenu fileMenu = new JMenu("File");
-		//JMenu viewMenu = new JMenu("View");		I took out the pie chart because we will not complete it this sprint
+		//JMenu viewMenu = new JMenu("View");			I took out the pie chart because we will not complete it this sprint
 		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(fileMenu);
 		//menuBar.add(viewMenu);
