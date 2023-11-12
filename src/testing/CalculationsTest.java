@@ -184,4 +184,86 @@ public class CalculationsTest
 		assertEquals(result2.getNumerator(), 84);
 		assertEquals(result2.getDenominator(), 24);
 	}
+	
+	@Test
+	public void inverseTest()
+	{
+		Fractions one = new Fractions(false, 2, 5, 8);
+		
+		assertThrows(IllegalArgumentException.class, () -> 
+		{Calculations.inverse(null);});
+		
+		Fractions result = Calculations.inverse(one);
+		
+		assertEquals(result.getIsNegative(), false);
+		assertEquals(result.getWholeNumber(), 0);
+		assertEquals(result.getNumerator(), 8);
+		assertEquals(result.getDenominator(), 21);
+		
+		Fractions two = new Fractions(true, 2, 5, 8);
+		Fractions result2 = Calculations.inverse(two);
+		
+		assertEquals(result2.getIsNegative(), true);
+		assertEquals(result2.getWholeNumber(), 0);
+		assertEquals(result2.getNumerator(), 8);
+		assertEquals(result2.getDenominator(), 21);
+	}
+	
+	@Test
+	public void mediantTest()
+	{
+		Fractions one = new Fractions(true, 4, 3, 5);
+		Fractions two = new Fractions(false, 2, 9, 11);
+		
+		assertThrows(IllegalArgumentException.class, () -> 
+		{Calculations.mediant(one, null);});
+		assertThrows(IllegalArgumentException.class, () -> 
+		{Calculations.mediant(null, two);});
+		assertThrows(IllegalArgumentException.class, () -> 
+		{Calculations.mediant(null, null);});
+		
+		Fractions result = Calculations.mediant(one, two);
+		
+		assertEquals(result.getIsNegative(), false);
+		assertEquals(result.getWholeNumber(), 0);
+		assertEquals(result.getNumerator(), 8);
+		assertEquals(result.getDenominator(), 16);
+		
+		Fractions one2 = new Fractions(false, 4, 3, 5);
+		Fractions two2 = new Fractions(true, 2, 9, 11);
+		Fractions result2 = Calculations.mediant(one2, two2);
+		
+		assertEquals(result2.getIsNegative(), true);
+		assertEquals(result2.getWholeNumber(), 0);
+		assertEquals(result2.getNumerator(), 8);
+		assertEquals(result2.getDenominator(), 16);
+	}
+	
+	@Test
+	public void powerTest()
+	{
+		Fractions one = new Fractions(true, 1, 3, 4);
+		
+		assertThrows(IllegalArgumentException.class, () -> 
+		{Calculations.power(null, 2);});
+		assertThrows(IllegalArgumentException.class, () -> 
+		{Calculations.power(one, null);});
+		assertThrows(IllegalArgumentException.class, () -> 
+		{Calculations.power(null, null);});
+		
+		Fractions result = Calculations.power(one, 3);
+		
+		assertEquals(result.getIsNegative(), true);
+		assertEquals(result.getWholeNumber(), 0);
+		assertEquals(result.getNumerator(), 343);
+		assertEquals(result.getDenominator(), 64);
+		
+		Fractions two = new Fractions(true, 2, 5, 8);
+		Fractions result2 = Calculations.power(two, 2);
+		
+		assertEquals(result2.getIsNegative(), false);
+		assertEquals(result2.getWholeNumber(), 0);
+		assertEquals(result2.getNumerator(), 441);
+		assertEquals(result2.getDenominator(), 64);
+	}
 }
