@@ -1,0 +1,68 @@
+package gui.display;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import utilities.Fractions;
+
+public class BarFractionDisplay extends JPanel implements FractionDisplay {
+
+	private Fractions fraction;
+	private JLabel whole;
+	private JLabel numerator;
+	private JLabel denominator;
+	private JLabel bar;
+	
+	public BarFractionDisplay() {
+		this(null);
+	}
+	
+	public BarFractionDisplay(Fractions fraction) {
+		this.fraction = fraction;
+		this.whole = new JLabel(fraction.getWholeNumber().toString());
+		this.numerator = new JLabel(fraction.getNumerator().toString());
+		this.denominator = new JLabel(fraction.getDenominator().toString());
+		
+		int barLength = Math.max(fraction.getNumerator().toString().length(), fraction.getDenominator().toString().length());
+		String barString = "";
+		for(int i = 0; i < barLength; i++)
+			barString += "--";
+		this.bar = new JLabel(barString);
+		setBorder(BorderFactory.createLineBorder(Color.lightGray));
+		numerator.setHorizontalAlignment(SwingConstants.CENTER);
+		denominator.setHorizontalAlignment(SwingConstants.CENTER);
+		whole.setBorder(BorderFactory.createLineBorder(Color.blue,2));
+		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		draw();
+	}
+	
+
+	public void draw() {
+		GridBagLayout grid = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		setLayout(grid);
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		add(whole, gbc);
+		gbc.gridx = 1;
+		add(new JLabel("  "), gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		add(numerator, gbc);
+		gbc.gridy = 1;
+		add(bar, gbc);
+		gbc.gridy = 2;
+		add(denominator, gbc);
+		
+	}
+
+}
