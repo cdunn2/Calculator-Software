@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class FragileWindow extends JFrame {
 
@@ -75,9 +77,54 @@ public static void main(String[] args) {
 				}
 			}
 		}
+		
+		JWindow secondaryWindow = new JWindow(frame);
+	    secondaryWindow.setSize(50, 500);
+	    secondaryWindow.setLocationRelativeTo(frame);
+	    secondaryWindow.setLocation(frame.getX() + frame.getWidth(), frame.getY());
 
+	    frame.addComponentListener(new ComponentAdapter() {
+	        public void componentMoved(ComponentEvent e) {
+	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
+	        }
+
+	        public void componentResized(ComponentEvent e) {
+	            secondaryWindow.setSize(secondaryWindow.getWidth(), frame.getHeight() - 170);
+	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
+	        }
+	    });
+	    
+	    // This is the area for the calculation history and the button to open/close it
+	    JPanel containerPanel = new JPanel(new BorderLayout());
+	    JPanel calcHistoryArea = new JPanel();
+	    JButton arrowButton = new JButton(">");
+	    calcHistoryArea.setPreferredSize(new Dimension(200, 500));
+	    JScrollPane scrollPane = new JScrollPane(calcHistoryArea);
+	    containerPanel.add(scrollPane, BorderLayout.CENTER);
+	    arrowButton.setBackground(Color.white);
+	    containerPanel.add(arrowButton, BorderLayout.WEST);
+	    secondaryWindow.add(containerPanel);
+	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
+	    arrowButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		if (secondaryWindow.getWidth() == 50) {
+	    			containerPanel.add(arrowButton, BorderLayout.EAST);
+	    			secondaryWindow.setSize(400, secondaryWindow.getHeight());
+	    			arrowButton.setText("<");
+	    			calcHistoryArea.setVisible(true);
+		    	}
+	    		else {
+	    			containerPanel.add(arrowButton, BorderLayout.WEST);
+	    			secondaryWindow.setSize(50, secondaryWindow.getHeight());
+	    			arrowButton.setText(">");
+	    			calcHistoryArea.setVisible(false);
+	    		}
+			}
+	    });
+	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
+		secondaryWindow.setVisible(true);
 	}
 	
 	private static void createMenu()
@@ -85,7 +132,7 @@ public static void main(String[] args) {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		JMenu fileMenu = new JMenu("File");
-		//JMenu viewMenu = new JMenu("View");			I took out the pie chart because we will not complete it this sprint
+		//JMenu viewMenu = new JMenu("View");		I took out the pie chart because we will not complete it this sprint
 		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(fileMenu);
 		//menuBar.add(viewMenu);
