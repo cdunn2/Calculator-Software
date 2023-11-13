@@ -102,24 +102,41 @@ public static void main(String[] args) {
 	    JScrollPane scrollPane = new JScrollPane(calcHistoryArea);
 	    containerPanel.add(scrollPane, BorderLayout.CENTER);
 	    arrowButton.setBackground(Color.white);
-	    containerPanel.add(arrowButton, BorderLayout.WEST);
+	    containerPanel.add(arrowButton, BorderLayout.EAST);
 	    secondaryWindow.add(containerPanel);
 	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
 	    arrowButton.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		if (secondaryWindow.getWidth() == 50) {
-	    			containerPanel.add(arrowButton, BorderLayout.EAST);
-	    			secondaryWindow.setSize(400, secondaryWindow.getHeight());
-	    			arrowButton.setText("<");
-	    			calcHistoryArea.setVisible(true);
-		    	}
-	    		else {
-	    			containerPanel.add(arrowButton, BorderLayout.WEST);
-	    			secondaryWindow.setSize(50, secondaryWindow.getHeight());
-	    			arrowButton.setText(">");
-	    			calcHistoryArea.setVisible(false);
-	    		}
-			}
+	        Timer timer;
+	        public void actionPerformed(ActionEvent e) {
+	            if (secondaryWindow.getWidth() == 50) {
+	                timer = new Timer(5, new ActionListener() {
+	                    public void actionPerformed(ActionEvent evt) {
+	                        if (secondaryWindow.getWidth() < 400) {
+	                            secondaryWindow.setSize(secondaryWindow.getWidth() + 10, secondaryWindow.getHeight());
+	                        } else {
+	                            ((Timer) evt.getSource()).stop();
+	                            arrowButton.setText("<");
+	                            calcHistoryArea.setVisible(true);
+	                        }
+	                    }
+	                });
+	                timer.start();
+	            }
+	            else {
+	                timer = new Timer(5, new ActionListener() {
+	                    public void actionPerformed(ActionEvent evt) {
+	                        if (secondaryWindow.getWidth() > 50) {
+	                            secondaryWindow.setSize(secondaryWindow.getWidth() - 10, secondaryWindow.getHeight());
+	                        } else {
+	                            ((Timer) evt.getSource()).stop();
+	                            arrowButton.setText(">");
+	                            calcHistoryArea.setVisible(false);
+	                        }
+	                    }
+	                });
+	                timer.start();
+	            }
+	        }
 	    });
 	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
