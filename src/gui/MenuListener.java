@@ -15,11 +15,10 @@ public class MenuListener implements ActionListener
 	{
 		if (e.getActionCommand().equals("Exit")) {
 			System.exit(0);
-		} else if (e.getActionCommand().equals("Pie Chart")) {
-			// Handle the "Pie Chart" action
-			//TODO
 		} else if (e.getActionCommand().equals("About")) {
 			AboutWindow.main(null);
+		} else if (e.getActionCommand().equals("Print Session")) {
+			//TODO
 		} else if (e.getActionCommand().equals("Help")) {
 			Desktop desktop = Desktop.getDesktop();
 			URI uri;
