@@ -143,13 +143,21 @@ public static void main(String[] args) {
 		//rn radio buttons appear as check box
 		JMenuItem printItem = new JMenuItem("Print Session");
 		JMenuItem exitItem = new JMenuItem("Exit");
+		
 		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem("Proper");
 		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem("Reduced");
+		
 		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem("Bar");
 		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem("Slash");
 		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem("Solidus");
+		
 		JMenuItem aboutItem = new JMenuItem("About");
 		JMenuItem helpItem = new JMenuItem("Help");
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(barItem);
+		group.add(slashItem);
+		group.add(solidusItem);
 
 		fileMenu.add(printItem);
 		fileMenu.add(exitItem);
