@@ -148,7 +148,7 @@ public static void main(String[] args) {
 		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem("Reduced");
 		
 		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem("Bar");
-		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem("Slash");
+		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem("Slash", true);
 		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem("Solidus");
 		
 		JMenuItem aboutItem = new JMenuItem("About");
