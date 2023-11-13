@@ -25,24 +25,42 @@ public class BarFractionDisplay extends JPanel implements FractionDisplay {
 	}
 	
 	public BarFractionDisplay(Fractions fraction) {
-		this.fraction = fraction;
-		this.whole = new JLabel(fraction.getWholeNumber().toString());
-		this.numerator = new JLabel(fraction.getNumerator().toString());
-		this.denominator = new JLabel(fraction.getDenominator().toString());
-		
-		int barLength = Math.max(fraction.getNumerator().toString().length(), fraction.getDenominator().toString().length());
-		String barString = "";
-		for(int i = 0; i < barLength; i++)
-			barString += "--";
-		this.bar = new JLabel(barString);
+		if(fraction == null) {
+			this.whole = new JLabel("");
+			this.numerator = new JLabel("");
+			this.denominator = new JLabel("");
+			this.bar = new JLabel("");
+			
+		}
+		else {
+			this.fraction = fraction;
+			this.whole = new JLabel(fraction.getWholeNumber().toString());
+			this.numerator = new JLabel(fraction.getNumerator().toString());
+			this.denominator = new JLabel(fraction.getDenominator().toString());
+			
+			int barLength = Math.max(fraction.getNumerator().toString().length(), fraction.getDenominator().toString().length());
+			String barString = "";
+			for(int i = 0; i < barLength; i++)
+				barString += "\u23AF\u23AF";
+			this.bar = new JLabel(barString);
+		}
 		setBorder(BorderFactory.createLineBorder(Color.lightGray));
 		numerator.setHorizontalAlignment(SwingConstants.CENTER);
 		denominator.setHorizontalAlignment(SwingConstants.CENTER);
-		whole.setBorder(BorderFactory.createLineBorder(Color.blue,2));
+		whole.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		draw();
 	}
+	
+	public BarFractionDisplay(int i) {
+		this.whole = new JLabel(" ");
+		this.numerator = new JLabel(" ");
+		this.denominator = new JLabel(" ");
+		this.bar = new JLabel(" ");
+		draw();
+	}
+	
 	
 
 	public void draw() {
@@ -61,8 +79,7 @@ public class BarFractionDisplay extends JPanel implements FractionDisplay {
 		gbc.gridy = 1;
 		add(bar, gbc);
 		gbc.gridy = 2;
-		add(denominator, gbc);
-		
+		add(denominator, gbc);		
 	}
 
 }
