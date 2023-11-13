@@ -24,7 +24,7 @@ public static void main(String[] args) {
 		createMenu();
 
 		// Fragile logo
-		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/Fragile_Logo.png"));
+		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/Fragile_Logo.png"));
 		logoLabel = new JLabel(logoIcon);
 		JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		logoPanel.add(logoLabel);

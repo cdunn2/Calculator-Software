@@ -24,7 +24,7 @@ public class AboutWindow  extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         //icon
-        ImageIcon logoIcon = new ImageIcon("icon.png");
+        ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/icon.png"));
         JLabel iconLabel = new JLabel(logoIcon, SwingConstants.CENTER);
         panel.add(iconLabel);
 
