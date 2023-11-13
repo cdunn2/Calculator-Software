@@ -1,4 +1,4 @@
-																																																																																										package gui;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,41 +102,24 @@ public static void main(String[] args) {
 	    JScrollPane scrollPane = new JScrollPane(calcHistoryArea);
 	    containerPanel.add(scrollPane, BorderLayout.CENTER);
 	    arrowButton.setBackground(Color.white);
-	    containerPanel.add(arrowButton, BorderLayout.EAST);
+	    containerPanel.add(arrowButton, BorderLayout.WEST);
 	    secondaryWindow.add(containerPanel);
 	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
 	    arrowButton.addActionListener(new ActionListener() {
-	        Timer timer;
-	        public void actionPerformed(ActionEvent e) {
-	            if (secondaryWindow.getWidth() == 50) {
-	                timer = new Timer(5, new ActionListener() {
-	                    public void actionPerformed(ActionEvent evt) {
-	                        if (secondaryWindow.getWidth() < 400) {
-	                            secondaryWindow.setSize(secondaryWindow.getWidth() + 10, secondaryWindow.getHeight());
-	                        } else {
-	                            ((Timer) evt.getSource()).stop();
-	                            arrowButton.setText("<");
-	                            calcHistoryArea.setVisible(true);
-	                        }
-	                    }
-	                });
-	                timer.start();
-	            }
-	            else {
-	                timer = new Timer(5, new ActionListener() {
-	                    public void actionPerformed(ActionEvent evt) {
-	                        if (secondaryWindow.getWidth() > 50) {
-	                            secondaryWindow.setSize(secondaryWindow.getWidth() - 10, secondaryWindow.getHeight());
-	                        } else {
-	                            ((Timer) evt.getSource()).stop();
-	                            arrowButton.setText(">");
-	                            calcHistoryArea.setVisible(false);
-	                        }
-	                    }
-	                });
-	                timer.start();
-	            }
-	        }
+	    	public void actionPerformed(ActionEvent e) {
+	    		if (secondaryWindow.getWidth() == 50) {
+	    			containerPanel.add(arrowButton, BorderLayout.EAST);
+	    			secondaryWindow.setSize(400, secondaryWindow.getHeight());
+	    			arrowButton.setText("<");
+	    			calcHistoryArea.setVisible(true);
+		    	}
+	    		else {
+	    			containerPanel.add(arrowButton, BorderLayout.WEST);
+	    			secondaryWindow.setSize(50, secondaryWindow.getHeight());
+	    			arrowButton.setText(">");
+	    			calcHistoryArea.setVisible(false);
+	    		}
+			}
 	    });
 	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
@@ -149,26 +132,52 @@ public static void main(String[] args) {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		JMenu fileMenu = new JMenu("File");
-		//JMenu viewMenu = new JMenu("View");		I took out the pie chart because we will not complete it this sprint
+		JMenu modeMenu = new JMenu("Mode");
+		JMenu styleMenu = new JMenu("Style");
 		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(fileMenu);
-		//menuBar.add(viewMenu);
+		menuBar.add(modeMenu);
+		menuBar.add(styleMenu);
 		menuBar.add(helpMenu);
 
+		//rn radio buttons appear as check box
+		JMenuItem printItem = new JMenuItem("Print Session");
 		JMenuItem exitItem = new JMenuItem("Exit");
-		//JMenuItem pieItem = new JMenuItem("Pie Chart");
+		
+		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem("Proper");
+		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem("Reduced");
+		
+		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem("Bar");
+		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem("Slash", true);
+		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem("Solidus");
+		
 		JMenuItem aboutItem = new JMenuItem("About");
 		JMenuItem helpItem = new JMenuItem("Help");
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(barItem);
+		group.add(slashItem);
+		group.add(solidusItem);
 
+		fileMenu.add(printItem);
 		fileMenu.add(exitItem);
-		//viewMenu.add(pieItem);
+		modeMenu.add(properItem);
+		modeMenu.add(reducedItem);
+		styleMenu.add(barItem);
+		styleMenu.add(slashItem);
+		styleMenu.add(solidusItem);
 		helpMenu.add(aboutItem);
 		helpMenu.add(helpItem);
 		
 		MenuListener listener = new MenuListener();
 
+		printItem.addActionListener(listener);
         exitItem.addActionListener(listener);
-        //pieItem.addActionListener(listener);
+        properItem.addActionListener(listener);
+        reducedItem.addActionListener(listener);
+        barItem.addActionListener(listener);
+        slashItem.addActionListener(listener);
+        solidusItem.addActionListener(listener);
         aboutItem.addActionListener(listener);
         helpItem.addActionListener(listener);
 	}
