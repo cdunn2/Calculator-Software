@@ -3,6 +3,7 @@ package gui;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,12 +21,14 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals("Print Session")) {
 			//TODO
 		} else if (e.getActionCommand().equals("Help")) {
-			Desktop desktop = Desktop.getDesktop();
-			URI uri;
+			//doesnt work yet
+			String URL = "index.html";
+			File file = new File(URL);
 			try {
-				uri = new URI("https://cdunn2.github.io/cs345-html/");
-				desktop.browse(uri);
-			} catch (URISyntaxException | IOException e1) {
+				Desktop.getDesktop().open(file);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 
