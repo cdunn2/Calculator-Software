@@ -34,8 +34,8 @@ public static void main(String[] args) {
 		// also display in a different class
 		Container display = new DisplayDriver();
 		display.setFont(new Font("Arial", Font.BOLD, 24));
-		topPanel.add(new JLabel("                             "), BorderLayout.EAST);
-		topPanel.add(new JLabel("                             "), BorderLayout.WEST);
+		topPanel.add(new JLabel(""), BorderLayout.EAST);
+		topPanel.add(new JLabel(""), BorderLayout.WEST);
 		topPanel.add(display, BorderLayout.CENTER);
 		frame.add(topPanel, BorderLayout.NORTH);
 
@@ -97,6 +97,7 @@ public static void main(String[] args) {
 	    // This is the area for the calculation history and the button to open/close it
 	    JPanel containerPanel = new JPanel(new BorderLayout());
 	    JPanel calcHistoryArea = new JPanel();
+	    calcHistoryArea.setLayout(new BoxLayout(calcHistoryArea, BoxLayout.Y_AXIS));
 	    JButton arrowButton = new JButton(">");
 	    calcHistoryArea.setPreferredSize(new Dimension(200, 500));
 	    JScrollPane scrollPane = new JScrollPane(calcHistoryArea);
@@ -116,7 +117,6 @@ public static void main(String[] args) {
 	                        } else {
 	                            ((Timer) evt.getSource()).stop();
 	                            arrowButton.setText("<");
-	                            calcHistoryArea.setVisible(true);
 	                        }
 	                    }
 	                });
@@ -130,7 +130,6 @@ public static void main(String[] args) {
 	                        } else {
 	                            ((Timer) evt.getSource()).stop();
 	                            arrowButton.setText(">");
-	                            calcHistoryArea.setVisible(false);
 	                        }
 	                    }
 	                });
@@ -138,6 +137,13 @@ public static void main(String[] args) {
 	            }
 	        }
 	    });
+	    
+	    // This is where we will add the calculation history entries
+	    for (int i = 0; i < 10; i++) {
+	        JLabel entry = new JLabel("Placeholder entry " + (i+1));
+	        entry.setAlignmentX(Component.CENTER_ALIGNMENT);
+	        calcHistoryArea.add(entry);
+	    }
 	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
