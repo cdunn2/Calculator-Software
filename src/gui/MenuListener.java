@@ -3,6 +3,7 @@ package gui;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -20,7 +21,8 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals("About")) {
 			AboutWindow.main(null);
 		} else if (e.getActionCommand().equals("Print Session")) {
-			//TODO
+			DelegatingPrintable print = new DelegatingPrintable(FragileWindow.calcHistoryArea);
+			PrintController.print(print, null);
 		} else if (e.getActionCommand().equals("Help")) {
 			
 			Desktop desktop = Desktop.getDesktop();

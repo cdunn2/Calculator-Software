@@ -12,6 +12,7 @@ public class FragileWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static JFrame frame = new JFrame("Fragile Calculator");
 	private static JLabel logoLabel;
+	public static JPanel calcHistoryArea = new JPanel();
 	
 
 public static void main(String[] args) {
@@ -96,7 +97,6 @@ public static void main(String[] args) {
 	    
 	    // This is the area for the calculation history and the button to open/close it
 	    JPanel containerPanel = new JPanel(new BorderLayout());
-	    JPanel calcHistoryArea = new JPanel();
 	    calcHistoryArea.setLayout(new BoxLayout(calcHistoryArea, BoxLayout.Y_AXIS));
 	    JButton arrowButton = new JButton(">");
 	    calcHistoryArea.setPreferredSize(new Dimension(200, 500));
