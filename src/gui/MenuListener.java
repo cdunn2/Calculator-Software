@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
 
 public class MenuListener implements ActionListener
 {
@@ -25,15 +26,29 @@ public class MenuListener implements ActionListener
 			PrintController.print(print, null);
 		} else if (e.getActionCommand().equals("Help")) {
 			
-			Desktop desktop = Desktop.getDesktop();
-			
+			//Desktop desktop = Desktop.getDesktop();
 			try {
-				URL url = FragileWindow.class.getResource("/index.html");
-				desktop.browse(url.toURI());
-			} catch (IOException | URISyntaxException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			    // Assuming "resources" is the subpackage containing index.html
+			    Path tempDir = ResourceCopier.copyResourcesToTemp("temp", "resources");
+
+			    // Print the path to verify
+			    System.out.println("Temporary directory: " + tempDir);
+
+			    // Now, you can construct the URI for index.html within the temporary directory
+			    URI indexHtmlURI = tempDir.resolve("index.html").toUri();
+
+			    // Open the URI in the default web browser
+			    Desktop.getDesktop().browse(indexHtmlURI);
+			} catch (IOException | URISyntaxException er) {
+			    er.printStackTrace();
 			}
+//			try {
+//				URL url = FragileWindow.class.getResource("/index.html");
+//				desktop.browse(url.toURI());
+//			} catch (IOException | URISyntaxException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
 		}
 
 	}
