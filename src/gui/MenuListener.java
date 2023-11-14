@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 public class MenuListener implements ActionListener
 {
@@ -21,12 +22,13 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals("Print Session")) {
 			//TODO
 		} else if (e.getActionCommand().equals("Help")) {
-			//doesnt work yet
-			String URL = "index.html";
-			File file = new File(URL);
+			
+			Desktop desktop = Desktop.getDesktop();
+			
 			try {
-				Desktop.getDesktop().open(file);
-			} catch (IOException e1) {
+				URL url = FragileWindow.class.getResource("/index.html");
+				desktop.browse(url.toURI());
+			} catch (IOException | URISyntaxException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
