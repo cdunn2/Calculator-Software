@@ -6,12 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class FragileWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static JFrame frame = new JFrame("Fragile Calculator");
+	static final Locale LOCALE = Locale.getDefault();
+	static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
+	private static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
 	private static JLabel logoLabel;
+	public static JPanel calcHistoryArea = new JPanel();
 	
 
 public static void main(String[] args) {
@@ -24,7 +29,7 @@ public static void main(String[] args) {
 		createMenu();
 
 		// Fragile logo
-		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/Fragile_Logo.png"));
+		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/Fragile_Logo.png"));
 		logoLabel = new JLabel(logoIcon);
 		JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		logoPanel.add(logoLabel);
@@ -34,8 +39,8 @@ public static void main(String[] args) {
 		// also display in a different class
 		Container display = new DisplayDriver();
 		display.setFont(new Font("Arial", Font.BOLD, 24));
-		topPanel.add(new JLabel("                             "), BorderLayout.EAST);
-		topPanel.add(new JLabel("                             "), BorderLayout.WEST);
+		topPanel.add(new JLabel(""), BorderLayout.EAST);
+		topPanel.add(new JLabel(""), BorderLayout.WEST);
 		topPanel.add(display, BorderLayout.CENTER);
 		frame.add(topPanel, BorderLayout.NORTH);
 
@@ -96,31 +101,53 @@ public static void main(String[] args) {
 	    
 	    // This is the area for the calculation history and the button to open/close it
 	    JPanel containerPanel = new JPanel(new BorderLayout());
-	    JPanel calcHistoryArea = new JPanel();
+	    calcHistoryArea.setLayout(new BoxLayout(calcHistoryArea, BoxLayout.Y_AXIS));
 	    JButton arrowButton = new JButton(">");
 	    calcHistoryArea.setPreferredSize(new Dimension(200, 500));
 	    JScrollPane scrollPane = new JScrollPane(calcHistoryArea);
 	    containerPanel.add(scrollPane, BorderLayout.CENTER);
 	    arrowButton.setBackground(Color.white);
-	    containerPanel.add(arrowButton, BorderLayout.WEST);
+	    containerPanel.add(arrowButton, BorderLayout.EAST);
 	    secondaryWindow.add(containerPanel);
 	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
 	    arrowButton.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		if (secondaryWindow.getWidth() == 50) {
-	    			containerPanel.add(arrowButton, BorderLayout.EAST);
-	    			secondaryWindow.setSize(400, secondaryWindow.getHeight());
-	    			arrowButton.setText("<");
-	    			calcHistoryArea.setVisible(true);
-		    	}
-	    		else {
-	    			containerPanel.add(arrowButton, BorderLayout.WEST);
-	    			secondaryWindow.setSize(50, secondaryWindow.getHeight());
-	    			arrowButton.setText(">");
-	    			calcHistoryArea.setVisible(false);
-	    		}
-			}
+	        Timer timer;
+	        public void actionPerformed(ActionEvent e) {
+	            if (secondaryWindow.getWidth() == 50) {
+	                timer = new Timer(5, new ActionListener() {
+	                    public void actionPerformed(ActionEvent evt) {
+	                        if (secondaryWindow.getWidth() < 400) {
+	                            secondaryWindow.setSize(secondaryWindow.getWidth() + 10, secondaryWindow.getHeight());
+	                        } else {
+	                            ((Timer) evt.getSource()).stop();
+	                            arrowButton.setText("<");
+	                        }
+	                    }
+	                });
+	                timer.start();
+	            }
+	            else {
+	                timer = new Timer(5, new ActionListener() {
+	                    public void actionPerformed(ActionEvent evt) {
+	                        if (secondaryWindow.getWidth() > 50) {
+	                            secondaryWindow.setSize(secondaryWindow.getWidth() - 10, secondaryWindow.getHeight());
+	                        } else {
+	                            ((Timer) evt.getSource()).stop();
+	                            arrowButton.setText(">");
+	                        }
+	                    }
+	                });
+	                timer.start();
+	            }
+	        }
 	    });
+	    
+	    // This is where we will add the calculation history entries
+	    for (int i = 0; i < 10; i++) {
+	        JLabel entry = new JLabel(STRINGS.getString("PLACEHOLDER") + (i+1));
+	        entry.setAlignmentX(Component.CENTER_ALIGNMENT);
+	        calcHistoryArea.add(entry);
+	    }
 	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
@@ -131,28 +158,28 @@ public static void main(String[] args) {
 	{
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		JMenu fileMenu = new JMenu("File");
-		JMenu modeMenu = new JMenu("Mode");
-		JMenu styleMenu = new JMenu("Style");
-		JMenu helpMenu = new JMenu("Help");
+		JMenu fileMenu = new JMenu(STRINGS.getString("FILE"));
+		JMenu modeMenu = new JMenu(STRINGS.getString("MODE"));
+		JMenu styleMenu = new JMenu(STRINGS.getString("STYLE"));
+		JMenu helpMenu = new JMenu(STRINGS.getString("HELP"));
 		menuBar.add(fileMenu);
 		menuBar.add(modeMenu);
 		menuBar.add(styleMenu);
 		menuBar.add(helpMenu);
 
 		//rn radio buttons appear as check box
-		JMenuItem printItem = new JMenuItem("Print Session");
-		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenuItem printItem = new JMenuItem(STRINGS.getString("PRINT"));
+		JMenuItem exitItem = new JMenuItem(STRINGS.getString("EXIT"));
 		
-		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem("Proper");
-		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem("Reduced");
+		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
+		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
 		
-		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem("Bar");
-		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem("Slash");
-		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem("Solidus");
+		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem(STRINGS.getString("BAR"));
+		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"), true);
+		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem(STRINGS.getString("SOLIDUS"));
 		
-		JMenuItem aboutItem = new JMenuItem("About");
-		JMenuItem helpItem = new JMenuItem("Help");
+		JMenuItem aboutItem = new JMenuItem(STRINGS.getString("ABOUT"));
+		JMenuItem helpItem = new JMenuItem(STRINGS.getString("HELP"));
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(barItem);

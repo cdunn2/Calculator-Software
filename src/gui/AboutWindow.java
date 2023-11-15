@@ -1,7 +1,7 @@
 package gui;
 
 import java.awt.*;
-
+import static gui.FragileWindow.*;
 import javax.swing.*;
 
 public class AboutWindow  extends JFrame {
@@ -9,7 +9,7 @@ public class AboutWindow  extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public AboutWindow() {
-		super("About Fragile");
+		super(STRINGS.getString("ABOUT") + " Fragile");
 
 		setSize(400, 200);
 		
@@ -18,13 +18,13 @@ public class AboutWindow  extends JFrame {
         add(panel);
 
         //title
-        JLabel titleLabel = new JLabel("About", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel(STRINGS.getString("ABOUT"), SwingConstants.CENTER);
         panel.add(titleLabel);
         
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         //icon
-        ImageIcon logoIcon = new ImageIcon("icon.png");
+        ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/icon.png"));
         JLabel iconLabel = new JLabel(logoIcon, SwingConstants.CENTER);
         panel.add(iconLabel);
 
@@ -35,12 +35,13 @@ public class AboutWindow  extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
 
         //about
-        JLabel line_one = new JLabel("Fragile is a modern, easy-to-use mixed "
-        		+ "fraction calculator.", SwingConstants.CENTER);
-        JLabel line_two = new JLabel("It is a product of Sagacious Media that was",
+        JLabel line_one = new JLabel("Fragile " + STRINGS.getString("LINE_ONE"),
+        		SwingConstants.CENTER);
+        JLabel line_two = new JLabel(STRINGS.getString("LINE_TWO"),
         		SwingConstants.CENTER); 
-        JLabel line_three = new JLabel("developed by:", SwingConstants.CENTER); 
-        JLabel line_four = new JLabel("Connor Dunn, Colin McCaffery, Ben Berry, and Logan Page",
+        JLabel line_three = new JLabel(STRINGS.getString("LINE_THREE"),
+        		SwingConstants.CENTER); 
+        JLabel line_four = new JLabel(STRINGS.getString("LINE_FOUR"),
         		SwingConstants.CENTER); 
         
         panel.add(line_one);
