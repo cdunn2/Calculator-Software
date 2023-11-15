@@ -112,6 +112,21 @@ public class DisplayDriver extends Container
 				bottom_text.setText("[] /");
 				curFocus = "W";
 			}
+			else if (buttonpressed.equals("\u2193")) {
+				if(operationComplete) {
+				    //Unsure what to do here, this prevents errors being thrown.
+				    return;
+				  }
+				bottom_text.setText(bottom_text.getText().replace("[]", ""));
+				op1 = Fractions.parseFractions(bottom_text.getText());
+				Fractions ans = Calculations.improper(op1);
+				ans = Calculations.reduce(ans);
+				ans = Calculations.proper(ans);
+				top_text.setText(ans.toString());
+				operationComplete = true;
+				bottom_text.setText("[] /");
+				curFocus = "W";
+			}
 			else if (buttonpressed.equals("=")) {
 			  if(operationComplete) {
 			    //Unsure what to do here, this prevents errors being thrown.
