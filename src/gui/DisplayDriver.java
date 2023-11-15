@@ -57,7 +57,7 @@ public class DisplayDriver extends Container
 		}
 		catch (NumberFormatException e) {
 			if (buttonpressed.equals("x") || buttonpressed.equals("-") || buttonpressed.equals("+")
-					|| buttonpressed.equals("\u00F7") )
+					|| buttonpressed.equals("\u00F7") || buttonpressed.equals("\u21F9"))
 			{
 			  operator = buttonpressed;
 			  if(operationComplete) {
@@ -146,6 +146,8 @@ public class DisplayDriver extends Container
 			    ans = Calculations.multiplication(op1,  op2);
 			  else if (operator.equals("\u00F7"))
 			    ans = Calculations.division(op1, op2);
+			  else if (operator.equals("\u21F9"))
+				    ans = Calculations.mediant(op1, op2);
 			  top_text.setText(ans.toString());
 			  operationComplete = true;
 			  bottom_text.setText("[] /");
