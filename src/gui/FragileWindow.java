@@ -110,6 +110,7 @@ public static void main(String[] args) {
 	    containerPanel.add(arrowButton, BorderLayout.EAST);
 	    secondaryWindow.add(containerPanel);
 	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
+	    arrowButton.setFocusPainted(false);
 	    arrowButton.addActionListener(new ActionListener() {
 	        Timer timer;
 	        public void actionPerformed(ActionEvent e) {
