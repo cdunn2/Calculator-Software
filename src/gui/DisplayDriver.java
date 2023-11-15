@@ -99,6 +99,19 @@ public class DisplayDriver extends Container
 			        bottom_text.getText().substring(bottom_text.getText().indexOf(" ")));
 			  }
 			}
+			else if (buttonpressed.equals("Inv")) {
+				if(operationComplete) {
+				    //Unsure what to do here, this prevents errors being thrown.
+				    return;
+				  }
+				bottom_text.setText(bottom_text.getText().replace("[]", ""));
+				op1 = Fractions.parseFractions(bottom_text.getText());
+				Fractions ans = Calculations.inverse(op1);
+				top_text.setText(ans.toString());
+				operationComplete = true;
+				bottom_text.setText("[] /");
+				curFocus = "W";
+			}
 			else if (buttonpressed.equals("=")) {
 			  if(operationComplete) {
 			    //Unsure what to do here, this prevents errors being thrown.
