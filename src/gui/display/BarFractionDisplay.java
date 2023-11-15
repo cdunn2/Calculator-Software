@@ -19,17 +19,14 @@ public class BarFractionDisplay extends JPanel implements FractionDisplay {
 	private JLabel numerator;
 	private JLabel denominator;
 	private JLabel bar;
+	private FocusLocation loc;
 	
-	public BarFractionDisplay() {
-		this(null);
-	}
-	
-	public BarFractionDisplay(Fractions fraction) {
+	public BarFractionDisplay(Fractions fraction, FocusLocation loc) {
 		if(fraction == null) {
-			this.whole = new JLabel("");
-			this.numerator = new JLabel("");
-			this.denominator = new JLabel("");
-			this.bar = new JLabel("");
+			this.whole = new JLabel(" ");
+			this.numerator = new JLabel(" ");
+			this.denominator = new JLabel(" ");
+			this.bar = new JLabel(" ");
 			
 		}
 		else {
@@ -44,10 +41,10 @@ public class BarFractionDisplay extends JPanel implements FractionDisplay {
 				barString += "\u23AF\u23AF";
 			this.bar = new JLabel(barString);
 		}
-		setBorder(BorderFactory.createLineBorder(Color.lightGray));
+		this.loc = loc;
 		numerator.setHorizontalAlignment(SwingConstants.CENTER);
 		denominator.setHorizontalAlignment(SwingConstants.CENTER);
-		whole.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		draw();
@@ -79,7 +76,14 @@ public class BarFractionDisplay extends JPanel implements FractionDisplay {
 		gbc.gridy = 1;
 		add(bar, gbc);
 		gbc.gridy = 2;
-		add(denominator, gbc);		
+		add(denominator, gbc);	
+	}
+	
+	public void addDigit(String num) {
+		if(this.loc == FocusLocation.WHOLE)
+			this.whole.setText(this.whole.getText() + num);
+		else if(this.loc == FocusLocation.NUMERATOR)
+			this.numerator.setText(this.numerator.getText() + num);
 	}
 
 }

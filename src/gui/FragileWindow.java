@@ -8,6 +8,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import gui.display.Display;
+import gui.display.TypesettingStyles;
 
 public class FragileWindow extends JFrame {
 
@@ -37,10 +39,10 @@ public static void main(String[] args) {
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.add(logoPanel, BorderLayout.NORTH);
 		// also display in a different class
-		Container display = new DisplayDriver();
+		Container display = new Display(TypesettingStyles.BAR, null, null, null);
 		display.setFont(new Font("Arial", Font.BOLD, 24));
-		topPanel.add(new JLabel(""), BorderLayout.EAST);
-		topPanel.add(new JLabel(""), BorderLayout.WEST);
+		//topPanel.add(new JLabel(""), BorderLayout.EAST);
+		//topPanel.add(new JLabel(""), BorderLayout.WEST);
 		topPanel.add(display, BorderLayout.CENTER);
 		frame.add(topPanel, BorderLayout.NORTH);
 
