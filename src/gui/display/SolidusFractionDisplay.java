@@ -1,55 +1,61 @@
 package gui.display;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import utilities.Fractions;
 
 public class SolidusFractionDisplay extends JPanel implements FractionDisplay {
 	
 	private Fractions fraction;
-	private int whole;
-	private int numerator;
-	private int denominator;
-	private JLabel fractionLabel;
+	private JLabel whole;
+	private JLabel numerator;
+	private JLabel denominator;
+	private JLabel slash;
 	
 	public SolidusFractionDisplay() {
 		this(null);
 	}
 	
 	public SolidusFractionDisplay(Fractions fraction) {
-		this.fraction = fraction;
-		this.whole = fraction.getWholeNumber();
-		this.numerator = fraction.getNumerator();
-		this.denominator = fraction.getDenominator();
-		this.fractionLabel = new JLabel();
+		if(fraction == null) {
+			this.whole = new JLabel("");
+			this.numerator = new JLabel("");
+			this.denominator = new JLabel("");
+			this.slash = new JLabel("");
+		}
+		else {
+			this.fraction = fraction;
+			this.whole = new JLabel(fraction.getWholeNumber().toString());
+			this.numerator = new JLabel("<html><sup>" + fraction.getNumerator().toString() + "</sup></html>");
+			this.denominator = new JLabel("<html><sub>" + fraction.getDenominator().toString() + "</sub></html>");
+			
+			this.slash = new JLabel("/");
+		}
 		draw();
 	}
 
 	@Override
 	public void draw() {
-		create(whole, numerator, denominator);
-		add(fractionLabel);
+		setBorder(BorderFactory.createLineBorder(Color.lightGray));
+		numerator.setHorizontalAlignment(SwingConstants.CENTER);
+		denominator.setHorizontalAlignment(SwingConstants.CENTER);
+		whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		setLayout(new FlowLayout());
+		add(whole);
+		//Creates a gap between numerator and whole to make them easier to differentiate.
+		add(new JLabel("  "));
+		add(numerator);
+		add(slash);
+		add(denominator);
 	}
 	
-	//temporary, will need to be reworked to implement focus later.
-	private void create(int w, int n, int d) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><font size = 4>");
-        sb.append(w);
-        sb.append("<sup>");
-        sb.append(n);
-        sb.append("</sup>");
-        sb.append("<font size=+1>/<font size=-1>");
-        sb.append("<sub><font size = 4>");
-        sb.append(d);
-        sb.append("</sub>");
-        sb.append("</html></body>");
-        fractionLabel.setText(sb.toString());
-        fractionLabel.setBorder(BorderFactory.createLineBorder(Color.lightGray));
-    }
 
 }

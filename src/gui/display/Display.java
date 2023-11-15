@@ -14,16 +14,14 @@ public class Display extends JPanel{
 	private TypesettingStyles style;
 	private Fractions currentOperand;
 	private Fractions op1;
-	private Fractions op2;
 	private String operation;
 	private JPanel[][] panelLayout = new JPanel[2][4];
 	
-	public Display(TypesettingStyles style, Fractions currentOperand, Fractions op1, Fractions op2, String operation) {
+	public Display(TypesettingStyles style, Fractions currentOperand, Fractions op1, String operation) {
 		super();
 		this.style = style;
 		this.currentOperand = currentOperand;
 		this.op1 = op1;
-		this.op2 = op2;
 		this.operation = operation;
 		draw();
 	}
@@ -34,10 +32,6 @@ public class Display extends JPanel{
 	
 	public Fractions getOp1() {
 		return this.currentOperand;
-	}
-	
-	public Fractions getOp2() {
-		return this.op2;
 	}
 	
 	public String getOperation() {
@@ -57,24 +51,33 @@ public class Display extends JPanel{
 				add(panelLayout[r][c]);
 			}
 		}
+		panelLayout[1][3].add(new ExponentDisplay(""));
 		if(this.style == TypesettingStyles.BAR) {
 			panelLayout[0][0].add(new BarFractionDisplay(op1));
-			JPanel operationPanel = new JPanel();
-			operationPanel.add(new JLabel(operation));
-			panelLayout[0][1].add(operationPanel);
-			panelLayout[0][2].add(new BarFractionDisplay(op2));
-			panelLayout[1][3].add(new BarFractionDisplay(currentOperand));
+			panelLayout[1][2].add(new BarFractionDisplay(currentOperand));
 			}
 		else if (this.style == TypesettingStyles.SLASH) {
 			panelLayout[0][0].add(new SlashFractionDisplay(op1));
-			JPanel operationPanel = new JPanel();
-			operationPanel.add(new JLabel(operation));
-			panelLayout[0][1].add(operationPanel);
-			panelLayout[0][2].add(new SlashFractionDisplay(op2));
-			panelLayout[1][3].add(new SlashFractionDisplay(currentOperand));
+			panelLayout[1][2].add(new SlashFractionDisplay(currentOperand));
 		}
-			
+		else if (this.style == TypesettingStyles.SOLIDUS) {
+			panelLayout[0][0].add(new SolidusFractionDisplay(op1));
+			panelLayout[1][2].add(new SolidusFractionDisplay(currentOperand));
+		}
+		JPanel operationPanel = new JPanel();
+		operationPanel.add(new JLabel(operation));
+		panelLayout[0][1].add(operationPanel);
+	}
+	
+	public void manageButtons(String buttonpressed) {
 		
+	}
+	
+	private void manageNumberButtons(String buttonpressed) {
+		
+	}
+	
+	private void manageOperationButtons(String buttonpressed) {
 		
 	}
 	

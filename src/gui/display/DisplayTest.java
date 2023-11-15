@@ -20,28 +20,14 @@ public class DisplayTest {
 		JFrame frame = new JFrame();
 		frame.setLayout(new FlowLayout());
 		Fractions frac = new Fractions(100, 2, 3);
-		/*
-		FractionDisplay solidus = new SolidusFractionDisplay(frac);
-		frame.add((JPanel) solidus);
-		FractionDisplay bar = new BarFractionDisplay(frac);
-		frame.add((JPanel) bar);
-		frame.add(new JLabel("20"));
-		JLabel numerator = new JLabel("<html><sup>100</sup></html>");
-		numerator.setVerticalAlignment(SwingConstants.TOP);
-		numerator.setBorder(BorderFactory.createLineBorder(Color.black,2));
-		
-		frame.add(numerator);
-		frame.add(new JLabel("<html>\u29F8</html>"));
-		frame.add(new JLabel("<html><sub>100</sub></html>"));
-		FractionDisplay slash = new SlashFractionDisplay(frac);
-		frame.add((JPanel) slash);
-		FractionDisplay bar2 = new BarFractionDisplay(1);
-		frame.add((JPanel)bar2);
-		*/
-		Display display = new Display(TypesettingStyles.BAR, frac, frac, frac, "+");
+		Display display = new Display(TypesettingStyles.BAR, frac, frac, "+");
 		frame.add(display);
-		Display display2 = new Display(TypesettingStyles.SLASH, frac, frac, frac, "/");
+		Display display2 = new Display(TypesettingStyles.SLASH, frac, frac, "/");
 		frame.add(display2);
+		Display display3 = new Display(TypesettingStyles.SOLIDUS, frac, frac, "*");
+		frame.add(display3);
+		Display display4 = new Display(TypesettingStyles.BAR, null, null, null);
+		frame.add(display4);
 		frame.setVisible(true);
 		frame.setSize(400, 900);
 
