@@ -6,11 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class FragileWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static JFrame frame = new JFrame("Fragile Calculator");
+	static final Locale LOCALE = Locale.getDefault();
+	static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
+	private static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
 	private static JLabel logoLabel;
 	public static JPanel calcHistoryArea = new JPanel();
 	
@@ -140,7 +144,7 @@ public static void main(String[] args) {
 	    
 	    // This is where we will add the calculation history entries
 	    for (int i = 0; i < 10; i++) {
-	        JLabel entry = new JLabel("Placeholder entry " + (i+1));
+	        JLabel entry = new JLabel(STRINGS.getString("PLACEHOLDER") + (i+1));
 	        entry.setAlignmentX(Component.CENTER_ALIGNMENT);
 	        calcHistoryArea.add(entry);
 	    }
@@ -154,28 +158,28 @@ public static void main(String[] args) {
 	{
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		JMenu fileMenu = new JMenu("File");
-		JMenu modeMenu = new JMenu("Mode");
-		JMenu styleMenu = new JMenu("Style");
-		JMenu helpMenu = new JMenu("Help");
+		JMenu fileMenu = new JMenu(STRINGS.getString("FILE"));
+		JMenu modeMenu = new JMenu(STRINGS.getString("MODE"));
+		JMenu styleMenu = new JMenu(STRINGS.getString("STYLE"));
+		JMenu helpMenu = new JMenu(STRINGS.getString("HELP"));
 		menuBar.add(fileMenu);
 		menuBar.add(modeMenu);
 		menuBar.add(styleMenu);
 		menuBar.add(helpMenu);
 
 		//rn radio buttons appear as check box
-		JMenuItem printItem = new JMenuItem("Print Session");
-		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenuItem printItem = new JMenuItem(STRINGS.getString("PRINT"));
+		JMenuItem exitItem = new JMenuItem(STRINGS.getString("EXIT"));
 		
-		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem("Proper");
-		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem("Reduced");
+		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
+		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
 		
-		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem("Bar");
-		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem("Slash", true);
-		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem("Solidus");
+		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem(STRINGS.getString("BAR"));
+		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"), true);
+		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem(STRINGS.getString("SOLIDUS"));
 		
-		JMenuItem aboutItem = new JMenuItem("About");
-		JMenuItem helpItem = new JMenuItem("Help");
+		JMenuItem aboutItem = new JMenuItem(STRINGS.getString("ABOUT"));
+		JMenuItem helpItem = new JMenuItem(STRINGS.getString("HELP"));
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(barItem);
