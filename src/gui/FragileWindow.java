@@ -72,6 +72,7 @@ public static void main(String[] args) {
 
 				if (!buttons[i][j].isEmpty()) {
 					JButton button = new JButton(buttons[i][j]);
+					button.setFocusPainted(false);
 					button.setBackground(Color.white);
 					button.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -110,6 +111,7 @@ public static void main(String[] args) {
 	    containerPanel.add(arrowButton, BorderLayout.EAST);
 	    secondaryWindow.add(containerPanel);
 	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
+	    arrowButton.setFocusPainted(false);																				
 	    arrowButton.addActionListener(new ActionListener() {
 	        Timer timer;
 	        public void actionPerformed(ActionEvent e) {
