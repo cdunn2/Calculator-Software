@@ -14,7 +14,7 @@ import utilities.Fractions;
 
 public class Display extends JPanel{
 	
-	private TypesettingStyles style = TypesettingStyles.BAR;
+	private TypesettingStyles style = TypesettingStyles.SLASH;
 	private FocusLocation loc = FocusLocation.WHOLE;
 	private boolean currIsNegative = false;
 	private boolean otherIsNegative = false;

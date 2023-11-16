@@ -19,6 +19,7 @@ public class FragileWindow extends JFrame {
 	public static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
 	private static JLabel logoLabel;
 	public static JPanel calcHistoryArea = new JPanel();
+	public static Display calculatorDisplay = new Display(TypesettingStyles.SLASH);
 	
 
 public static void main(String[] args) {
@@ -39,7 +40,7 @@ public static void main(String[] args) {
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.add(logoPanel, BorderLayout.NORTH);
 		//Manually change display style here, does not work dynamically yet.
-		Display calculatorDisplay = new Display(TypesettingStyles.BAR);
+		Display calculatorDisplay = new Display(TypesettingStyles.SLASH);
 		Container display = calculatorDisplay;
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		//topPanel.add(new JLabel(""), BorderLayout.EAST);
