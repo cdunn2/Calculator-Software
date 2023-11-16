@@ -8,9 +8,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import static gui.FragileWindow.*;
+import gui.display.*;
+import utilities.Calculations;
 
 public class MenuListener implements ActionListener
 {
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
@@ -25,17 +28,33 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals(STRINGS.getString("HELP"))) {
 
 			try {
-			    Path tempDir = ResourceCopier.copyResourcesToTemp("temp", "resources");
+				Path tempDir = ResourceCopier.copyResourcesToTemp("temp", "resources");
 
-			    URI indexHtmlURI = tempDir.resolve("index.html").toUri();
+				URI indexHtmlURI = tempDir.resolve("index.html").toUri();
 
-			    Desktop.getDesktop().browse(indexHtmlURI);
-			    
+				Desktop.getDesktop().browse(indexHtmlURI);
+
 			} catch (IOException | URISyntaxException er) {
-			    er.printStackTrace();
+				er.printStackTrace();
 			}
 		}
-
+		if (CreateMenu.properItem.isSelected()) {
+			//idk  what to  do here
+		} else {
+			// maybe? Calculations.improper(?);
+		}
+		if (CreateMenu.reducedItem.isSelected()) {
+			//Calculations.reduce(?);
+		}
+		
+		if (CreateMenu.barItem.isSelected()) {
+			//make it into bar
+		} else if (CreateMenu.slashItem.isSelected()) {
+			//make it into slash
+		} else if (CreateMenu.solidusItem.isSelected()) {
+			//make it into solidus
+		}
+		
 	}
 
 }

@@ -149,10 +149,8 @@ public class Calculations
 		if(numerator < 0)
 		{
 			return new Fractions(true, denominator, numerator * -1);
-		} else
-		{
-			return new Fractions(false, denominator, numerator);
 		}
+		return new Fractions(false, denominator, numerator);
 	}
 	
 	/**

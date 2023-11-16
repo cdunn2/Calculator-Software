@@ -16,7 +16,7 @@ public class FragileWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	static final Locale LOCALE = Locale.getDefault();
 	static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
-	private static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
+	public static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
 	private static JLabel logoLabel;
 	public static JPanel calcHistoryArea = new JPanel();
 	
@@ -28,7 +28,7 @@ public static void main(String[] args) {
 		frame.setLayout(new BorderLayout());
 		//frame.setResizable(false);
 
-		createMenu();
+		new CreateMenu();
 
 		// Fragile logo
 		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/Fragile_Logo.png"));
