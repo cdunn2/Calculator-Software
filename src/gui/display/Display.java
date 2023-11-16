@@ -200,17 +200,15 @@ public class Display extends JPanel{
 		} else if (this.currOperation == "x\u207F") {
 			result = Calculations.power(operand2, Integer.parseInt(this.exponent.getText()));
 		}
-		if(this.style == TypesettingStyles.BAR) {
-			clear(upperPanel);
-			if(result.getIsNegative())
-				upperPanel.add(new JLabel("-"));
-			this.upperOperand = new BarFractionDisplay();
-			setUpperOperandDisplay(this.style, result.getWholeNumber().toString(), result.getNumerator().toString(), result.getDenominator().toString());
-			upperPanel.add(this.upperOperand);
-			setEmptyLowerOperandDisplay(this.style);
-			clear(lowerPanel);
-			lowerPanel.add(this.lowerOperand);
-		}
+		clear(upperPanel);
+		if(result.getIsNegative())
+			upperPanel.add(new JLabel("-"));
+		this.upperOperand = new BarFractionDisplay();
+		setUpperOperandDisplay(this.style, result.getWholeNumber().toString(), result.getNumerator().toString(), result.getDenominator().toString());
+		upperPanel.add(this.upperOperand);
+		setEmptyLowerOperandDisplay(this.style);
+		clear(lowerPanel);
+		lowerPanel.add(this.lowerOperand);
 	}
 	
 	
