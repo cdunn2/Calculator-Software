@@ -14,7 +14,7 @@ public class FragileWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	static final Locale LOCALE = Locale.getDefault();
 	static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
-	private static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
+	public static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
 	private static JLabel logoLabel;
 	public static JPanel calcHistoryArea = new JPanel();
 	
@@ -26,7 +26,7 @@ public static void main(String[] args) {
 		frame.setLayout(new BorderLayout());
 		//frame.setResizable(false);
 
-		createMenu();
+		new CreateMenu();
 
 		// Fragile logo
 		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/Fragile_Logo.png"));
@@ -154,60 +154,5 @@ public static void main(String[] args) {
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		secondaryWindow.setVisible(true);
-	}
-	
-	private static void createMenu()
-	{
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		JMenu fileMenu = new JMenu(STRINGS.getString("FILE"));
-		JMenu modeMenu = new JMenu(STRINGS.getString("MODE"));
-		JMenu styleMenu = new JMenu(STRINGS.getString("STYLE"));
-		JMenu helpMenu = new JMenu(STRINGS.getString("HELP"));
-		menuBar.add(fileMenu);
-		menuBar.add(modeMenu);
-		menuBar.add(styleMenu);
-		menuBar.add(helpMenu);
-
-		//rn radio buttons appear as check box
-		JMenuItem printItem = new JMenuItem(STRINGS.getString("PRINT"));
-		JMenuItem exitItem = new JMenuItem(STRINGS.getString("EXIT"));
-		
-		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
-		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
-		
-		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem(STRINGS.getString("BAR"));
-		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"), true);
-		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem(STRINGS.getString("SOLIDUS"));
-		
-		JMenuItem aboutItem = new JMenuItem(STRINGS.getString("ABOUT"));
-		JMenuItem helpItem = new JMenuItem(STRINGS.getString("HELP"));
-		
-		ButtonGroup group = new ButtonGroup();
-		group.add(barItem);
-		group.add(slashItem);
-		group.add(solidusItem);
-
-		fileMenu.add(printItem);
-		fileMenu.add(exitItem);
-		modeMenu.add(properItem);
-		modeMenu.add(reducedItem);
-		styleMenu.add(barItem);
-		styleMenu.add(slashItem);
-		styleMenu.add(solidusItem);
-		helpMenu.add(aboutItem);
-		helpMenu.add(helpItem);
-		
-		MenuListener listener = new MenuListener();
-
-		printItem.addActionListener(listener);
-        exitItem.addActionListener(listener);
-        properItem.addActionListener(listener);
-        reducedItem.addActionListener(listener);
-        barItem.addActionListener(listener);
-        slashItem.addActionListener(listener);
-        solidusItem.addActionListener(listener);
-        aboutItem.addActionListener(listener);
-        helpItem.addActionListener(listener);
 	}
 }
