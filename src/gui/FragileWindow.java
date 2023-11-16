@@ -38,8 +38,9 @@ public static void main(String[] args) {
 
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.add(logoPanel, BorderLayout.NORTH);
-		// also display in a different class
-		Container display = new Display(TypesettingStyles.BAR, null, null, null);
+		//Manually change display style here, does not work dynamically yet.
+		Display calculatorDisplay = new Display(TypesettingStyles.BAR);
+		Container display = calculatorDisplay;
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		//topPanel.add(new JLabel(""), BorderLayout.EAST);
 		//topPanel.add(new JLabel(""), BorderLayout.WEST);
@@ -78,7 +79,7 @@ public static void main(String[] args) {
 					button.setBackground(Color.white);
 					button.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							DisplayDriver.bottomManager(((JButton) e.getSource()).getText());
+							calculatorDisplay.manageButtons(((JButton) e.getSource()).getText());
 						}
 					});
 					buttonsPanel.add(button, gb);
@@ -178,8 +179,8 @@ public static void main(String[] args) {
 		JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
 		JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
 		
-		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem(STRINGS.getString("BAR"));
-		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"), true);
+		JRadioButtonMenuItem barItem = new JRadioButtonMenuItem(STRINGS.getString("BAR"), true);
+		JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"));
 		JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem(STRINGS.getString("SOLIDUS"));
 		
 		JMenuItem aboutItem = new JMenuItem(STRINGS.getString("ABOUT"));

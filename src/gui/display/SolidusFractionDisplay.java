@@ -10,39 +10,27 @@ import javax.swing.SwingConstants;
 
 import utilities.Fractions;
 
-public class SolidusFractionDisplay extends JPanel implements FractionDisplay {
+public class SolidusFractionDisplay extends FractionDisplay {
 	
-	private Fractions fraction;
-	private JLabel whole;
-	private JLabel numerator;
-	private JLabel denominator;
-	private JLabel slash;
+	private JLabel slash = new JLabel("/");
+	private String currentNumerator;
+	private String currentDenominator;
 	
 	public SolidusFractionDisplay() {
-		this(null);
+		this(" ", " ", " ", FocusLocation.WHOLE);
 	}
 	
-	public SolidusFractionDisplay(Fractions fraction) {
-		if(fraction == null) {
-			this.whole = new JLabel("");
-			this.numerator = new JLabel("");
-			this.denominator = new JLabel("");
-			this.slash = new JLabel("");
-		}
-		else {
-			this.fraction = fraction;
-			this.whole = new JLabel(fraction.getWholeNumber().toString());
-			this.numerator = new JLabel("<html><sup>" + fraction.getNumerator().toString() + "</sup></html>");
-			this.denominator = new JLabel("<html><sub>" + fraction.getDenominator().toString() + "</sub></html>");
-			
-			this.slash = new JLabel("/");
-		}
+	public SolidusFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc) {
+		this.whole = new JLabel(whole);
+		this.numerator = new JLabel("<html><sup>" + numerator + "</sup></html>");
+		this.denominator = new JLabel("<html><sub>" + denominator + "</sub></html>");
+		this.currentNumerator = numerator;
+		this.currentDenominator = denominator;
 		draw();
 	}
 
 	@Override
 	public void draw() {
-		setBorder(BorderFactory.createLineBorder(Color.lightGray));
 		numerator.setHorizontalAlignment(SwingConstants.CENTER);
 		denominator.setHorizontalAlignment(SwingConstants.CENTER);
 		whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -57,5 +45,19 @@ public class SolidusFractionDisplay extends JPanel implements FractionDisplay {
 		add(denominator);
 	}
 	
+	@Override
+	public void addDigit(String num) {
+		if(this.loc == FocusLocation.WHOLE) {
+			this.whole.setText(this.whole.getText().replace(" ", "") + num);
+		}
+		else if(this.loc == FocusLocation.NUMERATOR) {
+			this.numerator.setText("<html><sup>" + currentNumerator + num + "</sup></html>");
+			currentNumerator = currentNumerator + num;
+		}
+		else if(this.loc == FocusLocation.DENOMINATOR) {
+			this.denominator.setText("<html><sub>" + currentDenominator + num + "</sub></html>");
+			currentDenominator = currentDenominator + num;
+		}
+	}
 
 }

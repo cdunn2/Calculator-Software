@@ -10,38 +10,27 @@ import javax.swing.SwingConstants;
 
 import utilities.Fractions;
 
-public class SlashFractionDisplay extends JPanel implements FractionDisplay {
+public class SlashFractionDisplay extends FractionDisplay {
 
-	private Fractions fraction;
-	private JLabel whole;
-	private JLabel numerator;
-	private JLabel denominator;
-	private JLabel slash;
+	private JLabel slash = new JLabel("/");
+	private FocusLocation loc = FocusLocation.WHOLE;
 	
 	public SlashFractionDisplay() {
-		this(null);
+		this(" ", " ", " ", FocusLocation.WHOLE);
 	}
 	
-	public SlashFractionDisplay(Fractions fraction) {
-		if(fraction == null) {
-			this.whole = new JLabel("");
-			this.numerator = new JLabel("");
-			this.denominator = new JLabel("");
-			this.slash = new JLabel("");
-		}
-		else {
-			this.fraction = fraction;
-			this.whole = new JLabel(fraction.getWholeNumber().toString());
-			this.numerator = new JLabel(fraction.getNumerator().toString());
-			this.denominator = new JLabel(fraction.getDenominator().toString());
-			
-			this.slash = new JLabel("/");
-		}
+	public SlashFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc) {
+		this.whole = new JLabel(whole);
+		this.numerator = new JLabel(numerator);
+		this.denominator = new JLabel(denominator);
+		this.loc = loc;
+		if(this.loc == null)
+			this.whole.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		draw();
-	}
+		}
+		
 	@Override
 	public void draw() {
-		setBorder(BorderFactory.createLineBorder(Color.lightGray));
 		numerator.setHorizontalAlignment(SwingConstants.CENTER);
 		denominator.setHorizontalAlignment(SwingConstants.CENTER);
 		whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
