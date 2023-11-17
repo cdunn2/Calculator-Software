@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import gui.display.Display;
@@ -40,6 +42,7 @@ public static void main(String[] args) {
 
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.add(logoPanel, BorderLayout.NORTH);
+		//Manually change display style here, does not work dynamically yet.
 		Container display = calculatorDisplay;
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		//topPanel.add(new JLabel(""), BorderLayout.EAST);
@@ -79,7 +82,6 @@ public static void main(String[] args) {
 					button.setBackground(Color.white);
 					button.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							
 							calculatorDisplay.manageButtons(((JButton) e.getSource()).getText());
 						}
 					});
@@ -87,6 +89,37 @@ public static void main(String[] args) {
 				}
 			}
 		}
+		
+		// Key bindings for each physical key
+		String[] keys = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "PERIOD", "shift EQUALS", "MINUS", "shift 8", "SLASH", "ENTER"};
+	    for (String key : keys) {
+	        KeyStroke keyStroke = KeyStroke.getKeyStroke(key);
+	        // For some reason I can't change input without it throwing a fit so this is what we got
+	        // The Display class also doesn't like it if I try to do alternate cases for these for some reason
+	        if (key.equals("shift EQUALS")) {
+	        	key = "+";
+	        }
+	        if (key.equals("MINUS")) {
+	        	key = "-";
+	        }
+	        if (key.equals("shift 8")) {
+	        	key = "x";
+	        }
+	        if (key.equals("SLASH")) {
+	        	key = "\u00F7";
+	        }
+	        if (key.equals("PERIOD")) {
+	        	key = "Pos";
+	        }
+	        String input = key;
+	        frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, input);
+	        frame.getRootPane().getActionMap().put(input, new AbstractAction() {
+				private static final long serialVersionUID = 1L;
+				public void actionPerformed(ActionEvent e) {
+	                calculatorDisplay.manageButtons(input);
+	            }
+	        });
+	    }
 		
 		JWindow secondaryWindow = new JWindow(frame);
 	    secondaryWindow.setSize(50, 500);
@@ -147,8 +180,21 @@ public static void main(String[] args) {
 	            }
 	        }
 	    });
+	    
+	    // This is where we will add the calculation history entries
+	    for (int i = 0; i < 10; i++) {
+	        JLabel entry = new JLabel(STRINGS.getString("PLACEHOLDER") + (i+1));
+	        entry.setAlignmentX(Component.CENTER_ALIGNMENT);
+	        calcHistoryArea.add(entry);
+	    }
+	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		secondaryWindow.setVisible(true);
+		frame.toFront();
+	}
+
+	public void createDisplay(TypesettingStyles style) {
+		
 	}
 }
