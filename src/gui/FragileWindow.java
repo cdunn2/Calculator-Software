@@ -20,6 +20,7 @@ public class FragileWindow extends JFrame {
 	private static JLabel logoLabel;
 	public static JPanel calcHistoryArea = new JPanel();
 	public static Display calculatorDisplay = new Display(TypesettingStyles.SLASH);
+	public static GridBagConstraints gbc;
 	
 
 
@@ -53,6 +54,69 @@ public static void main(String[] args) {
 
 		gb.weightx = 1.0;
 		gb.weighty = 1.0;
+		
+		JWindow secondaryWindow = new JWindow(frame);
+	    secondaryWindow.setSize(50, 500);
+	    secondaryWindow.setLocationRelativeTo(frame);
+	    secondaryWindow.setLocation(frame.getX() + frame.getWidth(), frame.getY());
+
+	    frame.addComponentListener(new ComponentAdapter() {
+	        public void componentMoved(ComponentEvent e) {
+	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
+	        }
+
+	        public void componentResized(ComponentEvent e) {
+	            secondaryWindow.setSize(secondaryWindow.getWidth(), frame.getHeight() - 170);
+	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
+	        }
+	    });
+		
+		// This is the area for the calculation history and the button to open/close it
+	    JPanel containerPanel = new JPanel(new BorderLayout());
+	    calcHistoryArea.setLayout(new BoxLayout(calcHistoryArea, BoxLayout.Y_AXIS));
+	    calcHistoryArea.setAlignmentY(TOP_ALIGNMENT);
+	    JButton arrowButton = new JButton(">");
+	    arrowButton.setBackground(Color.white);
+	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
+	    arrowButton.setFocusPainted(false);
+	    JScrollPane scrollPane = new JScrollPane(calcHistoryArea);
+	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	    containerPanel.add(scrollPane, BorderLayout.CENTER);
+	    containerPanel.add(arrowButton, BorderLayout.EAST);
+	    secondaryWindow.add(containerPanel);
+	    secondaryWindow.setVisible(true);
+	    arrowButton.addActionListener(new ActionListener() {
+	        Timer timer;
+	        public void actionPerformed(ActionEvent e) {
+	            if (secondaryWindow.getWidth() == 50) {
+	                timer = new Timer(5, new ActionListener() {
+	                    public void actionPerformed(ActionEvent evt) {
+	                        if (secondaryWindow.getWidth() < 400) {
+	                            secondaryWindow.setSize(secondaryWindow.getWidth() + 10, secondaryWindow.getHeight());
+	                        } else {
+	                            ((Timer) evt.getSource()).stop();
+	                            arrowButton.setText("<");
+	                        }
+	                    }
+	                });
+	                timer.start();
+	            }
+	            else {
+	                timer = new Timer(5, new ActionListener() {
+	                    public void actionPerformed(ActionEvent evt) {
+	                        if (secondaryWindow.getWidth() > 50) {
+	                            secondaryWindow.setSize(secondaryWindow.getWidth() - 10, secondaryWindow.getHeight());
+	                        } else {
+	                            ((Timer) evt.getSource()).stop();
+	                            arrowButton.setText(">");
+	                        }
+	                    }
+	                });
+	                timer.start();
+	            }
+	        }
+	    });
 
 		String[][] buttons = {
 				{"R", "C", "\u2190", "+", "\u21F9","\u00B1"},
@@ -118,71 +182,21 @@ public static void main(String[] args) {
 	            }
 	        });
 	    }
-		
-		JWindow secondaryWindow = new JWindow(frame);
-	    secondaryWindow.setSize(50, 500);
-	    secondaryWindow.setLocationRelativeTo(frame);
-	    secondaryWindow.setLocation(frame.getX() + frame.getWidth(), frame.getY());
-
-	    frame.addComponentListener(new ComponentAdapter() {
-	        public void componentMoved(ComponentEvent e) {
-	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
-	        }
-
-	        public void componentResized(ComponentEvent e) {
-	            secondaryWindow.setSize(secondaryWindow.getWidth(), frame.getHeight() - 170);
-	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
-	        }
-	    });
-	    
-	    // This is the area for the calculation history and the button to open/close it
-	    JPanel containerPanel = new JPanel(new BorderLayout());
-	    calcHistoryArea.setLayout(new BoxLayout(calcHistoryArea, BoxLayout.Y_AXIS));
-	    JButton arrowButton = new JButton(">");
-	    calcHistoryArea.setPreferredSize(new Dimension(200, 500));
-	    JScrollPane scrollPane = new JScrollPane(calcHistoryArea);
-	    containerPanel.add(scrollPane, BorderLayout.CENTER);
-	    arrowButton.setBackground(Color.white);
-	    containerPanel.add(arrowButton, BorderLayout.EAST);
-	    secondaryWindow.add(containerPanel);
-	    arrowButton.setMargin(new Insets(0, 18, 0, 18));
-	    arrowButton.setFocusPainted(false);
-	    arrowButton.addActionListener(new ActionListener() {
-	        Timer timer;
-	        public void actionPerformed(ActionEvent e) {
-	            if (secondaryWindow.getWidth() == 50) {
-	                timer = new Timer(5, new ActionListener() {
-	                    public void actionPerformed(ActionEvent evt) {
-	                        if (secondaryWindow.getWidth() < 400) {
-	                            secondaryWindow.setSize(secondaryWindow.getWidth() + 10, secondaryWindow.getHeight());
-	                        } else {
-	                            ((Timer) evt.getSource()).stop();
-	                            arrowButton.setText("<");
-	                        }
-	                    }
-	                });
-	                timer.start();
-	            }
-	            else {
-	                timer = new Timer(5, new ActionListener() {
-	                    public void actionPerformed(ActionEvent evt) {
-	                        if (secondaryWindow.getWidth() > 50) {
-	                            secondaryWindow.setSize(secondaryWindow.getWidth() - 10, secondaryWindow.getHeight());
-	                        } else {
-	                            ((Timer) evt.getSource()).stop();
-	                            arrowButton.setText(">");
-	                        }
-	                    }
-	                });
-	                timer.start();
-	            }
-	        }
-	    });
-	    
 	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		secondaryWindow.setVisible(true);
 		frame.toFront();
+	}
+
+	// Please do not delete this (or the stuff dealing with calcHistoryArea) it took me so many hours to get this working
+	// I am currently writing this at 6:49 am
+	// I'm tired boss
+	public static void addHistoryEntry(JPanel entryPanel) {
+	    entryPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+	    entryPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, entryPanel.getPreferredSize().height));
+	    calcHistoryArea.add(entryPanel);
+	    calcHistoryArea.revalidate();
+	    calcHistoryArea.repaint();
 	}
 }

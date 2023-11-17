@@ -10,13 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gui.FragileWindow;
-import gui.CreateMenu;
 import gui.MenuListener;
 import utilities.Calculations;
 import utilities.Fractions;
 
 public class Display extends JPanel{
-	
+
+	private static final long serialVersionUID = 1L;
 	private TypesettingStyles style;
 	private FocusLocation loc = FocusLocation.WHOLE;
 	private boolean currIsNegative = false;
@@ -210,6 +210,15 @@ public class Display extends JPanel{
 		setEmptyLowerOperandDisplay(this.style);
 		clear(lowerPanel);
 		lowerPanel.add(this.lowerOperand);
+		
+
+		JPanel entryPanel = new JPanel();
+	    entryPanel.setLayout(new BoxLayout(entryPanel, BoxLayout.X_AXIS));
+	    entryPanel.add(this.upperOperand);
+	    FragileWindow.addHistoryEntry(entryPanel);
+	    FragileWindow.calcHistoryArea.add(entryPanel);
+	    FragileWindow.calcHistoryArea.revalidate();
+	    FragileWindow.calcHistoryArea.repaint();
 	}
 	
 	
@@ -254,7 +263,6 @@ public class Display extends JPanel{
 	}
 	public void changeStyle(TypesettingStyles style) {
 		this.style = style;
-		System.out.println("!" + this.lowerOperand.getNumerator() + "!");
 		
 		setLowerOperandDisplay(style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator(), this.lowerOperand.getFocusLocation());
 		if(this.upperOperand != null) {
