@@ -11,61 +11,79 @@ import javax.swing.SwingConstants;
 
 import utilities.Fractions;
 
+/**
+ * Represents a fraction in the solidus style.
+ */
 public class SolidusFractionDisplay extends FractionDisplay {
-	
-	private JLabel slash = new JLabel("/");
-	private String currentNumerator;
-	private String currentDenominator;
-	private JPanel numeratorPanel = new JPanel();
-	private JPanel denominatorPanel = new JPanel();
-	
-	public SolidusFractionDisplay() {
-		this(" ", " ", " ", FocusLocation.WHOLE);
-	}
-	
-	public SolidusFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc) {
-		this.whole = new JLabel(whole);
-		this.numerator = new JLabel(numerator);
-		this.denominator = new JLabel(denominator);
-		if(numerator == null || numerator.equals(""))
-			this.currentNumerator = " ";
-		else
-			this.currentNumerator = numerator;
-		if(denominator == null)
-			this.currentDenominator = " ";
-		else
-			this.currentDenominator = denominator;
-		draw();
-	}
 
-	@Override
-	public void draw() {
-		numerator.setHorizontalAlignment(SwingConstants.CENTER);
-		denominator.setHorizontalAlignment(SwingConstants.CENTER);
-		if(this.numerator.getText().length() > 0)
-			numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
-		if(this.denominator.getText().length() > 0)
-			denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
-		if(this.whole.getText().length() == 0)
-			whole.setBorder(null);
-		setLayout(new FlowLayout());
-		if(!this.whole.getText().equals("0"))
-			add(whole);
-		numeratorPanel.setLayout(new BoxLayout(numeratorPanel, BoxLayout.Y_AXIS));
+  private JLabel slash = new JLabel("/");
+  private String currentNumerator;
+  private String currentDenominator;
+  private JPanel numeratorPanel = new JPanel();
+  private JPanel denominatorPanel = new JPanel();
 
-		numeratorPanel.add(numerator);
-		numeratorPanel.add(new JLabel(" "));
-		
-		denominatorPanel.setLayout(new BoxLayout(denominatorPanel, BoxLayout.Y_AXIS));
-		denominatorPanel.add(new JLabel(" "));
-		denominatorPanel.add(denominator);
-		
-		setLayout(new FlowLayout());
-		//Creates a gap between numerator and whole to make them easier to differentiate.
-		add(new JLabel("  "));
-		add(numeratorPanel);
-		add(slash);
-		add(denominatorPanel);
-		System.out.println();
-	}
+  public SolidusFractionDisplay() {
+    this(" ", " ", " ", FocusLocation.WHOLE);
+  }
+
+  /**
+   * Constructs a new fraction in the solidus style.
+   *
+   * @param whole The whole number of the fraction.
+   * @param numerator The numerator of the fraction.
+   * @param denominator The denominator of the fraction.
+   * @param loc The location of the focus indicator.
+   */
+  public SolidusFractionDisplay(String whole, String numerator, String denominator, 
+        FocusLocation loc) {
+    this.whole = new JLabel(whole);
+    this.numerator = new JLabel(numerator);
+    this.denominator = new JLabel(denominator);
+    if (numerator == null || numerator.equals("")) {
+      this.currentNumerator = " ";
+    } else {
+      this.currentNumerator = numerator;
+    }
+    if (denominator == null) {
+      this.currentDenominator = " ";
+    } else {
+      this.currentDenominator = denominator;
+    }
+    draw();
+  }
+
+  @Override
+  public void draw() {
+    numerator.setHorizontalAlignment(SwingConstants.CENTER);
+    denominator.setHorizontalAlignment(SwingConstants.CENTER);
+    if (this.numerator.getText().length() > 0) {
+      numerator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
+    }
+    if (this.denominator.getText().length() > 0) {
+      denominator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
+    }
+    if (this.whole.getText().length() == 0) {
+      whole.setBorder(null);
+    }
+    setLayout(new FlowLayout());
+    if (!this.whole.getText().equals("0")) {
+      add(whole);
+    }
+    numeratorPanel.setLayout(new BoxLayout(numeratorPanel, BoxLayout.Y_AXIS));
+
+    numeratorPanel.add(numerator);
+    numeratorPanel.add(new JLabel(" "));
+
+    denominatorPanel.setLayout(new BoxLayout(denominatorPanel, BoxLayout.Y_AXIS));
+    denominatorPanel.add(new JLabel(" "));
+    denominatorPanel.add(denominator);
+
+    setLayout(new FlowLayout());
+    //Creates a gap between numerator and whole to make them easier to differentiate.
+    add(new JLabel("  "));
+    add(numeratorPanel);
+    add(slash);
+    add(denominatorPanel);
+    System.out.println();
+  }
 }
