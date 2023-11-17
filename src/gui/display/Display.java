@@ -138,7 +138,6 @@ public class Display extends JPanel{
 			upperPanel.add(new JLabel("-"));
 			otherIsNegative = true;
 		}
-		System.out.println("!" + this.currOperation + "!");
 		if(this.currOperation.equals("")) {
 			setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
 			upperPanel.add(this.upperOperand);
