@@ -211,7 +211,7 @@ public class Display extends JPanel{
 		clear(lowerPanel);
 		lowerPanel.add(this.lowerOperand);
 		
-
+		// This is the stuff for copying over into the calculation history
 		JPanel entryPanel = new JPanel();
 	    entryPanel.setLayout(new BoxLayout(entryPanel, BoxLayout.X_AXIS));
 	    entryPanel.add(this.upperOperand);

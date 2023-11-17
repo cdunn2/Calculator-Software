@@ -11,6 +11,7 @@ import utilities.Fractions;
  */
 public abstract class FractionDisplay extends JPanel {
 
+  private static final long serialVersionUID = 1L;
   protected JLabel whole;
   protected JLabel numerator;
   protected JLabel denominator;
