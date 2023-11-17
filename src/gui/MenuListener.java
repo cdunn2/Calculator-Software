@@ -14,7 +14,9 @@ import utilities.Calculations;
 public class MenuListener implements ActionListener
 {
 	
-
+	public static Boolean reduce = false;
+	public static Boolean proper = false;
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -39,12 +41,14 @@ public class MenuListener implements ActionListener
 			}
 		}
 		if (CreateMenu.properItem.isSelected()) {
-			//idk  what to  do here
-		} else {
-			// maybe? Calculations.improper(?);
+			proper = true;
+		} else if (!CreateMenu.properItem.isSelected()){
+			proper = false;
 		}
 		if (CreateMenu.reducedItem.isSelected()) {
-			//Calculations.reduce(?);
+			reduce = true;
+		} else if (!CreateMenu.reducedItem.isSelected()) {
+			reduce = false;
 		}
 		
 		if (CreateMenu.barItem.isSelected()) {

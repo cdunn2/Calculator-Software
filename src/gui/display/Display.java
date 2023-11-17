@@ -9,6 +9,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import gui.CreateMenu;
+import gui.MenuListener;
 import utilities.Calculations;
 import utilities.Fractions;
 
@@ -196,6 +198,12 @@ public class Display extends JPanel{
 		clear(upperPanel);
 		if(result.getIsNegative())
 			upperPanel.add(new JLabel("-"));
+		if (MenuListener.reduce) {
+			result = Calculations.reduce(result);
+		}
+		if (MenuListener.proper) {
+			result = Calculations.proper(result);
+		}
 		this.upperOperand = new BarFractionDisplay();
 		setUpperOperandDisplay(this.style, result.getWholeNumber().toString(), result.getNumerator().toString(), result.getDenominator().toString());
 		upperPanel.add(this.upperOperand);
