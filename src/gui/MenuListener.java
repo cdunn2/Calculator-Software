@@ -48,14 +48,11 @@ public class MenuListener implements ActionListener
 		}
 		
 		if (CreateMenu.barItem.isSelected()) {
-			TypesettingStyles style = TypesettingStyles.BAR;
-			FragileWindow.calculatorDisplay.changeStyle(style);
+			FragileWindow.calculatorDisplay.changeStyle(TypesettingStyles.BAR);
 		} else if (CreateMenu.slashItem.isSelected()) {
-			TypesettingStyles style = TypesettingStyles.SLASH;
-			FragileWindow.calculatorDisplay.changeStyle(style);
+			FragileWindow.calculatorDisplay.changeStyle(TypesettingStyles.SLASH);
 		} else if (CreateMenu.solidusItem.isSelected()) {
-			TypesettingStyles style = TypesettingStyles.SOLIDUS;
-			FragileWindow.calculatorDisplay.changeStyle(style);
+			FragileWindow.calculatorDisplay.changeStyle(TypesettingStyles.SOLIDUS);
 		}
 		
 	}
