@@ -49,13 +49,13 @@ public class MenuListener implements ActionListener
 		
 		if (CreateMenu.barItem.isSelected()) {
 			TypesettingStyles style = TypesettingStyles.BAR;
-			FragileWindow.calculatorDisplay.setStyle(style);
+			FragileWindow.calculatorDisplay.changeStyle(style);
 		} else if (CreateMenu.slashItem.isSelected()) {
 			TypesettingStyles style = TypesettingStyles.SLASH;
-			FragileWindow.calculatorDisplay.setStyle(style);
+			FragileWindow.calculatorDisplay.changeStyle(style);
 		} else if (CreateMenu.solidusItem.isSelected()) {
 			TypesettingStyles style = TypesettingStyles.SOLIDUS;
-			FragileWindow.calculatorDisplay.setStyle(style);
+			FragileWindow.calculatorDisplay.changeStyle(style);
 		}
 		
 	}

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -15,6 +16,8 @@ public class SolidusFractionDisplay extends FractionDisplay {
 	private JLabel slash = new JLabel("/");
 	private String currentNumerator;
 	private String currentDenominator;
+	private JPanel numeratorPanel = new JPanel();
+	private JPanel denominatorPanel = new JPanel();
 	
 	public SolidusFractionDisplay() {
 		this(" ", " ", " ", FocusLocation.WHOLE);
@@ -22,10 +25,16 @@ public class SolidusFractionDisplay extends FractionDisplay {
 	
 	public SolidusFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc) {
 		this.whole = new JLabel(whole);
-		this.numerator = new JLabel("<html><sup>" + numerator + "</sup></html>");
-		this.denominator = new JLabel("<html><sub>" + denominator + "</sub></html>");
-		this.currentNumerator = numerator;
-		this.currentDenominator = denominator;
+		this.numerator = new JLabel(numerator);
+		this.denominator = new JLabel(denominator);
+		if(numerator == null || numerator.equals(""))
+			this.currentNumerator = " ";
+		else
+			this.currentNumerator = numerator;
+		if(denominator == null)
+			this.currentDenominator = " ";
+		else
+			this.currentDenominator = denominator;
 		draw();
 	}
 
@@ -36,28 +45,21 @@ public class SolidusFractionDisplay extends FractionDisplay {
 		whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		numeratorPanel.setLayout(new BoxLayout(numeratorPanel, BoxLayout.Y_AXIS));
+		numeratorPanel.add(numerator);
+		numeratorPanel.add(new JLabel(" "));
+		
+		denominatorPanel.setLayout(new BoxLayout(denominatorPanel, BoxLayout.Y_AXIS));
+		denominatorPanel.add(new JLabel(" "));
+		denominatorPanel.add(denominator);
+		
 		setLayout(new FlowLayout());
 		add(whole);
 		//Creates a gap between numerator and whole to make them easier to differentiate.
 		add(new JLabel("  "));
-		add(numerator);
+		add(numeratorPanel);
 		add(slash);
-		add(denominator);
+		add(denominatorPanel);
+		System.out.println();
 	}
-	
-	@Override
-	public void addDigit(String num) {
-		if(this.loc == FocusLocation.WHOLE) {
-			this.whole.setText(this.whole.getText().replace(" ", "") + num);
-		}
-		else if(this.loc == FocusLocation.NUMERATOR) {
-			this.numerator.setText("<html><sup>" + currentNumerator + num + "</sup></html>");
-			currentNumerator = currentNumerator + num;
-		}
-		else if(this.loc == FocusLocation.DENOMINATOR) {
-			this.denominator.setText("<html><sub>" + currentDenominator + num + "</sub></html>");
-			currentDenominator = currentDenominator + num;
-		}
-	}
-
 }

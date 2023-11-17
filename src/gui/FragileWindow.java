@@ -22,6 +22,7 @@ public class FragileWindow extends JFrame {
 	public static Display calculatorDisplay = new Display(TypesettingStyles.SLASH);
 	
 
+
 public static void main(String[] args) {
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +41,6 @@ public static void main(String[] args) {
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.add(logoPanel, BorderLayout.NORTH);
 		//Manually change display style here, does not work dynamically yet.
-		Display calculatorDisplay = new Display(TypesettingStyles.SLASH);
 		Container display = calculatorDisplay;
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		//topPanel.add(new JLabel(""), BorderLayout.EAST);
@@ -80,6 +80,7 @@ public static void main(String[] args) {
 					button.setBackground(Color.white);
 					button.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+							
 							calculatorDisplay.manageButtons(((JButton) e.getSource()).getText());
 						}
 					});
@@ -158,5 +159,9 @@ public static void main(String[] args) {
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		secondaryWindow.setVisible(true);
+	}
+
+	public void createDisplay(TypesettingStyles style) {
+		
 	}
 }

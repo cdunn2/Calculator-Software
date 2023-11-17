@@ -14,7 +14,7 @@ import utilities.Fractions;
 
 public class Display extends JPanel{
 	
-	private TypesettingStyles style = TypesettingStyles.SLASH;
+	private TypesettingStyles style;
 	private FocusLocation loc = FocusLocation.WHOLE;
 	private boolean currIsNegative = false;
 	private boolean otherIsNegative = false;
@@ -45,6 +45,7 @@ public class Display extends JPanel{
 	}
 	
 	private void setup() {
+		System.out.println(this.style);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		clear(upperPanel);
 		clear(lowerPanel);
@@ -58,7 +59,6 @@ public class Display extends JPanel{
 		exponentPanel.add(new JLabel(" "));
 		exponentPanel.add(new JLabel(" "));
 		exponentPanel.add(new JLabel(" "));
-		exponentPanel.add(new JLabel(" "));
 		setEmptyLowerOperandDisplay(this.style);
 		lowerPanel.add(signPanel);
 		lowerPanel.add((Component)this.lowerOperand);
@@ -66,13 +66,7 @@ public class Display extends JPanel{
 		add(upperPanel);
 		add(lowerPanel);
 		setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-
-	private void draw() {
-	}
-	
-	public void setOp1(Fractions fraction) {
-		
+		updateDisplay();
 	}
 	
 	public void manageButtons(String button) {
@@ -115,9 +109,8 @@ public class Display extends JPanel{
 			} else if (button == "\u2193") {
 				clear(lowerPanel);
 				Fractions result = Calculations.reduce(lowerOperand.getFraction());
-				System.out.println(result.getNumerator());
 				setLowerOperandDisplay(this.style, lowerOperand.getWhole(), result.getNumerator().toString(), result.getDenominator().toString(), lowerOperand.getFocusLocation());
-				lowerPanel.add((Component) this.lowerOperand);
+				lowerPanel.add( this.lowerOperand);
 			}
 		}
 		updateDisplay();
@@ -251,4 +244,19 @@ public class Display extends JPanel{
 		else if (style == TypesettingStyles.SOLIDUS)
 			this.lowerOperand = new SolidusFractionDisplay(whole, numerator, denominator, loc);
 	}
+	public void changeStyle(TypesettingStyles style) {
+		this.style = style;
+		System.out.println("!" + this.lowerOperand.getNumerator() + "!");
+		
+		setLowerOperandDisplay(style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator(), this.lowerOperand.getFocusLocation());
+		if(this.upperOperand != null) {
+			setUpperOperandDisplay(style, this.upperOperand.getWhole(), this.upperOperand.getNumerator(), this.upperOperand.getDenominator());
+			clear(upperPanel);
+			upperPanel.add(this.upperOperand);
+		}
+		clear(lowerPanel);
+		lowerPanel.add(this.lowerOperand);
+		updateDisplay();
+	}
+	
 }
