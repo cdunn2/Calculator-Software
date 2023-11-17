@@ -3,6 +3,8 @@ package gui.display;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -30,6 +32,10 @@ public class Display extends JPanel{
 	private JPanel exponentPanel = new JPanel();
 	private JPanel signPanel = new JPanel();
 	private JLabel exponent = new JLabel(" ");
+	private JPanel history = new JPanel();
+	private static int gridY = 0;
+	private GridBagLayout grid = new GridBagLayout();
+	private GridBagConstraints gbc = new GridBagConstraints();
 	
 	
 	public Display(TypesettingStyles style) {
@@ -49,6 +55,7 @@ public class Display extends JPanel{
 	
 	private void setup() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		history.setLayout(this.grid);
 		clear(upperPanel);
 		clear(lowerPanel);
 		upperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -77,7 +84,6 @@ public class Display extends JPanel{
 			manageNumberButtons(button);
 		} catch (NumberFormatException e) {
 			if(button == "+" || button == "x" || button == "\u00F7" || button == "-" || button == "\u21F9") {
-				this.currOperation = button;
 				manageBinaryOperationButtons(button);
 			} else if (button == "Pos") {
 				updateLoc(this.loc);
@@ -132,9 +138,15 @@ public class Display extends JPanel{
 			upperPanel.add(new JLabel("-"));
 			otherIsNegative = true;
 		}
-		setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
-		upperPanel.add((Component) this.upperOperand);
+		System.out.println("!" + this.currOperation + "!");
+		if(this.currOperation.equals("")) {
+			setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
+			upperPanel.add(this.upperOperand);
+		} else {
+			upperPanel.add(this.upperOperand);
+		}
 		upperPanel.add(new JLabel(button));
+		this.currOperation = button;
 		clear(lowerPanel);
 		setEmptyLowerOperandDisplay(this.style);
 		clear(signPanel);
@@ -174,6 +186,10 @@ public class Display extends JPanel{
 	private void calculate() {
 		Fractions operand1 =  null;
 		Fractions result = null;
+		this.gbc.gridy = gridY;
+		this.history.add(new SlashFractionDisplay(this.upperOperand.getWhole(), this.upperOperand.getNumerator(), this.upperOperand.getDenominator(), null), gbc);
+		this.history.add(new JLabel(this.currOperation), gbc);
+		this.history.add(new SlashFractionDisplay(this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator(), null), gbc);
 		if(!this.exponentMode) {
 			operand1 = this.upperOperand.getFraction();
 			if(otherIsNegative)
@@ -212,13 +228,15 @@ public class Display extends JPanel{
 		lowerPanel.add(this.lowerOperand);
 		
 		// This is the stuff for copying over into the calculation history
-		JPanel entryPanel = new JPanel();
-	    entryPanel.setLayout(new BoxLayout(entryPanel, BoxLayout.X_AXIS));
-	    entryPanel.add(this.upperOperand);
-	    FragileWindow.addHistoryEntry(entryPanel);
-	    FragileWindow.calcHistoryArea.add(entryPanel);
+		this.history.add(new JLabel("="), gbc);
+		this.history.add(new SlashFractionDisplay(result.getWholeNumber().toString(), result.getNumerator().toString(), result.getDenominator().toString(), null), gbc);
+	    
+	    FragileWindow.addHistoryEntry(history);
+	    FragileWindow.calcHistoryArea.add(history);
 	    FragileWindow.calcHistoryArea.revalidate();
 	    FragileWindow.calcHistoryArea.repaint();
+	    //clear(history);
+	    gridY++;
 	}
 	
 	

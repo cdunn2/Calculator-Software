@@ -14,6 +14,9 @@ public class HistoryEntry extends JPanel {
     private JPanel op2;
     private JPanel answer;
 
+    public HistoryEntry() {
+    	super();
+    }
     private HistoryEntry(JPanel op1, JLabel operation, JPanel op2, JPanel answer) {
         this.op1 = op1;
         this.operation = operation;
