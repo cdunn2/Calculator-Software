@@ -40,7 +40,6 @@ public static void main(String[] args) {
 
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.add(logoPanel, BorderLayout.NORTH);
-		//Manually change display style here, does not work dynamically yet.
 		Container display = calculatorDisplay;
 		display.setFont(new Font("Arial", Font.BOLD, 24));
 		//topPanel.add(new JLabel(""), BorderLayout.EAST);
@@ -148,20 +147,8 @@ public static void main(String[] args) {
 	            }
 	        }
 	    });
-	    
-	    // This is where we will add the calculation history entries
-	    for (int i = 0; i < 10; i++) {
-	        JLabel entry = new JLabel(STRINGS.getString("PLACEHOLDER") + (i+1));
-	        entry.setAlignmentX(Component.CENTER_ALIGNMENT);
-	        calcHistoryArea.add(entry);
-	    }
-	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		secondaryWindow.setVisible(true);
-	}
-
-	public void createDisplay(TypesettingStyles style) {
-		
 	}
 }

@@ -33,7 +33,6 @@ public class SlashFractionDisplay extends FractionDisplay {
 	public void draw() {
 		numerator.setHorizontalAlignment(SwingConstants.CENTER);
 		denominator.setHorizontalAlignment(SwingConstants.CENTER);
-		whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
 		setLayout(new FlowLayout());

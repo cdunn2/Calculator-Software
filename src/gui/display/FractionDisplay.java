@@ -122,4 +122,8 @@ public abstract class FractionDisplay extends JPanel {
 			this.denominator.setText(this.denominator.getText().replace(" ", "") + num);
 	}
 	
+	public SlashFractionDisplay copy() {
+		return new SlashFractionDisplay(this.whole.getText(), this.numerator.getText(), this.denominator.getText(), null);
+	}
+	
 }

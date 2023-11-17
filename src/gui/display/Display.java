@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import gui.FragileWindow;
 import utilities.Calculations;
 import utilities.Fractions;
 
@@ -27,6 +28,9 @@ public class Display extends JPanel{
 	private JPanel exponentPanel = new JPanel();
 	private JPanel signPanel = new JPanel();
 	private JLabel exponent = new JLabel(" ");
+	private HistoryEntry historyEntry = new HistoryEntry();
+	private boolean proper;
+	private boolean reduced;
 	
 	
 	public Display(TypesettingStyles style) {
@@ -45,7 +49,6 @@ public class Display extends JPanel{
 	}
 	
 	private void setup() {
-		System.out.println(this.style);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		clear(upperPanel);
 		clear(lowerPanel);
@@ -62,6 +65,35 @@ public class Display extends JPanel{
 		setEmptyLowerOperandDisplay(this.style);
 		lowerPanel.add(signPanel);
 		lowerPanel.add((Component)this.lowerOperand);
+		lowerPanel.add(exponentPanel);
+		add(upperPanel);
+		add(lowerPanel);
+		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		historyEntry.setLayout(new FlowLayout());
+		updateDisplay();
+	}
+	
+	private void draw(JPanel currOp, JPanel otherOp) {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		clear(upperPanel);
+		clear(lowerPanel);
+		upperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		if(otherOp != null)
+			upperPanel.add(otherOp);
+		if(this.currOperation.length() > 0)
+			upperPanel.add(new JLabel(this.currOperation));
+		lowerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		exponentPanel.setLayout(new BoxLayout(exponentPanel, BoxLayout.Y_AXIS));
+		exponent.setBorder(null);
+		clear(exponentPanel);
+		exponentPanel.add(exponent);
+		exponentPanel.add(new JLabel(" "));
+		exponentPanel.add(new JLabel(" "));
+		exponentPanel.add(new JLabel(" "));
+		exponentPanel.add(new JLabel(" "));
+		lowerPanel.add(signPanel);
+		lowerPanel.add(currOp);
 		lowerPanel.add(exponentPanel);
 		add(upperPanel);
 		add(lowerPanel);
@@ -124,14 +156,22 @@ public class Display extends JPanel{
 		}
 	}
 	
-	private void manageBinaryOperationButtons(String button) {
+	private void manageBinaryOperationButtons(String button) {		
 		clear(upperPanel);
+		if(upperOperand != null) {
+			upperPanel.add(upperOperand);
+		} else {
+			setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
+
+		}
 		if(currIsNegative) {
 			upperPanel.add(new JLabel("-"));
 			otherIsNegative = true;
 		}
-		setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
-		upperPanel.add((Component) this.upperOperand);
+		upperPanel.add(this.upperOperand);
+		historyEntry = new HistoryEntry();
+		historyEntry.setOp1(this.upperOperand.copy());
+		historyEntry.setOperation(new JLabel(button));
 		upperPanel.add(new JLabel(button));
 		clear(lowerPanel);
 		setEmptyLowerOperandDisplay(this.style);
@@ -139,7 +179,7 @@ public class Display extends JPanel{
 		signPanel.add(new JLabel());
 		this.currIsNegative = false;
 		lowerPanel.add(signPanel);
-		lowerPanel.add((Component) this.lowerOperand);
+		lowerPanel.add(this.lowerOperand);
 	}
 	
 	private void updateLoc(FocusLocation loc) {
@@ -178,6 +218,7 @@ public class Display extends JPanel{
 				operand1.setSign();
 		}
 		Fractions operand2 = this.lowerOperand.getFraction();
+		historyEntry.setOp2(lowerOperand.copy());
 		if(currIsNegative)
 			operand2.setSign();
 		if(this.currOperation == "+") {
@@ -202,6 +243,8 @@ public class Display extends JPanel{
 		setEmptyLowerOperandDisplay(this.style);
 		clear(lowerPanel);
 		lowerPanel.add(this.lowerOperand);
+		historyEntry.setAnswer(upperOperand.copy());
+		FragileWindow.calcHistoryArea.add(getHistoryEntry());
 	}
 	
 	
@@ -245,9 +288,7 @@ public class Display extends JPanel{
 			this.lowerOperand = new SolidusFractionDisplay(whole, numerator, denominator, loc);
 	}
 	public void changeStyle(TypesettingStyles style) {
-		this.style = style;
-		System.out.println("!" + this.lowerOperand.getNumerator() + "!");
-		
+		this.style = style;		
 		setLowerOperandDisplay(style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator(), this.lowerOperand.getFocusLocation());
 		if(this.upperOperand != null) {
 			setUpperOperandDisplay(style, this.upperOperand.getWhole(), this.upperOperand.getNumerator(), this.upperOperand.getDenominator());
@@ -256,7 +297,17 @@ public class Display extends JPanel{
 		}
 		clear(lowerPanel);
 		lowerPanel.add(this.lowerOperand);
+		draw(this.lowerOperand, this.upperOperand);
 		updateDisplay();
 	}
 	
+	public JPanel getHistoryEntry() {
+		JPanel temp = new JPanel();
+		temp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		temp.add(historyEntry.getOp1());
+		temp.add(historyEntry.getOperation());
+		temp.add(historyEntry.getOp2());
+		temp.add(historyEntry.getAnswer());
+		return temp;
+	}
 }
