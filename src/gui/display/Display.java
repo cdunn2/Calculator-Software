@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gui.FragileWindow;
+import gui.MenuListener;
 import utilities.Calculations;
 import utilities.Fractions;
 
@@ -20,6 +21,7 @@ public class Display extends JPanel{
 	private boolean currIsNegative = false;
 	private boolean otherIsNegative = false;
 	private boolean exponentMode = false;
+	private boolean answerIsNegative = false;
 	private String currOperation = "";
 	private JPanel lowerPanel = new JPanel();
 	private JPanel upperPanel = new JPanel();
@@ -120,10 +122,11 @@ public class Display extends JPanel{
 				}
 			} else if (button == "\u00B1") {
 				switchSign();
-			} else if (button == "C") {
+			} else if (button == "R") {
+				this.upperOperand = null;
 				this.exponentMode = false;
 				setup();
-			} else if (button == "R") {
+			} else if (button == "C") {
 				setEmptyLowerOperandDisplay(this.style);
 				clear(lowerPanel);
 				lowerPanel.add((Component)this.lowerOperand);
@@ -161,10 +164,10 @@ public class Display extends JPanel{
 		if(upperOperand != null) {
 			upperPanel.add(upperOperand);
 		} else {
-			setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
+			setUpperOperandDisplay(this.style, this.lowerOperand.getWhole().replace(" ", ""), this.lowerOperand.getNumerator().replace(" ", ""), this.lowerOperand.getDenominator().replace(" ", ""));
 
 		}
-		if(currIsNegative) {
+		if(currIsNegative || otherIsNegative) {
 			upperPanel.add(new JLabel("-"));
 			otherIsNegative = true;
 		}
@@ -235,15 +238,26 @@ public class Display extends JPanel{
 			result = Calculations.power(operand2, Integer.parseInt(this.exponent.getText()));
 		}
 		clear(upperPanel);
-		if(result.getIsNegative())
+		if(result.getIsNegative()) {
 			upperPanel.add(new JLabel("-"));
+			this.answerIsNegative = true;
+		} else {
+			this.answerIsNegative = false;
+		}
+		if (MenuListener.reduce) {
+			result = Calculations.reduce(result);
+		}
+		if (MenuListener.proper) {
+			result = Calculations.proper(result);
+		}
 		this.upperOperand = new BarFractionDisplay();
-		setUpperOperandDisplay(this.style, result.getWholeNumber().toString(), result.getNumerator().toString(), result.getDenominator().toString());
+		setUpperOperandDisplay(this.style, result.getWholeNumber().toString().replace(" ", ""), result.getNumerator().toString().replace(" ", ""), result.getDenominator().toString().replace(" ", ""));
 		upperPanel.add(this.upperOperand);
 		setEmptyLowerOperandDisplay(this.style);
 		clear(lowerPanel);
 		lowerPanel.add(this.lowerOperand);
 		historyEntry.setAnswer(upperOperand.copy());
+		this.currOperation = "";
 		FragileWindow.calcHistoryArea.add(getHistoryEntry());
 	}
 	
@@ -303,10 +317,16 @@ public class Display extends JPanel{
 	
 	public JPanel getHistoryEntry() {
 		JPanel temp = new JPanel();
-		temp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		if(this.currIsNegative)
+			temp.add(new JLabel("-"));
 		temp.add(historyEntry.getOp1());
 		temp.add(historyEntry.getOperation());
+		if(this.otherIsNegative)
+			temp.add(new JLabel("-"));
 		temp.add(historyEntry.getOp2());
+		temp.add(new JLabel("="));
+		if(this.answerIsNegative)
+			temp.add(new JLabel("-"));
 		temp.add(historyEntry.getAnswer());
 		return temp;
 	}

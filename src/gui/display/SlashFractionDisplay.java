@@ -31,16 +31,23 @@ public class SlashFractionDisplay extends FractionDisplay {
 		
 	@Override
 	public void draw() {
-		numerator.setHorizontalAlignment(SwingConstants.CENTER);
+		numerator.setHorizontalAlignment(SwingConstants.CENTER);	
 		denominator.setHorizontalAlignment(SwingConstants.CENTER);
-		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
-		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		
+		if(this.numerator.getText().length() > 0)
+			numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		if(this.denominator.getText().length() > 0)
+			denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		if(this.whole.getText().length() == 0)
+			whole.setBorder(null);
 		setLayout(new FlowLayout());
-		add(whole);
+		if(!this.whole.getText().equals("0"))
+			add(whole);
 		//Creates a gap between numerator and whole to make them easier to differentiate.
 		add(new JLabel("  "));
 		add(numerator);
-		add(slash);
+		if(this.numerator.getText().length() > 0 && this.denominator.getText().length() > 0)
+			add(slash);
 		add(denominator);
 		
 		

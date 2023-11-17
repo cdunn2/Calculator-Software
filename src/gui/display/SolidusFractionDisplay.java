@@ -42,10 +42,17 @@ public class SolidusFractionDisplay extends FractionDisplay {
 	public void draw() {
 		numerator.setHorizontalAlignment(SwingConstants.CENTER);
 		denominator.setHorizontalAlignment(SwingConstants.CENTER);
-		whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
-		denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		if(this.numerator.getText().length() > 0)
+			numerator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		if(this.denominator.getText().length() > 0)
+			denominator.setBorder(BorderFactory.createDashedBorder(Color.gray,2, 2));
+		if(this.whole.getText().length() == 0)
+			whole.setBorder(null);
+		setLayout(new FlowLayout());
+		if(!this.whole.getText().equals("0"))
+			add(whole);
 		numeratorPanel.setLayout(new BoxLayout(numeratorPanel, BoxLayout.Y_AXIS));
+
 		numeratorPanel.add(numerator);
 		numeratorPanel.add(new JLabel(" "));
 		
@@ -54,7 +61,6 @@ public class SolidusFractionDisplay extends FractionDisplay {
 		denominatorPanel.add(denominator);
 		
 		setLayout(new FlowLayout());
-		add(whole);
 		//Creates a gap between numerator and whole to make them easier to differentiate.
 		add(new JLabel("  "));
 		add(numeratorPanel);
