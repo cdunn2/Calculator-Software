@@ -181,20 +181,10 @@ public static void main(String[] args) {
 	        }
 	    });
 	    
-	    // This is where we will add the calculation history entries
-	    for (int i = 0; i < 10; i++) {
-	        JLabel entry = new JLabel(STRINGS.getString("PLACEHOLDER") + (i+1));
-	        entry.setAlignmentX(Component.CENTER_ALIGNMENT);
-	        calcHistoryArea.add(entry);
-	    }
 	    
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		secondaryWindow.setVisible(true);
 		frame.toFront();
-	}
-
-	public void createDisplay(TypesettingStyles style) {
-		
 	}
 }

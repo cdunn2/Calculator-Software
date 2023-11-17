@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import gui.FragileWindow;
 import gui.CreateMenu;
 import gui.MenuListener;
 import utilities.Calculations;
