@@ -36,6 +36,7 @@ public class Display extends JPanel{
 	private static int gridY = 0;
 	private GridBagLayout grid = new GridBagLayout();
 	private GridBagConstraints gbc = new GridBagConstraints();
+	private boolean equationCompleted = false;
 	
 	
 	public Display(TypesettingStyles style) {
@@ -59,6 +60,12 @@ public class Display extends JPanel{
 		clear(upperPanel);
 		clear(lowerPanel);
 		upperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		if(style == TypesettingStyles.BAR)
+			this.upperOperand = new BarFractionDisplay();
+		else if (style == TypesettingStyles.SLASH)
+			this.upperOperand = new SlashFractionDisplay();
+		else if (style == TypesettingStyles.SOLIDUS)
+			this.upperOperand = new SolidusFractionDisplay();
 		lowerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		exponentPanel.setLayout(new BoxLayout(exponentPanel, BoxLayout.Y_AXIS));
 		exponent.setBorder(null);
@@ -125,6 +132,10 @@ public class Display extends JPanel{
 	}
 	
 	private void manageNumberButtons(String button) {
+		if(this.equationCompleted) {
+			setup();
+			this.equationCompleted = false;
+		}
 		if(this.exponentMode) {
 			this.exponent.setText(this.exponent.getText().replace(" ", "") + button);
 		} else {
@@ -236,6 +247,8 @@ public class Display extends JPanel{
 	    FragileWindow.calcHistoryArea.repaint();
 	    //clear(history);
 	    gridY++;
+	    this.equationCompleted = true;
+	    this.currOperation = "";
 	}
 	
 	
