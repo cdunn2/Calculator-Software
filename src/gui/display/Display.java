@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gui.FragileWindow;
@@ -221,6 +222,27 @@ public class Display extends JPanel{
 			result = Calculations.mediant(operand1, operand2);
 		} else if (this.currOperation == "x\u207F") {
 			result = Calculations.power(operand2, Integer.parseInt(this.exponent.getText()));
+		} else if (this.currOperation == ">" || this.currOperation == "<" || this.currOperation == "≝")
+		{
+			if (this.currOperation == ">")
+			{
+				JOptionPane.showMessageDialog (this, Calculations.greater(operand1, operand2),
+						"Greater Than", JOptionPane.INFORMATION_MESSAGE);
+			} else if (this.currOperation == "<")
+			{
+				JOptionPane.showMessageDialog (this, Calculations.less(operand1, operand2),
+						"Less Than", JOptionPane.INFORMATION_MESSAGE);
+			} else if (this.currOperation == "≝")
+			{
+				JOptionPane.showMessageDialog (this, Calculations.equal(operand1, operand2),
+						"Equal To", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			clear(upperPanel);
+			setEmptyLowerOperandDisplay(this.style);
+			clear(lowerPanel);
+			lowerPanel.add(this.lowerOperand);
+			return;
 		}
 		clear(upperPanel);
 		if(result.getIsNegative())
