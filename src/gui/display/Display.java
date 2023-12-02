@@ -226,16 +226,16 @@ public class Display extends JPanel{
 		{
 			if (this.currOperation == ">")
 			{
-				JOptionPane.showMessageDialog (this, Calculations.greater(operand1, operand2),
-						"Greater Than", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog (this, operand1.toString() + " > " + operand2.toString() + 
+						" is " + Calculations.greater(operand1, operand2), "Greater Than", JOptionPane.INFORMATION_MESSAGE);
 			} else if (this.currOperation == "<")
 			{
-				JOptionPane.showMessageDialog (this, Calculations.less(operand1, operand2),
-						"Less Than", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog (this, operand1.toString() + " < " + operand2.toString() + 
+						" is " + Calculations.less(operand1, operand2), "Less Than", JOptionPane.INFORMATION_MESSAGE);
 			} else if (this.currOperation == "≝")
 			{
-				JOptionPane.showMessageDialog (this, Calculations.equal(operand1, operand2),
-						"Equal To", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog (this, operand1.toString() + " = " + operand2.toString() + 
+						" is " + Calculations.equal(operand1, operand2), "Equal To", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 			clear(upperPanel);
