@@ -90,7 +90,8 @@ public class Display extends JPanel{
 			Integer.parseInt(button);
 			manageNumberButtons(button);
 		} catch (NumberFormatException e) {
-			if(button == "+" || button == "x" || button == "\u00F7" || button == "-" || button == "\u21F9") {
+			if(button == "+" || button == "x" || button == "\u00F7" || button == "-" || button == "\u21F9"
+					|| button == ">" || button == "<" || button == "≝") {
 				manageBinaryOperationButtons(button);
 			} else if (button == "Pos") {
 				updateLoc(this.loc);

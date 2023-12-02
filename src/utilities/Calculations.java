@@ -218,6 +218,69 @@ public class Calculations
 		
 		return new Fractions(isNegative, new_N, new_D);
 	}
+	
+	/**
+	 * Checks if the first fraction is greater than the second fraction.
+	 * @param fraction1 The fraction being checked.
+	 * @param fraction2 The fraction comparing to.
+	 * @return Boolean true or false 
+	 */
+	public static Boolean greater(Fractions fraction1, Fractions fraction2)
+	{
+		Boolean answer = false;
+		Fractions improper1 = Calculations.improper(fraction1);
+		Fractions improper2 = Calculations.improper(fraction2);
+		
+		if (improper1.getNumerator() / improper1.getDenominator() 
+				> improper2.getNumerator() / improper2.getDenominator())
+		{
+			answer = true;
+		}
+		
+		return answer;
+	}
+	
+	/**
+	 * Checks if the first fraction is less than the second fraction.
+	 * @param fraction1 The fraction being checked.
+	 * @param fraction2 The fraction comparing to.
+	 * @return Boolean true or false 
+	 */
+	public static Boolean less(Fractions fraction1, Fractions fraction2)
+	{
+		Boolean answer = false;
+		Fractions improper1 = Calculations.improper(fraction1);
+		Fractions improper2 = Calculations.improper(fraction2);
+		
+		if (improper1.getNumerator() / improper1.getDenominator() 
+				< improper2.getNumerator() / improper2.getDenominator())
+		{
+			answer = true;
+		}
+		
+		return answer;
+	}
+
+	/**
+	 * Checks if the first fraction is equal to the second fraction.
+	 * @param fraction1 The fraction being checked.
+	 * @param fraction2 The fraction comparing to.
+	 * @return Boolean true or false 
+	 */
+	public static Boolean equal(Fractions fraction1, Fractions fraction2)
+	{
+		Boolean answer = false;
+		Fractions improper1 = Calculations.improper(fraction1);
+		Fractions improper2 = Calculations.improper(fraction2);
+		
+		if (improper1.getNumerator() / improper1.getDenominator() 
+				== improper2.getNumerator() / improper2.getDenominator())
+		{
+			answer = true;
+		}
+		
+		return answer;
+	}
 
 	/**
 	 * Turns a mixed fraction into an improper fraction.

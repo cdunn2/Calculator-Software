@@ -266,4 +266,55 @@ public class CalculationsTest
 		assertEquals(result2.getNumerator(), 441);
 		assertEquals(result2.getDenominator(), 64);
 	}
+	
+	@Test
+	public void greaterTest()
+	{
+		Fractions big = new Fractions(false, 3, 4,7);
+		Fractions small = new Fractions(false, 1, 1, 2);
+		
+		assertEquals(Calculations.greater(big,  small), true);
+		assertEquals(Calculations.greater(small,  big), false);
+		
+		Fractions positive = new Fractions(false, 3, 4, 7);
+		Fractions negative = new Fractions(true, 3, 4, 7);
+		
+		assertEquals(Calculations.greater(positive,  negative), true);
+		assertEquals(Calculations.greater(negative,  positive), false);
+	}
+	
+	@Test
+	public void lessTest()
+	{
+		Fractions big = new Fractions(false, 3, 4,7);
+		Fractions small = new Fractions(false, 1, 1, 2);
+		
+		assertEquals(Calculations.less(big,  small), false);
+		assertEquals(Calculations.less(small,  big), true);
+		
+		Fractions positive = new Fractions(false, 3, 4, 7);
+		Fractions negative = new Fractions(true, 3, 4, 7);
+		
+		assertEquals(Calculations.less(positive,  negative), false);
+		assertEquals(Calculations.less(negative,  positive), true);
+	}
+	
+	@Test
+	public void equalTest()
+	{
+		Fractions same1 = new Fractions(false, 1, 1, 2);
+		Fractions same2 = new Fractions(false, 1, 1, 2);
+		Fractions different = new Fractions(false, 4, 5, 6);
+		
+		assertEquals(Calculations.equal(same1,  same2), true);
+		assertEquals(Calculations.equal(same1,  different), false);
+		
+		Fractions sameNeg1 = new Fractions(true, 3, 4, 7);
+		Fractions sameNeg2 = new Fractions(true, 3, 4, 7);
+		Fractions differentNeg = new Fractions(true, 1, 1, 2);
+		
+		assertEquals(Calculations.equal(sameNeg1,  sameNeg2), true);
+		assertEquals(Calculations.equal(sameNeg1,  differentNeg), false);
+		assertEquals(Calculations.equal(sameNeg1,  different), false);
+	}
 }
