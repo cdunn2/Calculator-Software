@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide avec Fragile</title>
+    <style>
+        .interface img{
+            height: 60vh;
+        }
+
+        .interface{
+            display: flex;
+        }
+
+        .right{
+            height:min-content;
+            border-style: groove;
+            padding: 1em;
+            margin-left: 3em;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            background-color: #edebeb;
+            padding: 10px;
+        }
+
+        .menu li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .menu a:hover {
+            background-color: #d1cece;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Aide avec Fragile</h1>
+    Ceci est la page d'aide pour Fragile.<br>
+    <ul class="menu">
+        <li><a href="#interface">Comprendre les boutons et l'interface</a></li>
+        <li><a href="#entry">Saisir des nombres dans la calculatrice</a></li>
+        <li><a href="#solve">Résolution</a></li>
+        <li><a href="#exit">Quitter le programme</a></li>
+        <li><a href="#help">Aide avec et à propos du logiciel</a></li>
+    </ul>
+    
+
+    <h3 id="interface">Comprendre l'interface</h3>
+    <div class="interface">
+        <div><img src="blankCalc.png"></img></div>
+        <div class="right">
+        Voici à quoi ressemble la calculatrice dans son état initial.<br><br>
+        Pour <b>démarrer un calcul</b>, cliquez sur le nombre (entier) par lequel commencer.<br><br>
+        Pour les boutons non numériques, voici les utilisations:
+
+        <ul>
+            <li>Cliquer sur le bouton Effacer [C] supprime la fraction mixte actuelle.</li><br>
+            <li>Cliquer sur le bouton de réinitialisation [R] supprime toute l'expression actuelle.</li><br>
+            <li>Cliquer sur le bouton Retour arrière [←] supprime le chiffre le plus récemment saisi de la fraction mixte actuelle.</li><br>
+            <li>Cliquer sur le bouton Signer (en haut à droite) change le signe de la fraction mixte actuelle.</li><br>
+            <li>Cliquer sur le bouton Position [Pos] déplace le curseur à l'intérieur de la fraction, en commençant par le numérateur.</li>
+        </ul>
+
+        </div>
+    </div>
+    <hr>
+    
+    <h3 id="entry">Après la saisie d'un numéro</h3>
+    <div class="interface">
+        <div><img src="one-num.png"></img></div>
+        <div class="right">
+        Ici, l'utilisateur a saisi un 8 à la position du nombre entier.<br><br>
+        Pour saisir le <b>numérateur</b> de la fraction, appuyez simplement sur le bouton de position, suivi de votre numéro.<br><br>
+        Après avoir saisi le numérateur, appuyez à nouveau sur le bouton de position pour vous concentrer sur le <b>dénominateur</b>.
+
+        </div>
+    </div>
+    <hr>
+
+    <h3>Après la saisie d'une fraction</h3>
+    <div class="interface">
+        <div><img src="full-frac.png"></img></div>
+        <div class="right">
+        Dans l'image de gauche, l'utilisateur a saisi 8 et 1/2 pour l'opérande de gauche.<br><br>
+        Une fois cette information saisie, l'utilisateur doit appuyer sur son opérateur.<br><br><br><br>
+        Ceci est montré dans l'image de droite, où l'opérande gauche et l'opérateur se déplacent vers l'affichage.
+        </div>
+        <div><img src="left-operand.png" style="margin-left: 3em;"></img></div>
+    </div>
+    <hr>
+
+    <h3 id="solve">Résoudre le problème</h3>
+    <div class="interface">
+        <div><img src="right-op.png"></img></div>
+        <div class="right">
+        Dans l'image de gauche, vous pouvez voir l'utilisateur entré 8 1/2 comme opérande de gauche,
+        un signe d'addition<br> comme opérateur et 1/2 comme opérande de droite.<br><br><br><br>
+        Après avoir appuyé sur le signe égal, l'utilisateur verra l'image à droite, avec la réponse située<br>
+        en haut à droite de l'écran.<br><br><br><br>
+        De plus, si vous souhaitez utiliser la solution actuelle comme prochain opérande de gauche, cliquez simplement sur <br>
+        un opérateur et entrez le nouvel opérande de droite.
+        </div>
+        <div><img src="solution.png" style="margin-left: 3em;"></img></div>
+    </div>
+    <hr>
+
+    <h3 id="exit">Sortie</h3>
+    <div class="interface">
+        <div><img src="file-exit.png"></img></div>
+        <div class="right">
+        Pour quitter la calculatrice, sélectionnez le menu Fichier et "Quitter", ou sélectionnez le bouton de fermeture par défaut de votre système d'exploitation.<br>
+
+        </div>
+        
+    </div>
+    <hr>
+
+    <h3 id="help">Aide et à propos du logiciel</h3>
+    <div class="interface">
+        <div><img src="help-menu.png"></img></div>
+        <div class="right">
+        Pour accéder au menu d'aide ou en savoir plus sur le logiciel, sélectionnez le menu "Aide" et
+        sélectionnez Aide » ou À propos.
+        </div>
+    </div>
+
+</body>
+</html>
