@@ -33,7 +33,7 @@ public class MenuListener implements ActionListener
 			try {
 				Path tempDir = ResourceCopier.copyResourcesToTemp("temp", "resources");
 
-				URI indexHtmlURI = tempDir.resolve("index.html").toUri();
+				URI indexHtmlURI = tempDir.resolve(STRINGS.getString("HTML")).toUri();
 
 				Desktop.getDesktop().browse(indexHtmlURI);
 
