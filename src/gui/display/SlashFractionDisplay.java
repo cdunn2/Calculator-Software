@@ -16,6 +16,7 @@ import utilities.Fractions;
 public class SlashFractionDisplay extends FractionDisplay {
 
   private JLabel slash = new JLabel("/");
+  private boolean addGap = true;
 
   public SlashFractionDisplay() {
 	  //update this to not use other constructor.
@@ -43,9 +44,12 @@ public class SlashFractionDisplay extends FractionDisplay {
     this.numerator = new JLabel(numerator);
     this.denominator = new JLabel(denominator);
     this.loc = loc;
-    draw();
-    if(this.numerator.getText().equals(" ") && this.denominator.getText().equals(" "))
+    if(this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ") || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
     	this.slash.setText("");
+    	this.addGap = false;
+    }
+    draw();
+    
   }
 
   @Override
@@ -53,7 +57,8 @@ public class SlashFractionDisplay extends FractionDisplay {
     setLayout(new FlowLayout());
     add(whole);
     //Creates a gap between numerator and whole to make them easier to differentiate.
-    add(new JLabel("  "));
+    if(this.addGap)
+    	add(new JLabel("  "));
     add(numerator);
     add(slash);
     add(denominator);

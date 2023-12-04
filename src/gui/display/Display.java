@@ -200,9 +200,9 @@ public class Display extends JPanel{
 		Fractions operand1 =  null;
 		Fractions result = null;
 		this.gbc.gridy = gridY;
-		this.history.add(new SlashFractionDisplay(this.upperOperand.getWhole(), this.upperOperand.getNumerator(), this.upperOperand.getDenominator(), null), gbc);
+		this.history.add(new SlashFractionDisplay(this.upperOperand.getWhole().replace(" ", ""), this.upperOperand.getNumerator().replace(" ", ""), this.upperOperand.getDenominator().replace(" ", ""), null), gbc);
 		this.history.add(new JLabel(this.currOperation), gbc);
-		this.history.add(new SlashFractionDisplay(this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator(), null), gbc);
+		this.history.add(new SlashFractionDisplay(this.lowerOperand.getWhole().replace(" ", ""), this.lowerOperand.getNumerator().replace(" ", ""), this.lowerOperand.getDenominator().replace(" ", ""), null), gbc);
 		if(!this.exponentMode) {
 			operand1 = this.upperOperand.getFraction();
 			if(otherIsNegative)
@@ -266,7 +266,7 @@ public class Display extends JPanel{
 		
 		// This is the stuff for copying over into the calculation history
 		this.history.add(new JLabel("="), gbc);
-		this.history.add(new SlashFractionDisplay(result.getWholeNumber().toString(), result.getNumerator().toString(), result.getDenominator().toString(), null), gbc);
+		this.history.add(new SlashFractionDisplay(result.getWholeNumber().toString().replace(" ", ""), result.getNumerator().toString().replace(" ", ""), result.getDenominator().toString().replace(" ", ""), null), gbc);
 	    
 	    FragileWindow.addHistoryEntry(history);
 	    FragileWindow.calcHistoryArea.add(history);
