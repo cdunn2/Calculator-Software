@@ -105,10 +105,10 @@ public class Display extends JPanel{
 				}
 			} else if (button == "\u00B1") {
 				switchSign();
-			} else if (button == "C") {
+			} else if (button == "R") {
 				this.exponentMode = false;
 				setup();
-			} else if (button == "R") {
+			} else if (button == "C") {
 				setEmptyLowerOperandDisplay(this.style);
 				clear(lowerPanel);
 				lowerPanel.add((Component)this.lowerOperand);
