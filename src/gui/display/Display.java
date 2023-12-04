@@ -60,6 +60,7 @@ public class Display extends JPanel{
 		history.setLayout(this.grid);
 		clear(upperPanel);
 		clear(lowerPanel);
+		this.currOperation = "";
 		upperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		if(style == TypesettingStyles.BAR)
 			this.upperOperand = new BarFractionDisplay();
@@ -275,6 +276,8 @@ public class Display extends JPanel{
 	    gridY++;
 	    this.equationCompleted = true;
 	    this.currOperation = "";
+	    this.exponentMode = false;
+	    this.exponent.setText(" ");
 	}
 	
 	
