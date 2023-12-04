@@ -242,6 +242,9 @@ public class Display extends JPanel{
 			setEmptyLowerOperandDisplay(this.style);
 			clear(lowerPanel);
 			lowerPanel.add(this.lowerOperand);
+			gridY++;
+		    this.equationCompleted = true;
+		    this.currOperation = "";
 			return;
 		}
 		clear(upperPanel);
