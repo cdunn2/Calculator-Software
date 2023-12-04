@@ -16,10 +16,17 @@ import utilities.Fractions;
 public class SlashFractionDisplay extends FractionDisplay {
 
   private JLabel slash = new JLabel("/");
-  private FocusLocation loc = FocusLocation.WHOLE;
 
   public SlashFractionDisplay() {
-    this(" ", " ", " ", FocusLocation.WHOLE);
+	  //update this to not use other constructor.
+	  //make this always show borders and slashes, have other constructor remove them if elements are ommitted.
+	  //also check for invalid entries (i.e numerator and no denominator / incomplete fractions).
+	  //repeat for other styles.
+	  this.whole = new JLabel(" ");
+	    this.numerator = new JLabel(" ");
+	    this.denominator = new JLabel(" ");
+	    draw();
+    
   }
 
   /**
@@ -36,39 +43,20 @@ public class SlashFractionDisplay extends FractionDisplay {
     this.numerator = new JLabel(numerator);
     this.denominator = new JLabel(denominator);
     this.loc = loc;
-    if (this.loc == null) {
-      this.whole.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
-    }
     draw();
+    if(this.numerator.getText().equals(" ") && this.denominator.getText().equals(" "))
+    	this.slash.setText("");
   }
 
   @Override
   public void draw() {
-    numerator.setHorizontalAlignment(SwingConstants.CENTER);
-    denominator.setHorizontalAlignment(SwingConstants.CENTER);
-
-    if (this.numerator.getText().length() > 0) {
-      numerator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
-    }
-    if (this.denominator.getText().length() > 0) {
-      denominator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
-    }
-    if (this.whole.getText().length() == 0) {
-      whole.setBorder(null);
-    }
     setLayout(new FlowLayout());
-    if (!this.whole.getText().equals("0")) {
-      add(whole);
-    }
+    add(whole);
     //Creates a gap between numerator and whole to make them easier to differentiate.
     add(new JLabel("  "));
     add(numerator);
-    if (this.numerator.getText().length() > 0 && this.denominator.getText().length() > 0) {
-      add(slash);
-    }
+    add(slash);
     add(denominator);
-
-
   }
 
 }
