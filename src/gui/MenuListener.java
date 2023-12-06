@@ -6,7 +6,9 @@ import gui.display.*;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -25,6 +27,13 @@ public class MenuListener implements ActionListener
 			System.exit(0);
 		} else if (e.getActionCommand().equals(STRINGS.getString("ABOUT"))) {
 			AboutWindow.main(null);
+		} else if (e.getActionCommand().equals(STRINGS.getString("NEW"))) {
+			//FragileWindow.main(null);
+			//FragileWindow.getFrames().clone();
+			//FragileWindow.new
+			//https://docs.oracle.com/javase%2Ftutorial%2F/reflect/member/ctorInstance.html
+//			FragileWindow wind = new FragileWindow();
+//			Constructor<FragileWindow> test = new Constructor(wind);
 		} else if (e.getActionCommand().equals(STRINGS.getString("PRINT"))) {
 			DelegatingPrintable print = new DelegatingPrintable(FragileWindow.calcHistoryArea);
 			PrintController.print(print, null);
