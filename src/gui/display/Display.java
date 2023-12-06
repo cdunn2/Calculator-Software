@@ -303,22 +303,32 @@ public class Display extends JPanel{
 	
 	private void setUpperOperandDisplay(TypesettingStyles style, String whole, String numerator, 
 			String denominator) {
+		
 		if(style == TypesettingStyles.BAR)
 			this.upperOperand = new BarFractionDisplay(whole, numerator, denominator, null);
 		else if (style == TypesettingStyles.SLASH)
 			this.upperOperand = new SlashFractionDisplay(whole, numerator, denominator, null);
 		else if (style == TypesettingStyles.SOLIDUS)
 			this.upperOperand = new SolidusFractionDisplay(whole, numerator, denominator, null);
-	}
+		}
 	
 	private void setLowerOperandDisplay(TypesettingStyles style, String whole, String numerator, 
 			String denominator, FocusLocation loc) {
+		if(whole == " " && numerator == " " && denominator == " ") {
+			if(style == TypesettingStyles.BAR)
+				this.lowerOperand = new BarFractionDisplay();
+			else if (style == TypesettingStyles.SLASH)
+				this.lowerOperand = new SlashFractionDisplay();
+			else if (style == TypesettingStyles.SOLIDUS)
+				this.lowerOperand = new SolidusFractionDisplay();
+		} else {
 		if(style == TypesettingStyles.BAR)
 			this.lowerOperand = new BarFractionDisplay(whole, numerator, denominator, loc);
 		else if (style == TypesettingStyles.SLASH)
 			this.lowerOperand = new SlashFractionDisplay(whole, numerator, denominator, loc);
 		else if (style == TypesettingStyles.SOLIDUS)
 			this.lowerOperand = new SolidusFractionDisplay(whole, numerator, denominator, loc);
+		}
 	}
 	public void changeStyle(TypesettingStyles style) {
 		this.style = style;

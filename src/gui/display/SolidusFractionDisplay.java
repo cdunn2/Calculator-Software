@@ -17,13 +17,14 @@ import utilities.Fractions;
 public class SolidusFractionDisplay extends FractionDisplay {
 
   private JLabel slash = new JLabel("/");
-  private String currentNumerator;
-  private String currentDenominator;
   private JPanel numeratorPanel = new JPanel();
   private JPanel denominatorPanel = new JPanel();
 
   public SolidusFractionDisplay() {
-    this(" ", " ", " ", FocusLocation.WHOLE);
+	  this.whole = new JLabel(" ");
+	  this.numerator = new JLabel(" ");
+	  this.denominator = new JLabel(" ");
+	  draw();
   }
 
   /**
@@ -36,35 +37,21 @@ public class SolidusFractionDisplay extends FractionDisplay {
    */
   public SolidusFractionDisplay(String whole, String numerator, String denominator, 
         FocusLocation loc) {
-    this.whole = new JLabel(whole);
-    this.numerator = new JLabel(numerator);
-    this.denominator = new JLabel(denominator);
-    if (numerator == null || numerator.equals("")) {
-      this.currentNumerator = " ";
-    } else {
-      this.currentNumerator = numerator;
-    }
-    if (denominator == null) {
-      this.currentDenominator = " ";
-    } else {
-      this.currentDenominator = denominator;
-    }
-    draw();
+	  this.whole = new JLabel(whole);
+	    this.numerator = new JLabel(numerator);
+	    this.denominator = new JLabel(denominator);
+	    this.loc = loc;
+	    if(this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ") || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
+	    	this.slash.setText("");
+	    }
+	    draw();
   }
 
   @Override
   public void draw() {
     numerator.setHorizontalAlignment(SwingConstants.CENTER);
     denominator.setHorizontalAlignment(SwingConstants.CENTER);
-    if (this.numerator.getText().length() > 0) {
-      numerator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
-    }
-    if (this.denominator.getText().length() > 0) {
-      denominator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
-    }
-    if (this.whole.getText().length() == 0) {
-      whole.setBorder(null);
-    }
+    
     setLayout(new FlowLayout());
     if (!this.whole.getText().equals("0")) {
       add(whole);

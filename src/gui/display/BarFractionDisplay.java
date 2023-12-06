@@ -14,11 +14,14 @@ import javax.swing.SwingConstants;
 public class BarFractionDisplay extends FractionDisplay {
 
 
-  private JSeparator bar;
+  private JSeparator bar = new JSeparator();
   private FocusLocation loc = FocusLocation.WHOLE;
 	
   public BarFractionDisplay() {
-    this(" ", " ", " ", FocusLocation.WHOLE);
+	  this.whole = new JLabel(" ");
+	  this.numerator = new JLabel(" ");
+	  this.denominator = new JLabel(" ");
+	  draw();
   }
   
   /**
@@ -31,12 +34,14 @@ public class BarFractionDisplay extends FractionDisplay {
    * @param loc The current location of the focus.
    */
   public BarFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc) {
-    this.whole = new JLabel(whole);
-    this.numerator = new JLabel(numerator);
-    this.denominator = new JLabel(denominator);
-    this.bar = new JSeparator();
-    this.loc = loc;
-    draw();
+	  this.whole = new JLabel(whole);
+	    this.numerator = new JLabel(numerator);
+	    this.denominator = new JLabel(denominator);
+	    this.loc = loc;
+	    if(this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ") || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
+	    	this.bar = null;
+	    }
+	    draw();
   }
 	
 	
@@ -46,9 +51,6 @@ public class BarFractionDisplay extends FractionDisplay {
   public void draw() {
     this.numerator.setHorizontalAlignment(SwingConstants.CENTER);
     this.denominator.setHorizontalAlignment(SwingConstants.CENTER);
-    this.whole.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-    this.numerator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
-    this.denominator.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
     if (this.loc == null) {
       this.whole.setBorder(BorderFactory.createDashedBorder(Color.gray, 2, 2));
     }
@@ -65,7 +67,8 @@ public class BarFractionDisplay extends FractionDisplay {
     gbc.gridy = 0;
     add(numerator, gbc);
     gbc.gridy = 1;
-    add(bar, gbc);
+    if (bar != null)
+    	add(bar, gbc);
     gbc.gridy = 2;
     add(denominator, gbc);	
   }

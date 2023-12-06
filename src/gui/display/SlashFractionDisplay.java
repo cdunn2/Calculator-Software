@@ -24,10 +24,9 @@ public class SlashFractionDisplay extends FractionDisplay {
 	  //also check for invalid entries (i.e numerator and no denominator / incomplete fractions).
 	  //repeat for other styles.
 	  this.whole = new JLabel(" ");
-	    this.numerator = new JLabel(" ");
-	    this.denominator = new JLabel(" ");
-	    draw();
-    
+	  this.numerator = new JLabel(" ");
+	  this.denominator = new JLabel(" ");
+	  draw();
   }
 
   /**
