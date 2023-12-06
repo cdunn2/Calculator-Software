@@ -11,40 +11,46 @@ import javax.swing.SwingConstants;
 /**
  * Displays a fraction in the bar style.
  */
-public class BarFractionDisplay extends FractionDisplay {
-
+public class BarFractionDisplay extends FractionDisplay
+{
 
   private JSeparator bar = new JSeparator();
   private FocusLocation loc = FocusLocation.WHOLE;
-	
-  public BarFractionDisplay() {
-	  this.whole = new JLabel(" ");
-	  this.numerator = new JLabel(" ");
-	  this.denominator = new JLabel(" ");
-	  draw();
+
+  public BarFractionDisplay()
+  {
+    this.whole = new JLabel(" ");
+    this.numerator = new JLabel(" ");
+    this.denominator = new JLabel(" ");
+    draw();
   }
-  
+
   /**
-   * Constructs a new display with given fraction parts.
-   * Used when changing styles.
+   * Constructs a new display with given fraction parts. Used when changing styles.
    *
-   * @param whole The whole number of the mixed fraction.
-   * @param numerator The numerator of the mixed fraction.
-   * @param denominator The denominator of the mixed fraction.
-   * @param loc The current location of the focus.
+   * @param whole
+   *          The whole number of the mixed fraction.
+   * @param numerator
+   *          The numerator of the mixed fraction.
+   * @param denominator
+   *          The denominator of the mixed fraction.
+   * @param loc
+   *          The current location of the focus.
    */
-  public BarFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc) {
-	  this.whole = new JLabel(whole);
-	    this.numerator = new JLabel(numerator);
-	    this.denominator = new JLabel(denominator);
-	    this.loc = loc;
-	    if(this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ") || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
-	    	this.bar = null;
-	    }
-	    draw();
+  public BarFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc)
+  {
+    this.whole = new JLabel(whole);
+    this.numerator = new JLabel(numerator);
+    this.denominator = new JLabel(denominator);
+    this.loc = loc;
+    if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
+        || this.numerator.getText().equals("") && this.denominator.getText().equals(""))
+    {
+      this.bar = null;
+    }
+    draw();
   }
-	
-	
+
   /**
    * Draws the fraction to the display.
    */
@@ -67,9 +73,10 @@ public class BarFractionDisplay extends FractionDisplay {
     gbc.gridy = 0;
     add(numerator, gbc);
     gbc.gridy = 1;
-    if (bar != null)
-    	add(bar, gbc);
+    if (bar != null) {
+      add(bar, gbc);
+    }
     gbc.gridy = 2;
-    add(denominator, gbc);	
+    add(denominator, gbc);
   }
 }

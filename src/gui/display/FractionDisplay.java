@@ -16,6 +16,7 @@ public abstract class FractionDisplay extends JPanel {
   protected JLabel numerator;
   protected JLabel denominator;
   protected FocusLocation loc = FocusLocation.WHOLE;
+  protected String thousandsSeparator;
 
 
   abstract void draw();
@@ -153,6 +154,14 @@ public abstract class FractionDisplay extends JPanel {
   public SlashFractionDisplay copy() {
     return new SlashFractionDisplay(this.whole.getText(), 
         this.numerator.getText(), this.denominator.getText(), null);
+  }
+  
+  public boolean isComplete() {
+    if((this.numerator.getText().equals(" ") && !this.denominator.getText().equals(" ")) || 
+        (this.denominator.getText().equals(" ") && !this.numerator.getText().equals(" "))) {
+      return false;
+    }
+    return true;
   }
 
 }

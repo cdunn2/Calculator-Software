@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ public class Display extends JPanel{
 	private GridBagLayout grid = new GridBagLayout();
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private boolean equationCompleted = false;
+	private JFrame dialogFrame = new JFrame();
 	
 	
 	public Display(TypesettingStyles style) {
@@ -153,6 +155,10 @@ public class Display extends JPanel{
 			otherIsNegative = true;
 		}
 		if(this.currOperation.equals("")) {
+		  if (!this.lowerOperand.isComplete()) {
+		    JOptionPane.showMessageDialog(dialogFrame,"Please enter a complete fraction.");
+		    return;
+		  } 
 			setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
 			upperPanel.add(this.upperOperand);
 		} else {
@@ -197,6 +203,11 @@ public class Display extends JPanel{
 	}
 	
 	private void calculate() {
+	  if (!this.lowerOperand.isComplete()) {
+	    System.out.println("L");
+      JOptionPane.showMessageDialog(dialogFrame,"Please enter a complete fraction.");
+      return;
+	  }
 		Fractions operand1 =  null;
 		Fractions result = null;
 		this.gbc.gridy = gridY;
