@@ -90,6 +90,7 @@ public class CreateMenu {
 		MenuListener listener = new MenuListener();
 
 		printItem.addActionListener(listener);
+		newItem.addActionListener(listener);
         exitItem.addActionListener(listener);
         properItem.addActionListener(listener);
         reducedItem.addActionListener(listener);
