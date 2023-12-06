@@ -156,7 +156,7 @@ public class Display extends JPanel{
 		}
 		if(this.currOperation.equals("")) {
 		  if (!this.lowerOperand.isComplete()) {
-		    JOptionPane.showMessageDialog(dialogFrame,"Please enter a complete fraction.");
+		    JOptionPane.showMessageDialog(dialogFrame,"Please enter a complete fraction.", "Error", JOptionPane.ERROR_MESSAGE);
 		    return;
 		  } 
 			setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
@@ -204,8 +204,7 @@ public class Display extends JPanel{
 	
 	private void calculate() {
 	  if (!this.lowerOperand.isComplete()) {
-	    System.out.println("L");
-      JOptionPane.showMessageDialog(dialogFrame,"Please enter a complete fraction.");
+	    JOptionPane.showMessageDialog(dialogFrame,"Please enter a complete fraction.", "Error", JOptionPane.ERROR_MESSAGE);
       return;
 	  }
 		Fractions operand1 =  null;
