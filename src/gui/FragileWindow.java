@@ -19,7 +19,7 @@ public class FragileWindow extends JFrame {
 	public static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
 	private static JLabel logoLabel;
 	public static JPanel calcHistoryArea = new JPanel();
-	public static Display calculatorDisplay = new Display(TypesettingStyles.SLASH);
+	public static Display calculatorDisplay = new Display(TypesettingStyles.SLASH, true);
 	public static GridBagConstraints gbc;
 	
 

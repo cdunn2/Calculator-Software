@@ -40,11 +40,13 @@ public class Display extends JPanel{
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private boolean equationCompleted = false;
 	private JFrame dialogFrame = new JFrame();
+	protected boolean separators;
 	
 	
-	public Display(TypesettingStyles style) {
+	public Display(TypesettingStyles style, boolean thousandsSeparators) {
 		super();
 		this.style = style;
+		this.separators = thousandsSeparators;
 		setup();
 	}
 	
@@ -352,6 +354,10 @@ public class Display extends JPanel{
 		clear(lowerPanel);
 		lowerPanel.add(this.lowerOperand);
 		updateDisplay();
+	}
+	
+	public void separatorsOn(boolean separators) {
+	  this.separators = separators;
 	}
 	
 }

@@ -19,9 +19,12 @@ public class BarFractionDisplay extends FractionDisplay
 
   public BarFractionDisplay()
   {
-    this.whole = new JLabel(" ");
-    this.numerator = new JLabel(" ");
-    this.denominator = new JLabel(" ");
+    this.wholeNum = " ";
+    this.whole = new JLabel(wholeNum);
+    this.numeratorNum = " ";
+    this.numerator = new JLabel(numeratorNum);
+    this.denominatorNum = " ";
+    this.denominator = new JLabel(denominatorNum);
     draw();
   }
 
@@ -39,9 +42,13 @@ public class BarFractionDisplay extends FractionDisplay
    */
   public BarFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc)
   {
-    this.whole = new JLabel(whole);
-    this.numerator = new JLabel(numerator);
-    this.denominator = new JLabel(denominator);
+    this.wholeNum = whole;
+    this.whole = new JLabel(wholeNum);
+    this.numeratorNum = numerator;
+    this.numerator = new JLabel(numeratorNum);
+    this.denominatorNum = denominator;
+    this.denominator = new JLabel(denominatorNum);
+    super.addSeparators();
     this.loc = loc;
     if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
         || this.numerator.getText().equals("") && this.denominator.getText().equals(""))

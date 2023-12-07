@@ -1,6 +1,8 @@
 package gui.display;
 
 import java.awt.Color;
+import java.util.Locale;
+
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,22 +17,25 @@ public abstract class FractionDisplay extends JPanel {
   protected JLabel whole;
   protected JLabel numerator;
   protected JLabel denominator;
+  protected String wholeNum;
+  protected String numeratorNum;
+  protected String denominatorNum;
   protected FocusLocation loc = FocusLocation.WHOLE;
-  protected String thousandsSeparator;
-
+  protected Locale locale = Locale.getDefault();
+  protected String separator = String.valueOf(String.format(locale, "%,d", 1000).charAt(1));
 
   abstract void draw();
 
   public String getWhole() {
-    return this.whole.getText();
+    return this.wholeNum;
   }
 
   public String getNumerator() {
-    return this.numerator.getText();
+    return this.numeratorNum;
   }
 
   public String getDenominator() {
-    return this.denominator.getText();
+    return this.denominatorNum;
   }
 
   public FocusLocation getFocusLocation() {
@@ -68,17 +73,17 @@ public abstract class FractionDisplay extends JPanel {
     int denominator;
     int whole;
     try {
-      whole = Integer.parseInt(this.whole.getText());
+      whole = Integer.parseInt(this.wholeNum);
     } catch (NumberFormatException e) {
       whole = 0;
     }
     try {
-      numerator = Integer.parseInt(this.numerator.getText());
+      numerator = Integer.parseInt(this.numeratorNum);
     } catch (NumberFormatException e) {
       numerator = 0;
     }
     try {
-      denominator = Integer.parseInt(this.denominator.getText());
+      denominator = Integer.parseInt(this.denominatorNum);
     } catch (NumberFormatException e) {
       denominator = 1;
     }
@@ -94,8 +99,10 @@ public abstract class FractionDisplay extends JPanel {
       if (this.whole.getText().equals(" ")) {
         updateLoc(this.loc);
       } else {
-        this.whole.setText(this.whole.getText().substring(0, this.whole.getText().length() - 1));
-        if (this.whole.getText().length() == 0) {
+        this.wholeNum = (this.wholeNum.substring(0, this.wholeNum.length() - 1));
+        if(!this.wholeNum.equals(""))
+          this.whole.setText(String.format("%,d", Integer.parseInt(wholeNum)).replace(",", this.separator));
+        if (this.wholeNum.length() == 0) {
           this.whole.setText(" ");
         }
       }
@@ -103,9 +110,10 @@ public abstract class FractionDisplay extends JPanel {
       if (this.numerator.getText().equals(" ")) {
         updateLoc(this.loc);
       } else {
-        this.numerator.setText(this.numerator.getText().substring(0, 
-            this.numerator.getText().length() - 1));
-        if (this.numerator.getText().length() == 0) {
+        this.numeratorNum = (this.numeratorNum.substring(0, this.numeratorNum.length() - 1));
+        if(!this.numeratorNum.equals(""))
+          this.numerator.setText(String.format("%,d", Integer.parseInt(numeratorNum)).replace(",", this.separator));
+        if (this.numeratorNum.length() == 0) {
           this.numerator.setText(" ");
         }
       }
@@ -113,11 +121,13 @@ public abstract class FractionDisplay extends JPanel {
       if (this.denominator.getText().equals(" ")) {
         updateLoc(this.loc);
       } else {
-        this.denominator.setText(
-            this.denominator.getText().substring(0, this.denominator.getText().length() - 1));
-        if (this.denominator.getText().length() == 0) {
+        this.denominatorNum = (this.denominatorNum.substring(0, this.denominatorNum.length() - 1));
+        if(!this.denominatorNum.equals(""))
+          this.denominator.setText(String.format("%,d", Integer.parseInt(denominatorNum)).replace(",", this.separator));
+        if (this.denominatorNum.length() == 0) {
           this.denominator.setText(" ");
         }
+
       }
     }
   }
@@ -143,11 +153,14 @@ public abstract class FractionDisplay extends JPanel {
    */
   public void addDigit(String num) {
     if (this.loc == FocusLocation.WHOLE) {
-      this.whole.setText(this.whole.getText().replace(" ", "") + num);
+      this.wholeNum = (this.wholeNum.replace(" ", "") + num);
+      this.whole.setText(String.format("%,d", Integer.parseInt(wholeNum)).replace(",", this.separator));
     } else if (this.loc == FocusLocation.NUMERATOR) {
-      this.numerator.setText(this.numerator.getText().replace(" ", "") + num);
+      this.numeratorNum = (this.numeratorNum.replace(" ", "") + num);
+      this.numerator.setText(String.format("%,d", Integer.parseInt(numeratorNum)).replace(",", this.separator));
     } else if (this.loc == FocusLocation.DENOMINATOR) {
-      this.denominator.setText(this.denominator.getText().replace(" ", "") + num);
+      this.denominatorNum = (this.denominatorNum.replace(" ", "") + num);
+      this.denominator.setText(String.format("%,d", Integer.parseInt(denominatorNum)).replace(",", this.separator));
     }
   }
 
@@ -163,5 +176,25 @@ public abstract class FractionDisplay extends JPanel {
     }
     return true;
   }
-
+  
+  public void changeSeparators(boolean on) {
+    if(on) {
+      this.separator = String.valueOf(String.format(locale, "%,d", 1000).charAt(1));
+      
+    } else {
+      this.separator = "";
+    }
+  }
+  
+  protected void addSeparators() {
+    try {
+    this.whole.setText(String.format("%,d", Integer.parseInt(this.whole.getText())).replace(",", this.separator));
+    } catch (NumberFormatException e) {}
+    try {
+      this.numerator.setText(String.format("%,d", Integer.parseInt(this.numerator.getText())).replace(",", this.separator));
+      } catch (NumberFormatException e) {}
+    try {
+      this.denominator.setText(String.format("%,d", Integer.parseInt(this.denominator.getText())).replace(",", this.separator));
+      } catch (NumberFormatException e) {}
+  }
 }
