@@ -21,7 +21,13 @@ public class SolidusFractionDisplay extends FractionDisplay {
   private JPanel denominatorPanel = new JPanel();
 
   public SolidusFractionDisplay() {
-    super();
+    this.wholeNum = " ";
+    this.whole = new JLabel(wholeNum);
+    this.numeratorNum = " ";
+    this.numerator = new JLabel(numeratorNum);
+    this.denominatorNum = " ";
+    this.denominator = new JLabel(denominatorNum);
+    draw();
   }
 
   /**

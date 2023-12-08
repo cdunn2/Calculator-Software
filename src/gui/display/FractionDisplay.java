@@ -40,21 +40,6 @@ public abstract class FractionDisplay extends JPanel {
   public FocusLocation getFocusLocation() {
     return this.loc;
   }
-  
-  /**
-   * Constructs a blank fraction display. Specifies the JLabels and values of the parts
-   * of the fraction, then the GUI construction is handled by the individual classes'
-   * "draw" functions.
-   */
-  public FractionDisplay() {
-    this.wholeNum = " ";
-    this.whole = new JLabel(wholeNum);
-    this.numeratorNum = " ";
-    this.numerator = new JLabel(numeratorNum);
-    this.denominatorNum = " ";
-    this.denominator = new JLabel(denominatorNum);
-    draw();
-  }
 
   /**
    * Updates the focus location in the mixed fraction.

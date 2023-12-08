@@ -20,7 +20,13 @@ public class BarFractionDisplay extends FractionDisplay  {
    * Creates a new bar fraction display that is empty.
    */
   public BarFractionDisplay() {
-    super();
+    this.wholeNum = " ";
+    this.whole = new JLabel(wholeNum);
+    this.numeratorNum = " ";
+    this.numerator = new JLabel(numeratorNum);
+    this.denominatorNum = " ";
+    this.denominator = new JLabel(denominatorNum);
+    draw();
   }
 
   /**

@@ -15,7 +15,13 @@ public class SlashFractionDisplay extends FractionDisplay {
    * Creates an empty fraction display in the slash style.
    */
   public SlashFractionDisplay() {
-    super();
+    this.wholeNum = " ";
+    this.whole = new JLabel(wholeNum);
+    this.numeratorNum = " ";
+    this.numerator = new JLabel(numeratorNum);
+    this.denominatorNum = " ";
+    this.denominator = new JLabel(denominatorNum);
+    draw();
     
     
   }
