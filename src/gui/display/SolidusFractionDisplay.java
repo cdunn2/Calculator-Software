@@ -14,15 +14,13 @@ import utilities.Fractions;
 /**
  * Represents a fraction in the solidus style.
  */
-public class SolidusFractionDisplay extends FractionDisplay
-{
+public class SolidusFractionDisplay extends FractionDisplay {
 
   private JLabel slash = new JLabel("/");
   private JPanel numeratorPanel = new JPanel();
   private JPanel denominatorPanel = new JPanel();
 
-  public SolidusFractionDisplay()
-  {
+  public SolidusFractionDisplay() {
     this.wholeNum = " ";
     this.whole = new JLabel(wholeNum);
     this.numeratorNum = " ";
@@ -45,8 +43,7 @@ public class SolidusFractionDisplay extends FractionDisplay
    *          The location of the focus indicator.
    */
   public SolidusFractionDisplay(String whole, String numerator, String denominator,
-      FocusLocation loc)
-  {
+      FocusLocation loc) {
     this.wholeNum = whole;
     this.whole = new JLabel(wholeNum);
     this.numeratorNum = numerator;
@@ -56,22 +53,19 @@ public class SolidusFractionDisplay extends FractionDisplay
     super.addSeparators();
     this.loc = loc;
     if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
-        || this.numerator.getText().equals("") && this.denominator.getText().equals(""))
-    {
+        || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
       this.slash.setText("");
     }
     draw();
   }
 
   @Override
-  public void draw()
-  {
+  public void draw() {
     numerator.setHorizontalAlignment(SwingConstants.CENTER);
     denominator.setHorizontalAlignment(SwingConstants.CENTER);
 
     setLayout(new FlowLayout());
-    if (!this.whole.getText().equals("0"))
-    {
+    if (!this.whole.getText().equals("0")) {
       add(whole);
     }
     numeratorPanel.setLayout(new BoxLayout(numeratorPanel, BoxLayout.Y_AXIS));

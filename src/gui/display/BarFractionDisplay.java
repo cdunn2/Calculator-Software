@@ -11,14 +11,15 @@ import javax.swing.SwingConstants;
 /**
  * Displays a fraction in the bar style.
  */
-public class BarFractionDisplay extends FractionDisplay
-{
+public class BarFractionDisplay extends FractionDisplay  {
 
   private JSeparator bar = new JSeparator();
   private FocusLocation loc = FocusLocation.WHOLE;
 
-  public BarFractionDisplay()
-  {
+  /**
+   * Creates a new bar fraction display that is empty.
+   */
+  public BarFractionDisplay() {
     this.wholeNum = " ";
     this.whole = new JLabel(wholeNum);
     this.numeratorNum = " ";
@@ -40,8 +41,7 @@ public class BarFractionDisplay extends FractionDisplay
    * @param loc
    *          The current location of the focus.
    */
-  public BarFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc)
-  {
+  public BarFractionDisplay(String whole, String numerator, String denominator, FocusLocation loc) {
     this.wholeNum = whole;
     this.whole = new JLabel(wholeNum);
     this.numeratorNum = numerator;
@@ -51,8 +51,7 @@ public class BarFractionDisplay extends FractionDisplay
     super.addSeparators();
     this.loc = loc;
     if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
-        || this.numerator.getText().equals("") && this.denominator.getText().equals(""))
-    {
+        || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
       this.bar = null;
     }
     draw();
