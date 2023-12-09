@@ -99,6 +99,7 @@ public class CreateMenu {
         solidusItem.addActionListener(listener);
         aboutItem.addActionListener(listener);
         helpItem.addActionListener(listener);
+        editItem.addActionListener(listener);
 	}
 
 	private static void AddShortcut(JMenuItem item, int key, int modifier)

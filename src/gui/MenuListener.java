@@ -13,6 +13,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 
+import javax.swing.JFrame;
+
 
 public class MenuListener implements ActionListener
 {
@@ -54,7 +56,10 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals(STRINGS.getString("PRINT"))) {
 			DelegatingPrintable print = new DelegatingPrintable(FragileWindow.calcHistoryArea);
 			PrintController.print(print, null);
-		} else if (e.getActionCommand().equals(STRINGS.getString("PREFERENCES"))) {
+		} else if (e.getActionCommand().equals(STRINGS.getString("EDIT"))) {
+
+            new PreferencesDialog();
+
 
 			//for preferences, use a dialog:
 			//https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
