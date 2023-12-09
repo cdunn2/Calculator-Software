@@ -54,6 +54,11 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals(STRINGS.getString("PRINT"))) {
 			DelegatingPrintable print = new DelegatingPrintable(FragileWindow.calcHistoryArea);
 			PrintController.print(print, null);
+		} else if (e.getActionCommand().equals(STRINGS.getString("PREFERENCES"))) {
+
+			//for preferences, use a dialog:
+			//https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+			//maybe have a text file to save the preferences
 		} else if (e.getActionCommand().equals(STRINGS.getString("HELP"))) {
 
 			try {
