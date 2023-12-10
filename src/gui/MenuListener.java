@@ -6,16 +6,18 @@ import gui.display.*;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Console;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 
-import javax.swing.JFrame;
 
-
+/**
+ * This is the class that creates the listener for the menu items.
+ *
+ * @author      Connor Dunn
+ * @version     1.3
+ */
 public class MenuListener implements ActionListener
 {
 	private FragileWindow fw;
@@ -27,6 +29,12 @@ public class MenuListener implements ActionListener
 		this.fw = fw;
 	}
 	
+	/**
+     * This is the main method in the class that adds behavior to what happens when
+     * a menu item is selected.
+     *
+     * @param e    The current action event
+     */
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{

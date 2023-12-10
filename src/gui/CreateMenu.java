@@ -2,17 +2,21 @@ package gui;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
-
 import static gui.FragileWindow.*;
-
 import java.awt.event.KeyEvent;
 
+
+/**
+ * This is the class that creates the menu for the calculator.
+ *
+ * @author      Connor Dunn
+ * @version     1.3
+ */
 public class CreateMenu {
 	
 	protected static JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
@@ -24,6 +28,12 @@ public class CreateMenu {
 	
 	private FragileWindow fw;
 	
+	
+	/**
+     * This is the constructor for the menu class, where it gets built
+     *
+     * @param fw    The current fragile window
+     */
 	public CreateMenu(FragileWindow fw) {
 		this.fw = fw;
 		JMenuBar menuBar = new JMenuBar();
@@ -103,6 +113,13 @@ public class CreateMenu {
         editItem.addActionListener(listener);
 	}
 
+	/**
+     * This is the private method for adding the shortcut for each menu item
+     *
+     * @param item    The menu item that the shortcut is being added to
+     * @param key    The key to be pressed for the shortcut
+     * @param modifier	The modifier shortcut key
+     */
 	private static void AddShortcut(JMenuItem item, int key, int modifier)
 	{
 		item.setAccelerator(KeyStroke.getKeyStroke(key, modifier));

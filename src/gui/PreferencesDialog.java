@@ -4,14 +4,20 @@ import static gui.FragileWindow.STRINGS;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
-//https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
-//https://stackoverflow.com/questions/6555040/multiple-input-in-joptionpane-showinputdialog
-//https://www.youtube.com/watch?v=uaQ1bBoK7HU
+
+/**
+ * This is the class that creates the preferences dialog GUI.
+ * 
+ * I used the following resources to help  me with creating this dialog:
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+ * https://stackoverflow.com/questions/6555040/multiple-input-in-joptionpane-showinputdialog
+ * https://www.youtube.com/watch?v=uaQ1bBoK7HU
+ *
+ * @author      Connor Dunn
+ * @version     1.3
+ */
 public class PreferencesDialog extends JDialog
 {
 	
@@ -19,6 +25,11 @@ public class PreferencesDialog extends JDialog
 	protected static JCheckBox separatorsCheckbox = new JCheckBox(STRINGS.getString("ENABLED"), true);
 	private FragileWindow fw;
 
+	/**
+     * This is the constructor for the Preferences class, where it gets built.
+     *
+     * @param fw    The current fragile window
+     */
 	public PreferencesDialog(FragileWindow fw) {
         super((JFrame)  null, STRINGS.getString("PREFERENCES"), true);
         this.fw = fw;
