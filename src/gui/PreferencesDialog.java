@@ -39,7 +39,10 @@ public class PreferencesDialog extends JDialog
        JPanel thousandsSeparatorsPanel = new JPanel();
        thousandsSeparatorsPanel.add(new JLabel(STRINGS.getString("ASK_SEPARATORS")));
        thousandsSeparatorsPanel.add(separatorsCheckbox);
+       
+       JPanel shortcutsPanel = new JPanel();
        shortcutsPanel.setLayout(new GridLayout(0, 2));
+       
        String[] shortcutNames =
        		{STRINGS.getString("PRINT"), STRINGS.getString("NEW"),
        		STRINGS.getString("EXIT"), STRINGS.getString("PROPER"),
@@ -71,7 +74,7 @@ public class PreferencesDialog extends JDialog
        cancelButton.setActionCommand(STRINGS.getString("CANCEL"));
        cancelButton.addActionListener(listener);
       
-       separatorsCheckbox.addActionListener(listener);
+       //separatorsCheckbox.addActionListener(listener);
       
        buttonsPanel.add(applyButton);
        buttonsPanel.add(cancelButton);

@@ -18,16 +18,16 @@ import javax.swing.*;
  * @version     1.3
  */
 public class PreferencesListener implements ActionListener {
-	
+
 	private PreferencesDialog preferencesDialog;
 	private FragileWindow fw;
-	
+
 	/**
-     * The constructor for adding the listeners to each preference.
-     *
-     * @param preferencesDialog    The inputed preferences dialog
-     * @param fw					The current fragile window
-     */
+	 * The constructor for adding the listeners to each preference.
+	 *
+	 * @param preferencesDialog    The inputed preferences dialog
+	 * @param fw					The current fragile window
+	 */
 	public PreferencesListener(PreferencesDialog preferencesDialog, FragileWindow fw)
 	{
 		this.preferencesDialog = preferencesDialog;
@@ -35,57 +35,57 @@ public class PreferencesListener implements ActionListener {
 	}
 
 	/**
-     * The constructor for adding the listeners to each preference.
-     *
-     * @param e    The current action event
-     */
+	 * The constructor for adding the listeners to each preference.
+	 *
+	 * @param e    The current action event
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getActionCommand().equals(STRINGS.getString("APPLY"))) {
-			
+
 			// Thousands separators
 			//Doesn't work yet
 			separatorsChanger();
-			
+
 			// Shortcuts
 			applyShortcuts();
-			
+
 			preferencesDialog.dispose();
 
 		} else if (e.getActionCommand().equals(STRINGS.getString("CANCEL"))) {
 			preferencesDialog.dispose();
 		}
-		
+
 	}
 
 	/**
-     * The private method that changes the thousands separators.
-     */
+	 * The private method that changes the thousands separators.
+	 */
 	private void separatorsChanger() {
 		if (PreferencesDialog.separatorsCheckbox.isSelected()) {
 			fw.calculatorDisplay.separatorsOn(true);
-			
+
 		} else if (!PreferencesDialog.separatorsCheckbox.isSelected()) {
 			fw.calculatorDisplay.separatorsOn(false);
 		}
-		
+
 	}
 
 	/**
-     * The private method that assigns behavior to the shortcut text fields.
-     */
+	 * The private method that assigns behavior to the shortcut text fields.
+	 */
 	private void applyShortcuts() {
-		
+
 		for (Map.Entry<String, JTextField> entry : preferencesDialog.getMenuShortcuts().entrySet())
 		{
 			String menuItemName = entry.getKey();
-            JTextField textField = entry.getValue();
-            String shortcut = textField.getText().trim();
-            
-            System.out.print(menuItemName + "\t" + shortcut);
+			JTextField textField = entry.getValue();
+			String shortcut = textField.getText().trim();
+
+			//System.out.print(menuItemName + "\t" + shortcut);
 		}
-		
+
 	}
 
 }
