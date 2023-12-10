@@ -2,6 +2,7 @@ package gui.display;
 
 import gui.FragileWindow;
 import gui.MenuListener;
+import java.util.ResourceBundle;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -43,6 +44,7 @@ public class Display extends JPanel {
   private JFrame dialogFrame = new JFrame();
   protected boolean separators;
   private FragileWindow fw;
+  static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
 
   /**
    * Creates a new Display to be added to the calculator.
@@ -225,7 +227,8 @@ public class Display extends JPanel {
 
   private void calculate() {
     if (!this.lowerOperand.isComplete()) {
-      JOptionPane.showMessageDialog(dialogFrame, "Please enter a valid fraction.", "Error",
+      JOptionPane.showMessageDialog(dialogFrame, STRINGS.getString("COMPLETE"),
+    		  STRINGS.getString("ERROR"),
           JOptionPane.ERROR_MESSAGE);
       return;
     }
