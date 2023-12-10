@@ -14,8 +14,6 @@ import static gui.FragileWindow.*;
 import java.awt.event.KeyEvent;
 
 public class CreateMenu {
-
-	private static JFrame frame = FragileWindow.frame;
 	
 	protected static JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
 	protected static JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
@@ -24,9 +22,12 @@ public class CreateMenu {
 	protected static JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"), true);
 	protected static JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem(STRINGS.getString("SOLIDUS"));
 	
-	public CreateMenu() {
+	private FragileWindow fw;
+	
+	public CreateMenu(FragileWindow fw) {
+		this.fw = fw;
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		fw.setJMenuBar(menuBar);
 		JMenu fileMenu = new JMenu(STRINGS.getString("FILE"));
 		JMenu modeMenu = new JMenu(STRINGS.getString("MODE"));
 		JMenu styleMenu = new JMenu(STRINGS.getString("STYLE"));
@@ -87,7 +88,7 @@ public class CreateMenu {
 		preferencesMenu.add(openItem);
 		preferencesMenu.add(saveItem);
 		
-		MenuListener listener = new MenuListener();
+		MenuListener listener = new MenuListener(this.fw);
 
 		printItem.addActionListener(listener);
 		newItem.addActionListener(listener);

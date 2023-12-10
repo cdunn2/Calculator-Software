@@ -16,22 +16,28 @@ public class FragileWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	static final Locale LOCALE = Locale.getDefault();
 	static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
-	public static JFrame frame = new JFrame(STRINGS.getString("CALCULATOR"));
 	private static JLabel logoLabel;
-	public static JPanel calcHistoryArea = new JPanel();
-	public static Display calculatorDisplay = new Display(TypesettingStyles.SLASH, true);
-	public static GridBagConstraints gbc;
+	public JPanel calcHistoryArea = new JPanel();
+	public Display calculatorDisplay = new Display(TypesettingStyles.SLASH, true);
+	public GridBagConstraints gbc;
 	
 
 
 public static void main(String[] args) {
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(400, 500);
-		frame.setLayout(new BorderLayout());
+		new FragileWindow();
+	}
+
+	public FragileWindow() {
+		super(STRINGS.getString("CALCULATOR"));
+		this.calcHistoryArea = new JPanel();
+        this.calculatorDisplay = new Display(TypesettingStyles.SLASH, true);
+        this.gbc = new GridBagConstraints();
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setSize(400, 500);
+		this.setLayout(new BorderLayout());
 		//frame.setResizable(false);
 
-		new CreateMenu();
+		new CreateMenu(this);
 
 		// Fragile logo
 		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/Fragile_Logo.png"));
@@ -47,7 +53,7 @@ public static void main(String[] args) {
 		//topPanel.add(new JLabel(""), BorderLayout.EAST);
 		//topPanel.add(new JLabel(""), BorderLayout.WEST);
 		topPanel.add(display, BorderLayout.CENTER);
-		frame.add(topPanel, BorderLayout.NORTH);
+		this.add(topPanel, BorderLayout.NORTH);
 
 		JPanel buttonsPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gb = new GridBagConstraints();
@@ -55,19 +61,22 @@ public static void main(String[] args) {
 		gb.weightx = 1.0;
 		gb.weighty = 1.0;
 		
-		JWindow secondaryWindow = new JWindow(frame);
+		JWindow secondaryWindow = new JWindow(this);
 	    secondaryWindow.setSize(50, 500);
-	    secondaryWindow.setLocationRelativeTo(frame);
-	    secondaryWindow.setLocation(frame.getX() + frame.getWidth(), frame.getY());
+	    secondaryWindow.setLocationRelativeTo(this);
+	    secondaryWindow.setLocation(this.getX() + this.getWidth(), this.getY());
 
-	    frame.addComponentListener(new ComponentAdapter() {
+	    this.addComponentListener(new ComponentAdapter() {
 	        public void componentMoved(ComponentEvent e) {
-	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
+	        	secondaryWindow.setLocation(FragileWindow.this.getX() + FragileWindow.this.getWidth() - 7, 
+                        FragileWindow.this.getY() + 100);
 	        }
 
 	        public void componentResized(ComponentEvent e) {
-	            secondaryWindow.setSize(secondaryWindow.getWidth(), frame.getHeight() - 170);
-	            secondaryWindow.setLocation(frame.getX() - 7 + frame.getWidth(), frame.getY() + 100);
+	        	secondaryWindow.setSize(secondaryWindow.getWidth(), 
+                        FragileWindow.this.getHeight() - 170);
+	        	secondaryWindow.setLocation(FragileWindow.this.getX() + FragileWindow.this.getWidth() - 7, 
+                            FragileWindow.this.getY() + 100);
 	        }
 	    });
 		
@@ -174,8 +183,8 @@ public static void main(String[] args) {
 	        	key = "Pos";
 	        }
 	        String input = key;
-	        frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, input);
-	        frame.getRootPane().getActionMap().put(input, new AbstractAction() {
+	        this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, input);
+	        this.getRootPane().getActionMap().put(input, new AbstractAction() {
 				private static final long serialVersionUID = 1L;
 				public void actionPerformed(ActionEvent e) {
 	                calculatorDisplay.manageButtons(input);
@@ -183,16 +192,22 @@ public static void main(String[] args) {
 	        });
 	    }
 	    
-		frame.add(buttonsPanel, BorderLayout.CENTER);
-		frame.setVisible(true);
+		this.add(buttonsPanel, BorderLayout.CENTER);
+		this.setVisible(true);
 		secondaryWindow.setVisible(true);
-		frame.toFront();
+		this.toFront();
 	}
+	
+	public static void openNewWindow() {
+        EventQueue.invokeLater(() -> {
+            new FragileWindow().setVisible(true);
+        });
+    }
 
 	// Please do not delete this (or the stuff dealing with calcHistoryArea) it took me so many hours to get this working
 	// I am currently writing this at 6:49 am
 	// I'm tired boss
-	public static void addHistoryEntry(JPanel entryPanel) {
+	public void addHistoryEntry(JPanel entryPanel) {
 	    entryPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 	    entryPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, entryPanel.getPreferredSize().height));
 	    calcHistoryArea.add(entryPanel);

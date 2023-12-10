@@ -17,9 +17,11 @@ public class PreferencesDialog extends JDialog
 	
 	private static final long serialVersionUID = 1L;
 	protected static JCheckBox separatorsCheckbox = new JCheckBox(STRINGS.getString("ENABLED"), true);
+	private FragileWindow fw;
 
-	public PreferencesDialog() {
+	public PreferencesDialog(FragileWindow fw) {
         super((JFrame)  null, STRINGS.getString("PREFERENCES"), true);
+        this.fw = fw;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(400, 300);
 
@@ -56,7 +58,7 @@ public class PreferencesDialog extends JDialog
         JButton cancelButton = new JButton(STRINGS.getString("CANCEL"));
         
         //Listeners
-        PreferencesListener listener = new PreferencesListener(this);
+        PreferencesListener listener = new PreferencesListener(this, this.fw);
         applyButton.addActionListener(listener);
         separatorsCheckbox.addActionListener(listener);
 

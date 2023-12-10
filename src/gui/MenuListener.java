@@ -18,9 +18,14 @@ import javax.swing.JFrame;
 
 public class MenuListener implements ActionListener
 {
+	private FragileWindow fw;
 	
 	public static Boolean reduce = false;
 	public static Boolean proper = false;
+	
+	public MenuListener(FragileWindow fw) {
+		this.fw = fw;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
@@ -30,6 +35,7 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals(STRINGS.getString("ABOUT"))) {
 			AboutWindow.main(null);
 		} else if (e.getActionCommand().equals(STRINGS.getString("NEW"))) {
+			FragileWindow.openNewWindow();
 			/**
 			try {
 				Runtime.getRuntime().exec("javac -cp . FragileWindow.java");
@@ -54,11 +60,11 @@ public class MenuListener implements ActionListener
 			//FragileWindow wind = new FragileWindow();
 			//Constructor<FragileWindow> test = new Constructor(wind);
 		} else if (e.getActionCommand().equals(STRINGS.getString("PRINT"))) {
-			DelegatingPrintable print = new DelegatingPrintable(FragileWindow.calcHistoryArea);
+			DelegatingPrintable print = new DelegatingPrintable(fw.calcHistoryArea);
 			PrintController.print(print, null);
 		} else if (e.getActionCommand().equals(STRINGS.getString("EDIT"))) {
 
-            new PreferencesDialog();
+            new PreferencesDialog(fw);
 
 
 			//for preferences, use a dialog:
@@ -89,11 +95,11 @@ public class MenuListener implements ActionListener
 		}
 		
 		if (CreateMenu.barItem.isSelected()) {
-			FragileWindow.calculatorDisplay.changeStyle(TypesettingStyles.BAR);
+			fw.calculatorDisplay.changeStyle(TypesettingStyles.BAR);
 		} else if (CreateMenu.slashItem.isSelected()) {
-			FragileWindow.calculatorDisplay.changeStyle(TypesettingStyles.SLASH);
+			fw.calculatorDisplay.changeStyle(TypesettingStyles.SLASH);
 		} else if (CreateMenu.solidusItem.isSelected()) {
-			FragileWindow.calculatorDisplay.changeStyle(TypesettingStyles.SOLIDUS);
+			fw.calculatorDisplay.changeStyle(TypesettingStyles.SOLIDUS);
 		}
 		
 	}

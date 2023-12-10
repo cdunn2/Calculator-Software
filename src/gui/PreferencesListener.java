@@ -8,10 +8,12 @@ import java.awt.event.ActionListener;
 public class PreferencesListener implements ActionListener {
 	
 	private PreferencesDialog preferencesDialog;
+	private FragileWindow fw;
 	
-	public PreferencesListener(PreferencesDialog preferencesDialog)
+	public PreferencesListener(PreferencesDialog preferencesDialog, FragileWindow fw)
 	{
 		this.preferencesDialog = preferencesDialog;
+		this.fw = fw;
 	}
 
 	@Override
@@ -22,10 +24,10 @@ public class PreferencesListener implements ActionListener {
 			// Thousands separators
 			//Doesn't work yet
 			if (PreferencesDialog.separatorsCheckbox.isSelected()) {
-				FragileWindow.calculatorDisplay.separatorsOn(true);
+				fw.calculatorDisplay.separatorsOn(true);
 				
 			} else if (!PreferencesDialog.separatorsCheckbox.isSelected()) {
-				FragileWindow.calculatorDisplay.separatorsOn(false);
+				fw.calculatorDisplay.separatorsOn(false);
 			}
 			preferencesDialog.dispose();
 
