@@ -167,23 +167,28 @@ public class Display extends JPanel {
   }
 
   private void manageBinaryOperationButtons(String button) {
-    clear(upperPanel);
-    if (currIsNegative) {
-      upperPanel.add(new JLabel("-"));
-      otherIsNegative = true;
-    }
-    if (this.currOperation.equals("")) {
-      if (!this.lowerOperand.isComplete()) {
-        JOptionPane.showMessageDialog(dialogFrame, "Please enter a valid fraction.", "Error",
-            JOptionPane.ERROR_MESSAGE);
-        return;
+    if (!this.equationCompleted) {
+      clear(upperPanel);
+      if (currIsNegative) {
+        upperPanel.add(new JLabel("-"));
+        otherIsNegative = true;
+        clear(this.history);
+        this.history.add(new JLabel("-"));
       }
-      setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(),
-          this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
-      upperPanel.add(this.upperOperand);
-    } else {
-      upperPanel.add(this.upperOperand);
+      if (this.currOperation.equals("")) {
+        if (!this.lowerOperand.isComplete()) {
+          JOptionPane.showMessageDialog(dialogFrame, "Please enter a valid fraction.", "Error",
+              JOptionPane.ERROR_MESSAGE);
+          return;
+        }
+        setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(),
+            this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
+        upperPanel.add(this.upperOperand);
+      } else {
+        upperPanel.add(this.upperOperand);
+      }
     }
+    this.equationCompleted = false;
     upperPanel.add(new JLabel(button));
     this.currOperation = button;
     clear(lowerPanel);
@@ -309,7 +314,10 @@ public class Display extends JPanel {
     lowerPanel.add(this.lowerOperand);
 
     // This is the stuff for copying over into the calculation history
-    this.history.add(new JLabel("="), gbc);
+    this.history.add(new JLabel("= "), gbc);
+    if (result.getIsNegative()) {
+      this.history.add(new JLabel("-"));
+    }
     this.history.add(new SlashFractionDisplay(result.getWholeNumber().toString().replace(" ", ""),
         result.getNumerator().toString().replace(" ", ""),
         result.getDenominator().toString().replace(" ", ""), null), gbc);
