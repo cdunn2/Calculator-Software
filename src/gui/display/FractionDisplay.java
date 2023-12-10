@@ -21,7 +21,7 @@ public abstract class FractionDisplay extends JPanel {
   protected String denominatorNum;
   protected FocusLocation loc = FocusLocation.WHOLE;
   protected Locale locale = Locale.getDefault();
-  protected String separator = String.valueOf(String.format(locale, "%,d", 1000).charAt(1));
+  protected String separator = String.valueOf(String.format(locale, "%,d", 1000).charAt(1)); 
 
   abstract void draw();
 
@@ -193,25 +193,11 @@ public abstract class FractionDisplay extends JPanel {
     return true;
   }
   
-  /**
-   * Update the separator to be the current locale's separator 
-   * or the empty string if separators are turned off.
-   *
-   * @param on True if separators are on, false if they are off.
-   */
-  public void changeSeparators(boolean on) {
-    if (on) {
-      this.separator = String.valueOf(String.format(locale, "%,d", 1000).charAt(1));
-      
-    } else {
-      this.separator = "";
-    }
-  }
-  
   protected void addSeparators() {
     //Catch blocks are empty to avoid adding separators to empty strings
     //If the string cant be converted to an int, the NFE error is thrown and the 
     //text will remain the same as before.
+    this.separator = String.valueOf(String.format(locale, "%,d", 1000).charAt(1));
     try {
       this.whole.setText(String.format("%,d", Integer.parseInt(this.whole.getText()))
           .replace(",", this.separator));
@@ -224,5 +210,12 @@ public abstract class FractionDisplay extends JPanel {
       this.denominator.setText(String.format("%,d", Integer.parseInt(this.denominator.getText()))
           .replace(",", this.separator));
     } catch (NumberFormatException e) { }
+  }
+  
+  protected void removeSeparators() {
+    this.whole.setText(this.wholeNum);
+    this.numerator.setText(this.whole.getText().replace(this.separator, ""));
+    this.denominator.setText(this.whole.getText().replace(this.separator, ""));
+    this.separator = "";
   }
 }

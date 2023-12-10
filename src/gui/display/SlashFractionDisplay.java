@@ -3,6 +3,8 @@ package gui.display;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 
+import gui.PreferencesDialog;
+
 /**
  * Represents a fraction displayed in the slash style.
  */
@@ -46,12 +48,17 @@ public class SlashFractionDisplay extends FractionDisplay {
     this.numerator = new JLabel(numeratorNum);
     this.denominatorNum = denominator;
     this.denominator = new JLabel(denominatorNum);
-    super.addSeparators();
     this.loc = loc;
-    if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
-        || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
-      this.slash.setText("");
-      this.addGap = false;
+    if (PreferencesDialog.separatorsCheckbox.isSelected()) {
+      super.addSeparators();
+    } else if (!this.whole.getText().equals(" ")) {
+      this.slash.setText("/");
+    } else {
+      if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
+          || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
+        this.slash.setText("");
+        this.addGap = false;
+      }
     }
     draw();
 

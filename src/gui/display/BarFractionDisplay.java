@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import gui.PreferencesDialog;
+
 /**
  * Displays a fraction in the bar style.
  */
@@ -48,11 +50,15 @@ public class BarFractionDisplay extends FractionDisplay  {
     this.numerator = new JLabel(numeratorNum);
     this.denominatorNum = denominator;
     this.denominator = new JLabel(denominatorNum);
-    super.addSeparators();
-    this.loc = loc;
-    if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
-        || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
-      this.bar = null;
+    if (PreferencesDialog.separatorsCheckbox.isSelected()) {
+      super.addSeparators();
+    } else if (!this.whole.getText().equals(" ")) {
+      this.bar = new JSeparator();
+    } else {
+      if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
+          || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
+        this.bar = null;
+      }
     }
     draw();
   }

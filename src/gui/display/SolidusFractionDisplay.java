@@ -1,15 +1,13 @@
 package gui.display;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import utilities.Fractions;
+import gui.PreferencesDialog;
+
 
 /**
  * Represents a fraction in the solidus style.
@@ -20,6 +18,9 @@ public class SolidusFractionDisplay extends FractionDisplay {
   private JPanel numeratorPanel = new JPanel();
   private JPanel denominatorPanel = new JPanel();
 
+  /**
+   * Creates a new empty fraction display in the solidus style.
+   */
   public SolidusFractionDisplay() {
     this.wholeNum = " ";
     this.whole = new JLabel(wholeNum);
@@ -50,11 +51,15 @@ public class SolidusFractionDisplay extends FractionDisplay {
     this.numerator = new JLabel(numeratorNum);
     this.denominatorNum = denominator;
     this.denominator = new JLabel(denominatorNum);
-    super.addSeparators();
-    this.loc = loc;
-    if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
-        || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
-      this.slash.setText("");
+    if (PreferencesDialog.separatorsCheckbox.isSelected()) {
+      super.addSeparators();
+    } else if (!this.whole.getText().equals(" ")) {
+      this.slash.setText("/");
+    } else {
+      if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
+          || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
+        this.slash.setText("");
+      }
     }
     draw();
   }
@@ -83,6 +88,5 @@ public class SolidusFractionDisplay extends FractionDisplay {
     add(numeratorPanel);
     add(slash);
     add(denominatorPanel);
-    System.out.println();
   }
 }

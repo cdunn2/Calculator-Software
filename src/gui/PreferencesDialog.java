@@ -22,7 +22,7 @@ public class PreferencesDialog extends JDialog
 {
 	
 	private static final long serialVersionUID = 1L;
-	protected static JCheckBox separatorsCheckbox = new JCheckBox(STRINGS.getString("ENABLED"), true);
+	public static JCheckBox separatorsCheckbox = new JCheckBox(STRINGS.getString("ENABLED"), true);
 	private FragileWindow fw;
 
 	/**

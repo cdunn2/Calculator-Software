@@ -42,7 +42,6 @@ public class Display extends JPanel {
   private GridBagConstraints gbc = new GridBagConstraints();
   private boolean equationCompleted = false;
   private JFrame dialogFrame = new JFrame();
-  protected boolean separators;
   private FragileWindow fw;
   static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
 
@@ -56,7 +55,6 @@ public class Display extends JPanel {
     super();
     this.fw = fw;
     this.style = style;
-    this.separators = thousandsSeparators;
     setup();
   }
 
@@ -403,8 +401,15 @@ public class Display extends JPanel {
     updateDisplay();
   }
 
-  public void separatorsOn(boolean separators) {
-    this.separators = separators;
+  public void separatorsOn(boolean on) {
+    if(on) {
+      this.lowerOperand.addSeparators();
+      if(this.upperOperand != null) {
+        this.upperOperand.addSeparators();
+      }
+    } else {
+      this.lowerOperand.removeSeparators();
+    }
   }
 
 }
