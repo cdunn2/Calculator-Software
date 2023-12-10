@@ -174,7 +174,7 @@ public class Display extends JPanel {
     }
     if (this.currOperation.equals("")) {
       if (!this.lowerOperand.isComplete()) {
-        JOptionPane.showMessageDialog(dialogFrame, "Please enter a complete fraction.", "Error",
+        JOptionPane.showMessageDialog(dialogFrame, "Please enter a valid fraction.", "Error",
             JOptionPane.ERROR_MESSAGE);
         return;
       }
@@ -225,7 +225,7 @@ public class Display extends JPanel {
 
   private void calculate() {
     if (!this.lowerOperand.isComplete()) {
-      JOptionPane.showMessageDialog(dialogFrame, "Please enter a complete fraction.", "Error",
+      JOptionPane.showMessageDialog(dialogFrame, "Please enter a valid fraction.", "Error",
           JOptionPane.ERROR_MESSAGE);
       return;
     }
