@@ -50,7 +50,7 @@ public class Display extends JPanel {
    * @param style The fraction display style to use for the display.
    * @param thousandsSeparators True if separators are on, false otherwise.
    */
-  public Display(TypesettingStyles style, boolean thousandsSeparators) {
+  public Display(TypesettingStyles style, boolean thousandsSeparators, FragileWindow fw) {
     super();
     this.fw = fw;
     this.style = style;

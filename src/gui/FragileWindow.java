@@ -18,7 +18,7 @@ public class FragileWindow extends JFrame {
 	static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
 	private static JLabel logoLabel;
 	public JPanel calcHistoryArea = new JPanel();
-	public Display calculatorDisplay = new Display(TypesettingStyles.SLASH, true);
+	public Display calculatorDisplay;
 	public GridBagConstraints gbc;
 	
 
@@ -30,7 +30,7 @@ public static void main(String[] args) {
 	public FragileWindow() {
 		super(STRINGS.getString("CALCULATOR"));
 		this.calcHistoryArea = new JPanel();
-        this.calculatorDisplay = new Display(TypesettingStyles.SLASH, true);
+        this.calculatorDisplay = new Display(TypesettingStyles.SLASH, true, this);
         this.gbc = new GridBagConstraints();
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(400, 500);
