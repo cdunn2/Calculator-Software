@@ -42,6 +42,7 @@ public class Display extends JPanel {
   private boolean equationCompleted = false;
   private JFrame dialogFrame = new JFrame();
   protected boolean separators;
+  private FragileWindow fw;
 
   /**
    * Creates a new Display to be added to the calculator.
@@ -51,6 +52,7 @@ public class Display extends JPanel {
    */
   public Display(TypesettingStyles style, boolean thousandsSeparators) {
     super();
+    this.fw = fw;
     this.style = style;
     this.separators = thousandsSeparators;
     setup();
@@ -311,10 +313,10 @@ public class Display extends JPanel {
         result.getNumerator().toString().replace(" ", ""),
         result.getDenominator().toString().replace(" ", ""), null), gbc);
 
-    FragileWindow.addHistoryEntry(history);
-    FragileWindow.calcHistoryArea.add(history);
-    FragileWindow.calcHistoryArea.revalidate();
-    FragileWindow.calcHistoryArea.repaint();
+    fw.addHistoryEntry(history);
+    fw.calcHistoryArea.add(history);
+    fw.calcHistoryArea.revalidate();
+    fw.calcHistoryArea.repaint();
     // clear(history);
     gridY++;
     this.equationCompleted = true;
