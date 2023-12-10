@@ -186,7 +186,8 @@ public abstract class FractionDisplay extends JPanel {
    */
   public boolean isComplete() {
     if ((this.numerator.getText().equals(" ") && !this.denominator.getText().equals(" ")) 
-        || (this.denominator.getText().equals(" ") && !this.numerator.getText().equals(" "))) {
+        || (this.denominator.getText().equals(" ") && !this.numerator.getText().equals(" "))
+        || this.denominator.getText().equals("0")) {
       return false;
     }
     return true;

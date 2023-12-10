@@ -44,29 +44,6 @@ public class MenuListener implements ActionListener
 			AboutWindow.main(null);
 		} else if (e.getActionCommand().equals(STRINGS.getString("NEW"))) {
 			FragileWindow.openNewWindow();
-			/**
-			try {
-				Runtime.getRuntime().exec("javac -cp . FragileWindow.java");
-				Runtime.getRuntime().exec("java -cp . FragileWindow");
-			    System.out.println("1");
-			} catch (IOException e1) {
-			    System.out.println("2");
-			}*/
-			
-			/**
-			ProcessBuilder pb = new ProcessBuilder("java", "-jar", "Fragile.jar");
-			try {
-				Process p = pb.start();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}*/
-			
-			//FragileWindow.main(null);
-			//FragileWindow.getFrames().clone();
-			//FragileWindow.new
-			//https://docs.oracle.com/javase%2Ftutorial%2F/reflect/member/ctorInstance.html
-			//FragileWindow wind = new FragileWindow();
-			//Constructor<FragileWindow> test = new Constructor(wind);
 		} else if (e.getActionCommand().equals(STRINGS.getString("PRINT"))) {
 			DelegatingPrintable print = new DelegatingPrintable(fw.calcHistoryArea);
 			PrintController.print(print, null);
