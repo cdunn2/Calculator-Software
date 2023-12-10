@@ -21,6 +21,7 @@ public class PreferencesListener implements ActionListener {
 
 	private PreferencesDialog preferencesDialog;
 	private FragileWindow fw;
+	public Boolean separators;
 
 	/**
 	 * The constructor for adding the listeners to each preference.
@@ -65,9 +66,11 @@ public class PreferencesListener implements ActionListener {
 	private void separatorsChanger() {
 		if (PreferencesDialog.separatorsCheckbox.isSelected()) {
 			fw.calculatorDisplay.separatorsOn(true);
+			separators = true;
 
 		} else if (!PreferencesDialog.separatorsCheckbox.isSelected()) {
 			fw.calculatorDisplay.separatorsOn(false);
+			separators = false;
 		}
 
 	}
