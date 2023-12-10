@@ -49,7 +49,7 @@ public class PreferencesListener implements ActionListener {
 			separatorsChanger();
 			
 			// Shortcuts
-			//applyShortcuts();
+			applyShortcuts();
 			
 			preferencesDialog.dispose();
 
@@ -75,17 +75,17 @@ public class PreferencesListener implements ActionListener {
 	/**
      * The private method that assigns behavior to the shortcut text fields.
      */
-//	private void applyShortcuts() {
-//		
-//		for (Map.Entry<String, JTextField> entry : preferencesDialog.getMenuShortcuts().entrySet())
-//		{
-//			String menuItemName = entry.getKey();
-//            JTextField textField = entry.getValue();
-//            String shortcut = textField.getText().trim();
-//            
-//            System.out.print(menuItemName + "\t" + shortcut);
-//		}
-//		
-//	}
+	private void applyShortcuts() {
+		
+		for (Map.Entry<String, JTextField> entry : preferencesDialog.getMenuShortcuts().entrySet())
+		{
+			String menuItemName = entry.getKey();
+            JTextField textField = entry.getValue();
+            String shortcut = textField.getText().trim();
+            
+            System.out.print(menuItemName + "\t" + shortcut);
+		}
+		
+	}
 
 }
