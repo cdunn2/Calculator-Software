@@ -230,29 +230,28 @@ public class FragileWindow extends JFrame
     for (String key : keys)
     {
       KeyStroke keyStroke = KeyStroke.getKeyStroke(key);
-      String key1;
       // For some reason I can't change input without it throwing a fit so this is what we got
       // The Display class also doesn't like it if I try to do alternate cases for these for some
       // reason
       if (key.equals(SHIFTEQUALS))
       {
-        key1 = PLUS;
+        key = PLUS;
       }
       if (key.equals(MINUSSTRING))
       {
-        key1 = MINUS;
+        key = MINUS;
       }
       if (key.equals(SHIFT8))
       {
-        key1 = TIMES;
+        key = TIMES;
       }
       if (key.equals(SLASHSTRING))
       {
-        key1 = DIVIDE;
+        key = DIVIDE;
       }
       if (key.equals(PERIOD))
       {
-        key1 = POSITION;
+        key = POSITION;
       }
       String input = key;
       this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, input);
