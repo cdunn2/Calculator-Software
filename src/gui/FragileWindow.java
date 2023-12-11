@@ -94,7 +94,6 @@ public static void main(String[] args) {
 	    containerPanel.add(scrollPane, BorderLayout.CENTER);
 	    containerPanel.add(arrowButton, BorderLayout.EAST);
 	    secondaryWindow.add(containerPanel);
-	    secondaryWindow.setVisible(true);
 	    arrowButton.addActionListener(new ActionListener() {
 	        Timer timer;
 	        public void actionPerformed(ActionEvent e) {

@@ -24,9 +24,12 @@ public class MenuListener implements ActionListener
 	
 	public static Boolean reduce = false;
 	public static Boolean proper = false;
+	PreferencesDialog preferencesDialog;
 	
 	public MenuListener(FragileWindow fw) {
 		this.fw = fw;
+		this.preferencesDialog = new PreferencesDialog(fw);
+		preferencesDialog.setVisible(false);
 	}
 	
 	/**
@@ -47,9 +50,13 @@ public class MenuListener implements ActionListener
 		} else if (e.getActionCommand().equals(STRINGS.getString("PRINT"))) {
 			DelegatingPrintable print = new DelegatingPrintable(fw.calcHistoryArea);
 			PrintController.print(print, null);
+		} else if (e.getActionCommand().equals(STRINGS.getString("SAVE"))) {
+			preferencesDialog.saveToFile();
+		} else if (e.getActionCommand().equals(STRINGS.getString("OPEN"))) {
+			preferencesDialog.loadFromFile();
 		} else if (e.getActionCommand().equals(STRINGS.getString("EDIT"))) {
 
-            new PreferencesDialog(fw);
+			preferencesDialog.setVisible(true);
 
 
 			//for preferences, use a dialog:

@@ -111,6 +111,8 @@ public class CreateMenu {
         aboutItem.addActionListener(listener);
         helpItem.addActionListener(listener);
         editItem.addActionListener(listener);
+        openItem.addActionListener(listener);
+        saveItem.addActionListener(listener);
 	}
 
 	/**
