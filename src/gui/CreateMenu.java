@@ -9,6 +9,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import static gui.FragileWindow.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
 
 
 /**
@@ -19,6 +20,7 @@ import java.awt.event.KeyEvent;
  */
 public class CreateMenu {
 	
+  private Map<String, JMenuItem> menuItems;
 	private JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
 	private JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
 	
@@ -61,6 +63,21 @@ public class CreateMenu {
 		JMenuItem openItem = new JMenuItem(STRINGS.getString("OPEN"));
 		JMenuItem saveItem = new JMenuItem(STRINGS.getString("SAVE"));
 		
+		menuItems = new HashMap<String, JMenuItem>();
+		menuItems.put(STRINGS.getString("PRINT"), printItem);
+		menuItems.put(STRINGS.getString("NEW"), newItem);
+		menuItems.put(STRINGS.getString("EXIT"), exitItem);
+		menuItems.put(STRINGS.getString("ABOUT"), aboutItem);
+		menuItems.put(STRINGS.getString("HELP"), helpItem);
+		menuItems.put(STRINGS.getString("PROPER"), properItem);
+		menuItems.put(STRINGS.getString("REDUCED"), reducedItem);
+		menuItems.put(STRINGS.getString("BAR"), barItem);
+		menuItems.put(STRINGS.getString("SLASH"), slashItem);
+		menuItems.put(STRINGS.getString("SOLIDUS"), solidusItem);
+		menuItems.put(STRINGS.getString("EDIT"), editItem);
+		menuItems.put(STRINGS.getString("OPEN"), openItem);
+		menuItems.put(STRINGS.getString("SAVE"), saveItem);
+	   
 		AddShortcut(printItem, KeyEvent.VK_P, KeyEvent.CTRL_DOWN_MASK);
 		AddShortcut(newItem, KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK);
 		AddShortcut(exitItem, KeyEvent.VK_ESCAPE, 0);
@@ -146,4 +163,11 @@ public class CreateMenu {
 		item.setAccelerator(KeyStroke.getKeyStroke(key, modifier));
 	}
 
+	/**
+	 * @return the menuItems
+	 */
+	public Map<String, JMenuItem> getMenuItems()
+	{
+	  return menuItems;
+	}
 }

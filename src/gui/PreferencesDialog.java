@@ -136,4 +136,3 @@ public class PreferencesDialog extends JDialog
 		return menuShortcuts;
 	}
 }
-
