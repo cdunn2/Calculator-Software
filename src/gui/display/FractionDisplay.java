@@ -18,6 +18,7 @@ public abstract class FractionDisplay extends JPanel
   private static final long serialVersionUID = 1L;
   private static final String SPACE = " ";
   private static final String FORMAT = "%,d";
+  private static final String FORMATNORMAL = "%d";
   private static final String COMMA = ",";
   protected JLabel whole;
   protected JLabel numerator;
@@ -257,19 +258,19 @@ public abstract class FractionDisplay extends JPanel
       {
         this.wholeNum = (this.wholeNum.replace(SPACE, "") + num);
         this.whole.setText(
-            String.format(FORMAT, Integer.parseInt(wholeNum)).replace(COMMA, this.separator));
+            String.format(FORMATNORMAL, Integer.parseInt(wholeNum)).replace(COMMA, this.separator));
       }
       else if (this.loc == FocusLocation.NUMERATOR)
       {
         this.numeratorNum = (this.numeratorNum.replace(SPACE, "") + num);
         this.numerator.setText(
-            String.format(FORMAT, Integer.parseInt(numeratorNum)).replace(COMMA, this.separator));
+            String.format(FORMATNORMAL, Integer.parseInt(numeratorNum)).replace(COMMA, this.separator));
       }
       else if (this.loc == FocusLocation.DENOMINATOR)
       {
         this.denominatorNum = (this.denominatorNum.replace(SPACE, "") + num);
         this.denominator.setText(
-            String.format(FORMAT, Integer.parseInt(denominatorNum)).replace(COMMA, this.separator));
+            String.format(FORMATNORMAL, Integer.parseInt(denominatorNum)).replace(COMMA, this.separator));
       }
     }
   }
