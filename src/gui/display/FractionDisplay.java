@@ -5,6 +5,8 @@ import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import gui.PreferencesListener;
 import utilities.Fractions;
 
 /**
@@ -157,18 +159,36 @@ public abstract class FractionDisplay extends JPanel {
    * @param num The digit to append.
    */
   public void addDigit(String num) {
-    if (this.loc == FocusLocation.WHOLE) {
-      this.wholeNum = (this.wholeNum.replace(" ", "") + num);
-      this.whole.setText(String.format("%,d", Integer.parseInt(wholeNum))
-          .replace(",", this.separator));
-    } else if (this.loc == FocusLocation.NUMERATOR) {
-      this.numeratorNum = (this.numeratorNum.replace(" ", "") + num);
-      this.numerator.setText(String.format("%,d", Integer.parseInt(numeratorNum))
-          .replace(",", this.separator));
-    } else if (this.loc == FocusLocation.DENOMINATOR) {
-      this.denominatorNum = (this.denominatorNum.replace(" ", "") + num);
-      this.denominator.setText(String.format("%,d", Integer.parseInt(denominatorNum))
-          .replace(",", this.separator));
+    if (PreferencesListener.separators)
+    {
+    	if (this.loc == FocusLocation.WHOLE) {
+    		this.wholeNum = (this.wholeNum.replace(" ", "") + num);
+    	    this.whole.setText(String.format("%,d", Integer.parseInt(wholeNum))
+    	    		.replace(",", this.separator));
+    	} else if (this.loc == FocusLocation.NUMERATOR) {
+    	    this.numeratorNum = (this.numeratorNum.replace(" ", "") + num);
+    	    this.numerator.setText(String.format("%,d", Integer.parseInt(numeratorNum))
+    	        .replace(",", this.separator));
+    	} else if (this.loc == FocusLocation.DENOMINATOR) {
+    	    this.denominatorNum = (this.denominatorNum.replace(" ", "") + num);
+    	    this.denominator.setText(String.format("%,d", Integer.parseInt(denominatorNum))
+    	        .replace(",", this.separator));
+    	}
+    } else
+    {
+    	if (this.loc == FocusLocation.WHOLE) {
+    	    this.wholeNum = (this.wholeNum.replace(" ", "") + num);
+    	    this.whole.setText(String.format("%d", Integer.parseInt(wholeNum))
+    	        .replace(",", this.separator));
+    	} else if (this.loc == FocusLocation.NUMERATOR) {
+    	    this.numeratorNum = (this.numeratorNum.replace(" ", "") + num);
+    	    this.numerator.setText(String.format("%d", Integer.parseInt(numeratorNum))
+    	         .replace(",", this.separator));
+    	} else if (this.loc == FocusLocation.DENOMINATOR) {
+    	    this.denominatorNum = (this.denominatorNum.replace(" ", "") + num);
+    	    this.denominator.setText(String.format("%d", Integer.parseInt(denominatorNum))
+    	        .replace(",", this.separator));
+    	}
     }
   }
 

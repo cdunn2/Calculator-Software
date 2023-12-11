@@ -16,7 +16,7 @@ import javax.swing.*;
 public class PreferencesListener implements ActionListener {
   private PreferencesDialog preferencesDialog;
   private FragileWindow fw;
-  public Boolean separators;
+  public static Boolean separators = true;
   private Map<String, JTextField> menuShortcuts;
   /**
    * The constructor for adding the listeners to each preference.
@@ -53,11 +53,11 @@ public class PreferencesListener implements ActionListener {
    */
   private void separatorsChanger() {
     if (PreferencesDialog.separatorsCheckbox.isSelected()) {
-      fw.calculatorDisplay.separatorsOn(true);
-      separators = true;
+    	separators = true;
+    	fw.calculatorDisplay.separatorsOn(true);
     } else if (!PreferencesDialog.separatorsCheckbox.isSelected()) {
-      fw.calculatorDisplay.separatorsOn(false);
-      separators = false;
+    	separators = false;
+    	fw.calculatorDisplay.separatorsOn(false);
     }
   }
   /**
