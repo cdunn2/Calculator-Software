@@ -75,22 +75,22 @@ public class MenuListener implements ActionListener
 				er.printStackTrace();
 			}
 		}
-		if (CreateMenu.properItem.isSelected()) {
+		if (fw.properItem.isSelected()) {
 			proper = true;
-		} else if (!CreateMenu.properItem.isSelected()){
+		} else if (!fw.properItem.isSelected()){
 			proper = false;
 		}
-		if (CreateMenu.reducedItem.isSelected()) {
+		if (fw.reducedItem.isSelected()) {
 			reduce = true;
-		} else if (!CreateMenu.reducedItem.isSelected()) {
+		} else if (!fw.reducedItem.isSelected()) {
 			reduce = false;
 		}
 		
-		if (CreateMenu.barItem.isSelected()) {
+		if (fw.barItem.isSelected()) {
 			fw.calculatorDisplay.changeStyle(TypesettingStyles.BAR);
-		} else if (CreateMenu.slashItem.isSelected()) {
+		} else if (fw.slashItem.isSelected()) {
 			fw.calculatorDisplay.changeStyle(TypesettingStyles.SLASH);
-		} else if (CreateMenu.solidusItem.isSelected()) {
+		} else if (fw.solidusItem.isSelected()) {
 			fw.calculatorDisplay.changeStyle(TypesettingStyles.SOLIDUS);
 		}
 		

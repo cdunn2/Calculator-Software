@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,11 @@ public class FragileWindow extends JFrame {
 	public JPanel calcHistoryArea = new JPanel();
 	public Display calculatorDisplay;
 	public GridBagConstraints gbc;
+	public JCheckBoxMenuItem properItem;
+	public JCheckBoxMenuItem reducedItem;
+	public JRadioButtonMenuItem barItem;
+	public JRadioButtonMenuItem slashItem;
+	public JRadioButtonMenuItem solidusItem;
 	
 
 
@@ -37,7 +43,12 @@ public static void main(String[] args) {
 		this.setLayout(new BorderLayout());
 		//frame.setResizable(false);
 
-		new CreateMenu(this);
+		CreateMenu menu = new CreateMenu(this);
+		this.properItem = menu.getProperItem();
+		this.reducedItem = menu.getReducedItem();
+		this.barItem = menu.getBarItem();
+		this.slashItem = menu.getSlashItem();
+		this.solidusItem = menu.getSolidusItem();
 
 		// Fragile logo
 		ImageIcon logoIcon = new ImageIcon(FragileWindow.class.getResource("/icons/Fragile_Logo.png"));
@@ -199,7 +210,7 @@ public static void main(String[] args) {
 	
 	public static void openNewWindow() {
         EventQueue.invokeLater(() -> {
-            new FragileWindow().setVisible(true);
+            new FragileWindow();
         });
     }
 

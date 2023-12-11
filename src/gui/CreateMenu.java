@@ -19,12 +19,12 @@ import java.awt.event.KeyEvent;
  */
 public class CreateMenu {
 	
-	protected static JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
-	protected static JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
+	private JCheckBoxMenuItem properItem = new JCheckBoxMenuItem(STRINGS.getString("PROPER"));
+	private JCheckBoxMenuItem reducedItem = new JCheckBoxMenuItem(STRINGS.getString("REDUCED"));
 	
-	protected static JRadioButtonMenuItem barItem = new JRadioButtonMenuItem(STRINGS.getString("BAR"));
-	protected static JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"), true);
-	protected static JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem(STRINGS.getString("SOLIDUS"));
+	private JRadioButtonMenuItem barItem = new JRadioButtonMenuItem(STRINGS.getString("BAR"));
+	private JRadioButtonMenuItem slashItem = new JRadioButtonMenuItem(STRINGS.getString("SLASH"), true);
+	private JRadioButtonMenuItem solidusItem = new JRadioButtonMenuItem(STRINGS.getString("SOLIDUS"));
 	
 	private FragileWindow fw;
 	
@@ -115,6 +115,25 @@ public class CreateMenu {
         saveItem.addActionListener(listener);
 	}
 
+	public JCheckBoxMenuItem getReducedItem() {
+		return reducedItem;
+	}
+	
+	public JCheckBoxMenuItem getProperItem() {
+		return properItem;
+	}
+	
+	public JRadioButtonMenuItem getBarItem() {
+		return barItem;
+	}
+	
+	public JRadioButtonMenuItem getSlashItem() {
+		return slashItem;
+	}
+	
+	public JRadioButtonMenuItem getSolidusItem() {
+		return solidusItem;
+	}
 	/**
      * This is the private method for adding the shortcut for each menu item
      *
