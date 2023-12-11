@@ -75,6 +75,12 @@ public class PreferencesListener implements ActionListener {
     }
   }
   
+  /**
+   * The private method that assigns behavior to each individual item.
+   * 
+   * @param menuItemName the menu item
+   * @param shortcut the shortcut for the item
+   */
   private void addShortcut(String menuItemName, String shortcut) {
     JMenuItem menuItem = fw.getMenu().getMenuItems().get(menuItemName);
     if (menuItem != null) {

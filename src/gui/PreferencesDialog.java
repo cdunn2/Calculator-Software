@@ -193,6 +193,11 @@ public class PreferencesDialog extends JDialog
     }
   }
   
+  /**
+   * The getter for the preferences.
+   *
+   * @return the preferences
+   */
   public PreferencesListener getPreferencesListener() {
 	  return listener;
   }
