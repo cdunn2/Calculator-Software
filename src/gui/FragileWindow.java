@@ -110,14 +110,14 @@ public class FragileWindow extends JFrame
     {
       public void componentMoved(final ComponentEvent e)
       {
-        secondaryWindow.setLocation(FragileWindow.this.getX() + FragileWindow.this.getWidth() - 7,
+        secondaryWindow.setLocation(FragileWindow.this.getX() + FragileWindow.this.getWidth(),
             FragileWindow.this.getY() + 100);
       }
 
       public void componentResized(final ComponentEvent e)
       {
         secondaryWindow.setSize(secondaryWindow.getWidth(), FragileWindow.this.getHeight() - 170);
-        secondaryWindow.setLocation(FragileWindow.this.getX() + FragileWindow.this.getWidth() - 7,
+        secondaryWindow.setLocation(FragileWindow.this.getX() + FragileWindow.this.getWidth(),
             FragileWindow.this.getY() + 100);
       }
     });
