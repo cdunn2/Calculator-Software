@@ -69,6 +69,11 @@ public class SlashFractionDisplay extends FractionDisplay
         this.addGap = false;
       }
     }
+    if (this.wholeNum.equals(SPACE) && this.numeratorNum.equals(SPACE)
+        && this.denominatorNum.equals(SPACE) && this.whole.getBorder() == null) 
+    {
+      this.slash.setText("");
+    }
     draw();
 
   }

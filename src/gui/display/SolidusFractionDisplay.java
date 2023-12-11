@@ -70,6 +70,11 @@ public class SolidusFractionDisplay extends FractionDisplay
         this.slash.setText("");
       }
     }
+    if (this.wholeNum.equals(SPACE) && this.numeratorNum.equals(SPACE)
+        && this.denominatorNum.equals(SPACE) && this.whole.getBorder() == null)
+    {
+      this.slash.setText("");
+    }
     draw();
   }
 
