@@ -26,7 +26,7 @@ public class FragileWindow extends JFrame {
 	public JRadioButtonMenuItem barItem;
 	public JRadioButtonMenuItem slashItem;
 	public JRadioButtonMenuItem solidusItem;
-	public CreateMenu menu = new CreateMenu(this);
+	private CreateMenu menu;
 
 
 public static void main(String[] args) {
@@ -43,6 +43,7 @@ public static void main(String[] args) {
 		this.setLayout(new BorderLayout());
 		//frame.setResizable(false);
 
+		this.menu = new CreateMenu(this);
 		this.properItem = menu.getProperItem();
 		this.reducedItem = menu.getReducedItem();
 		this.barItem = menu.getBarItem();
@@ -223,4 +224,13 @@ public static void main(String[] args) {
 	    calcHistoryArea.revalidate();
 	    calcHistoryArea.repaint();
 	}
+
+  /**
+   * @return the menu
+   */
+  public CreateMenu getMenu()
+  {
+    return menu;
+  }
+
 }

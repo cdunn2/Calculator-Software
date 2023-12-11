@@ -6,9 +6,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
 import static gui.FragileWindow.*;
-import java.awt.event.KeyEvent;
 import java.util.*;
 
 
@@ -77,20 +75,6 @@ public class CreateMenu {
 		menuItems.put(STRINGS.getString("EDIT"), editItem);
 		menuItems.put(STRINGS.getString("OPEN"), openItem);
 		menuItems.put(STRINGS.getString("SAVE"), saveItem);
-	   
-		AddShortcut(printItem, KeyEvent.VK_P, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(newItem, KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(exitItem, KeyEvent.VK_ESCAPE, 0);
-		AddShortcut(aboutItem, KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(helpItem, KeyEvent.VK_H, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(properItem, KeyEvent.VK_P, KeyEvent.SHIFT_DOWN_MASK);
-		AddShortcut(reducedItem, KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(barItem, KeyEvent.VK_B, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(slashItem, KeyEvent.VK_SLASH, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(solidusItem, KeyEvent.VK_SLASH, KeyEvent.SHIFT_DOWN_MASK);
-		AddShortcut(editItem, KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(openItem, KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
-		AddShortcut(saveItem, KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(barItem);
@@ -119,17 +103,17 @@ public class CreateMenu {
 
 		printItem.addActionListener(listener);
 		newItem.addActionListener(listener);
-        exitItem.addActionListener(listener);
-        properItem.addActionListener(listener);
-        reducedItem.addActionListener(listener);
-        barItem.addActionListener(listener);
-        slashItem.addActionListener(listener);
-        solidusItem.addActionListener(listener);
-        aboutItem.addActionListener(listener);
-        helpItem.addActionListener(listener);
-        editItem.addActionListener(listener);
-        openItem.addActionListener(listener);
-        saveItem.addActionListener(listener);
+		exitItem.addActionListener(listener);
+		properItem.addActionListener(listener);
+		reducedItem.addActionListener(listener);
+		barItem.addActionListener(listener);
+		slashItem.addActionListener(listener);
+		solidusItem.addActionListener(listener);
+		aboutItem.addActionListener(listener);
+		helpItem.addActionListener(listener);
+		editItem.addActionListener(listener);
+		openItem.addActionListener(listener);
+		saveItem.addActionListener(listener);
 	}
 
 	public JCheckBoxMenuItem getReducedItem() {
@@ -150,17 +134,6 @@ public class CreateMenu {
 	
 	public JRadioButtonMenuItem getSolidusItem() {
 		return solidusItem;
-	}
-	/**
-     * This is the private method for adding the shortcut for each menu item
-     *
-     * @param item    The menu item that the shortcut is being added to
-     * @param key    The key to be pressed for the shortcut
-     * @param modifier	The modifier shortcut key
-     */
-	private static void AddShortcut(JMenuItem item, int key, int modifier)
-	{
-		item.setAccelerator(KeyStroke.getKeyStroke(key, modifier));
 	}
 
 	/**

@@ -17,7 +17,7 @@ public class PreferencesListener implements ActionListener {
   private PreferencesDialog preferencesDialog;
   private FragileWindow fw;
   public static Boolean separators = true;
-  private Map<String, JTextField> menuShortcuts;
+  
   /**
    * The constructor for adding the listeners to each preference.
    *
@@ -28,8 +28,8 @@ public class PreferencesListener implements ActionListener {
   {
     this.preferencesDialog = preferencesDialog;
     this.fw = fw;
-    this.menuShortcuts = preferencesDialog.getMenuShortcuts();
   }
+  
   /**
    * The constructor for adding the listeners to each preference.
    *
@@ -48,6 +48,7 @@ public class PreferencesListener implements ActionListener {
       preferencesDialog.dispose();
     }
   }
+  
   /**
    * The private method that changes the thousands separators.
    */
@@ -60,6 +61,7 @@ public class PreferencesListener implements ActionListener {
     	fw.calculatorDisplay.separatorsOn(false);
     }
   }
+  
   /**
    * The private method that assigns behavior to the shortcut text fields.
    */
@@ -72,13 +74,12 @@ public class PreferencesListener implements ActionListener {
       addShortcut(menuItemName, shortcut);
     }
   }
-  private void addShortcut(String menuItemName, String shortcut)
-  {
-    JMenuItem menuItem = fw.menu.getMenuItems().get(menuItemName);
-    if (menuItem != null)
-    {
-      menuItem.setAccelerator(KeyStroke.getKeyStroke(shortcut));
+  
+  private void addShortcut(String menuItemName, String shortcut) {
+    JMenuItem menuItem = fw.getMenu().getMenuItems().get(menuItemName);
+    if (menuItem != null) {
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(shortcut));
     }
+}
 
-  }
 }

@@ -57,13 +57,14 @@ public class PreferencesDialog extends JDialog
 	   		STRINGS.getString("EDIT"), STRINGS.getString("OPEN"),
 	   		STRINGS.getString("SAVE")
 	   		};
-       listener = new PreferencesListener(this, this.fw);
+       listener = new PreferencesListener(this, fw);
 	   int index = 0;
 	   for (String menuItemName : shortcutNames) {
-	       JLabel label = new JLabel(menuItemName + STRINGS.getString("SHORTCUT"));
+	       JLabel label = new JLabel(menuItemName + " " + STRINGS.getString("SHORTCUT"));
 	       JTextField textField = new JTextField();
 	       shortcutsPanel.add(label);
 	       shortcutsPanel.add(textField);
+	       menuShortcuts.put(menuItemName, textField);
 	       textFieldList[index] = textField;
 	       index ++;
 	   }
