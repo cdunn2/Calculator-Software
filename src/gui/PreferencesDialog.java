@@ -36,7 +36,6 @@ public class PreferencesDialog extends JDialog
   private static JCheckBox separatorsCheckbox = new JCheckBox(STRINGS.getString("ENABLED"), true);
   private static final long serialVersionUID = 1L;
   private PreferencesListener listener;
-  private FragileWindow fw;
   private JPanel shortcutsPanel = new JPanel();
   private Map<String, JTextField> menuShortcuts = new HashMap<String, JTextField>();
   private JTextField[] textFieldList;
@@ -50,7 +49,6 @@ public class PreferencesDialog extends JDialog
   public PreferencesDialog(final FragileWindow fw)
   {
     super((JFrame) null, STRINGS.getString("PREFERENCES"), true);
-    this.fw = fw;
     this.textFieldList = new JTextField[13];
     setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
     setSize(400, 300);
@@ -187,11 +185,16 @@ public class PreferencesDialog extends JDialog
       String separatorsValue = properties.getProperty(SEPARATORS, FALSE);
       separatorsCheckbox.setSelected(separatorsValue.equals(TRUE));
 
+      
     }
     catch (IOException e)
     {
       e.printStackTrace();
     }
+  }
+  
+  public PreferencesListener getPreferencesListener() {
+	  return listener;
   }
 
   /**

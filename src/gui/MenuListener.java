@@ -71,6 +71,7 @@ public class MenuListener implements ActionListener
     else if (e.getActionCommand().equals(STRINGS.getString("OPEN")))
     {
       preferencesDialog.loadFromFile();
+      preferencesDialog.getPreferencesListener().applyShortcuts();
     }
     else if (e.getActionCommand().equals(STRINGS.getString("EDIT")))
     {

@@ -65,7 +65,7 @@ public class PreferencesListener implements ActionListener {
   /**
    * The private method that assigns behavior to the shortcut text fields.
    */
-  private void applyShortcuts() {
+  public void applyShortcuts() {
     for (Map.Entry<String, JTextField> entry : preferencesDialog.getMenuShortcuts().entrySet())
     {
       String menuItemName = entry.getKey();
