@@ -197,7 +197,6 @@ public class Display extends JPanel
         exponentPanel.add(new JLabel(SPACE));
         exponentPanel.add(new JLabel(SPACE));
         this.exponentMode = false;
-        this.currOperation = "";
         this.lowerOperand.setFocusLocation(FocusLocation.WHOLE);
         setEmptyLowerOperandDisplay(this.style);
         clear(lowerPanel);
