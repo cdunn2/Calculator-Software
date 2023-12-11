@@ -196,6 +196,7 @@ public class Display extends JPanel
         exponent.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         lowerOperand.setFocusLocation(null);
         this.exponentMode = true;
+        //this.equationCompleted = true;
         this.currOperation = button;
       }
       else if (button.equals("Inv"))
@@ -238,6 +239,12 @@ public class Display extends JPanel
 
   private void manageBinaryOperationButtons(final String button)
   {
+    if(this.equationCompleted) {
+      upperPanel.add(new JLabel(button));
+      this.currOperation = button;
+      this.equationCompleted = false;
+      return;
+    }
     clear(upperPanel);
     if (currIsNegative)
     {
