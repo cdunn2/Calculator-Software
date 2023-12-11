@@ -122,6 +122,7 @@ public class Display extends JPanel
     lowerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     exponentPanel.setLayout(new BoxLayout(exponentPanel, BoxLayout.Y_AXIS));
     exponent.setBorder(null);
+    exponent.setText(SPACE);
     clear(exponentPanel);
     exponentPanel.add(exponent);
     exponentPanel.add(new JLabel(SPACE));
@@ -186,9 +187,23 @@ public class Display extends JPanel
       }
       else if (button.equals("C"))
       {
+        exponentPanel.setLayout(new BoxLayout(exponentPanel, BoxLayout.Y_AXIS));
+        exponent.setBorder(null);
+        exponent.setText(SPACE);
+        clear(exponentPanel);
+        exponentPanel.add(exponent);
+        exponentPanel.add(new JLabel(SPACE));
+        exponentPanel.add(new JLabel(SPACE));
+        exponentPanel.add(new JLabel(SPACE));
+        exponentPanel.add(new JLabel(SPACE));
+        this.exponentMode = false;
+        this.currOperation = "";
+        this.lowerOperand.setFocusLocation(FocusLocation.WHOLE);
         setEmptyLowerOperandDisplay(this.style);
         clear(lowerPanel);
+        lowerPanel.add(signPanel);
         lowerPanel.add((Component) this.lowerOperand);
+        lowerPanel.add(exponentPanel);
       }
       else if (button.equals(EXPONENT))
       {
@@ -196,7 +211,7 @@ public class Display extends JPanel
         exponent.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         lowerOperand.setFocusLocation(null);
         this.exponentMode = true;
-        //this.equationCompleted = true;
+        // this.equationCompleted = true;
         this.currOperation = button;
       }
       else if (button.equals("Inv"))
@@ -239,7 +254,8 @@ public class Display extends JPanel
 
   private void manageBinaryOperationButtons(final String button)
   {
-    if(this.equationCompleted) {
+    if (this.equationCompleted)
+    {
       upperPanel.add(new JLabel(button));
       this.currOperation = button;
       this.equationCompleted = false;
