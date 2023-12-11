@@ -55,7 +55,7 @@ public class BarFractionDisplay extends FractionDisplay
     this.numerator = new JLabel(numeratorNum);
     this.denominatorNum = denominator;
     this.denominator = new JLabel(denominatorNum);
-    if (PreferencesDialog.separatorsCheckbox.isSelected())
+    if (PreferencesDialog.getSeparatorsCheckbox().isSelected())
     {
       super.addSeparators();
     }

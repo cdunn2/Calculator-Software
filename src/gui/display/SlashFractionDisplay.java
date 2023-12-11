@@ -52,7 +52,7 @@ public class SlashFractionDisplay extends FractionDisplay
     this.denominatorNum = denominator;
     this.denominator = new JLabel(denominatorNum);
     this.loc = loc;
-    if (PreferencesDialog.separatorsCheckbox.isSelected())
+    if (PreferencesDialog.getSeparatorsCheckbox().isSelected())
     {
       super.addSeparators();
     }

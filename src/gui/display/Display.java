@@ -402,11 +402,11 @@ public class Display extends JPanel
     {
       upperPanel.add(new JLabel(MINUS));
     }
-    if (MenuListener.reduce)
+    if (MenuListener.getReduce())
     {
       result = Calculations.reduce(result);
     }
-    if (MenuListener.proper)
+    if (MenuListener.getProper())
     {
       result = Calculations.proper(result);
     }
@@ -425,9 +425,9 @@ public class Display extends JPanel
         result.getDenominator().toString().replace(SPACE, ""), null), gbc);
 
     fw.addHistoryEntry(history);
-    fw.calcHistoryArea.add(history);
-    fw.calcHistoryArea.revalidate();
-    fw.calcHistoryArea.repaint();
+    fw.getHistoryArea().add(history);
+    fw.getHistoryArea().revalidate();
+    fw.getHistoryArea().repaint();
     // clear(history);
     gridY++;
     this.equationCompleted = true;

@@ -53,12 +53,12 @@ public class PreferencesListener implements ActionListener {
    * The private method that changes the thousands separators.
    */
   private void separatorsChanger() {
-    if (PreferencesDialog.separatorsCheckbox.isSelected()) {
+    if (PreferencesDialog.getSeparatorsCheckbox().isSelected()) {
     	separators = true;
-    	fw.calculatorDisplay.separatorsOn(true);
-    } else if (!PreferencesDialog.separatorsCheckbox.isSelected()) {
+    	fw.getCalculatorDisplay().separatorsOn(true);
+    } else if (!PreferencesDialog.getSeparatorsCheckbox().isSelected()) {
     	separators = false;
-    	fw.calculatorDisplay.separatorsOn(false);
+    	fw.getCalculatorDisplay().separatorsOn(false);
     }
   }
   
