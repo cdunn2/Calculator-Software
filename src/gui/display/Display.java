@@ -20,9 +20,24 @@ import utilities.Fractions;
 /**
  * Creates and maintains the display in the calculator.
  */
-public class Display extends JPanel {
+public class Display extends JPanel
+{
 
+  public static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
   private static final long serialVersionUID = 1L;
+  private static int gridY = 0;
+  private static final String SPACE = " ";
+  private static final String IS = " is ";
+  private static final String PLUS = "+";
+  private static final String TIMES = "x";
+  private static final String DIVIDE = "\u00F7";
+  private static final String MINUS = "-";
+  private static final String MEDIANT = "\u21F9";
+  private static final String GREATER = ">";
+  private static final String LESSER = "<";
+  private static final String EQUALTO = "≝";
+  private static final String EQUALS = "=";
+  private static final String EXPONENT = "x\u207F";
   private TypesettingStyles style;
   private FocusLocation loc = FocusLocation.WHOLE;
   private boolean currIsNegative = false;
@@ -35,49 +50,73 @@ public class Display extends JPanel {
   private FractionDisplay upperOperand;
   private JPanel exponentPanel = new JPanel();
   private JPanel signPanel = new JPanel();
-  private JLabel exponent = new JLabel(" ");
+  private JLabel exponent = new JLabel(SPACE);
   private JPanel history = new JPanel();
-  private static int gridY = 0;
+
   private GridBagLayout grid = new GridBagLayout();
   private GridBagConstraints gbc = new GridBagConstraints();
   private boolean equationCompleted = false;
   private JFrame dialogFrame = new JFrame();
   private FragileWindow fw;
-  static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
 
   /**
    * Creates a new Display to be added to the calculator.
    *
-   * @param style The fraction display style to use for the display.
-   * @param thousandsSeparators True if separators are on, false otherwise.
+   * @param style
+   *          The fraction display style to use for the display.
+   * @param thousandsSeparators
+   *          True if separators are on, false otherwise.
+   * @param fw
+   *          The window this display is in.
    */
-  public Display(TypesettingStyles style, boolean thousandsSeparators, FragileWindow fw) {
+  public Display(final TypesettingStyles style, final boolean thousandsSeparators,
+      final FragileWindow fw)
+  {
     super();
     this.fw = fw;
     this.style = style;
     setup();
   }
 
-  public TypesettingStyles getStyle() {
+  /**
+   * Returns the style of this display.
+   *
+   * @return TypesettingStyles The style of the display.
+   */
+  public TypesettingStyles getStyle()
+  {
     return this.style;
   }
 
-  public void setStyle(TypesettingStyles style) {
+  /**
+   * Sets the style of the display.
+   *
+   * @param style
+   *          The style
+   */
+  public void setStyle(final TypesettingStyles style)
+  {
     this.style = style;
   }
 
-  private void setup() {
+  private void setup()
+  {
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     history.setLayout(this.grid);
     clear(upperPanel);
     clear(lowerPanel);
     this.currOperation = "";
     upperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-    if (style == TypesettingStyles.BAR) {
+    if (style == TypesettingStyles.BAR)
+    {
       this.upperOperand = new BarFractionDisplay();
-    } else if (style == TypesettingStyles.SLASH) {
+    }
+    else if (style == TypesettingStyles.SLASH)
+    {
       this.upperOperand = new SlashFractionDisplay();
-    } else if (style == TypesettingStyles.SOLIDUS) {
+    }
+    else if (style == TypesettingStyles.SOLIDUS)
+    {
       this.upperOperand = new SolidusFractionDisplay();
     }
     lowerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -85,10 +124,10 @@ public class Display extends JPanel {
     exponent.setBorder(null);
     clear(exponentPanel);
     exponentPanel.add(exponent);
-    exponentPanel.add(new JLabel(" "));
-    exponentPanel.add(new JLabel(" "));
-    exponentPanel.add(new JLabel(" "));
-    exponentPanel.add(new JLabel(" "));
+    exponentPanel.add(new JLabel(SPACE));
+    exponentPanel.add(new JLabel(SPACE));
+    exponentPanel.add(new JLabel(SPACE));
+    exponentPanel.add(new JLabel(SPACE));
     setEmptyLowerOperandDisplay(this.style);
     lowerPanel.add(signPanel);
     lowerPanel.add((Component) this.lowerOperand);
@@ -98,51 +137,77 @@ public class Display extends JPanel {
     setBorder(BorderFactory.createLineBorder(Color.black));
     updateDisplay();
   }
-  
+
   /**
    * Reads what button the user pressed, and updates the display accordingly.
    *
-   * @param button The name of the button the user pressed.
+   * @param button
+   *          The name of the button the user pressed.
    */
-  public void manageButtons(String button) {
-    try {
+  public void manageButtons(final String button)
+  {
+    try
+    {
       Integer.parseInt(button);
       manageNumberButtons(button);
-    } catch (NumberFormatException e) {
-      if (button == "+" || button == "x" || button == "\u00F7" || button == "-"
-          || button == "\u21F9" || button == ">" || button == "<" || button == "≝") {
+    }
+    catch (NumberFormatException e)
+    {
+      if (button.equals(PLUS) || button.equals(TIMES) || button.equals(DIVIDE)
+          || button.equals(MINUS) || button.equals(MEDIANT) || button.equals(GREATER)
+          || button.equals(LESSER) || button.equals(EQUALTO))
+      {
         manageBinaryOperationButtons(button);
-      } else if (button == "Pos") {
+      }
+      else if (button.equals("Pos"))
+      {
         updateLoc(this.loc);
-      } else if (button == "\u2190") {
+      }
+      else if (button.equals("\u2190"))
+      {
         backspace();
-      } else if (button == "=" || button == "ENTER") {
-        if (!this.currOperation.equals("")) {
+      }
+      else if (button.equals(EQUALS) || button.equals("ENTER"))
+      {
+        if (!this.currOperation.equals(""))
+        {
           calculate();
           this.exponentMode = false;
         }
-      } else if (button == "\u00B1") {
+      }
+      else if (button.equals("\u00B1"))
+      {
         switchSign();
-      } else if (button == "R") {
+      }
+      else if (button.equals("R"))
+      {
         this.exponentMode = false;
         setup();
-      } else if (button == "C") {
+      }
+      else if (button.equals("C"))
+      {
         setEmptyLowerOperandDisplay(this.style);
         clear(lowerPanel);
         lowerPanel.add((Component) this.lowerOperand);
-      } else if (button == "x\u207F") {
+      }
+      else if (button.equals(EXPONENT))
+      {
         clear(upperPanel);
         exponent.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         lowerOperand.setFocusLocation(null);
         this.exponentMode = true;
         this.currOperation = button;
-      } else if (button == "Inv") {
+      }
+      else if (button.equals("Inv"))
+      {
         clear(upperPanel);
         Fractions result = Calculations.inverse(lowerOperand.getFraction());
         setUpperOperandDisplay(this.style, result.getWholeNumber().toString(),
             result.getNumerator().toString(), result.getDenominator().toString());
         upperPanel.add((Component) upperOperand);
-      } else if (button == "\u2193") {
+      }
+      else if (button.equals("\u2193"))
+      {
         clear(lowerPanel);
         Fractions result = Calculations.reduce(lowerOperand.getFraction());
         setLowerOperandDisplay(this.style, lowerOperand.getWhole(),
@@ -154,26 +219,35 @@ public class Display extends JPanel {
     updateDisplay();
   }
 
-  private void manageNumberButtons(String button) {
-    if (this.equationCompleted) {
+  private void manageNumberButtons(final String button)
+  {
+    if (this.equationCompleted)
+    {
       setup();
       this.equationCompleted = false;
     }
-    if (this.exponentMode) {
-      this.exponent.setText(this.exponent.getText().replace(" ", "") + button);
-    } else {
+    if (this.exponentMode)
+    {
+      this.exponent.setText(this.exponent.getText().replace(SPACE, "") + button);
+    }
+    else
+    {
       this.lowerOperand.addDigit(button);
     }
   }
 
-  private void manageBinaryOperationButtons(String button) {
+  private void manageBinaryOperationButtons(final String button)
+  {
     clear(upperPanel);
-    if (currIsNegative) {
-      upperPanel.add(new JLabel("-"));
+    if (currIsNegative)
+    {
+      upperPanel.add(new JLabel(MINUS));
       otherIsNegative = true;
     }
-    if (this.currOperation.equals("")) {
-      if (!this.lowerOperand.isComplete()) {
+    if (this.currOperation.equals(""))
+    {
+      if (!this.lowerOperand.isComplete())
+      {
         JOptionPane.showMessageDialog(dialogFrame, "Please enter a valid fraction.", "Error",
             JOptionPane.ERROR_MESSAGE);
         return;
@@ -181,7 +255,9 @@ public class Display extends JPanel {
       setUpperOperandDisplay(this.style, this.lowerOperand.getWhole(),
           this.lowerOperand.getNumerator(), this.lowerOperand.getDenominator());
       upperPanel.add(this.upperOperand);
-    } else {
+    }
+    else
+    {
       upperPanel.add(this.upperOperand);
     }
     upperPanel.add(new JLabel(button));
@@ -195,88 +271,119 @@ public class Display extends JPanel {
     lowerPanel.add((Component) this.lowerOperand);
   }
 
-  private void updateLoc(FocusLocation loc) {
-    this.lowerOperand.updateLoc(loc);
+  private void updateLoc(final FocusLocation loc1)
+  {
+    this.lowerOperand.updateLoc(loc1);
   }
 
-  private void backspace() {
-    if (this.exponentMode) {
-      if (!this.exponent.getText().equals(" "))  {
+  private void backspace()
+  {
+    if (this.exponentMode)
+    {
+      if (!this.exponent.getText().equals(SPACE))
+      {
         this.exponent
             .setText(this.exponent.getText().substring(0, this.exponent.getText().length() - 1));
-        if (this.exponent.getText().length() == 0) {
-          this.exponent.setText(" ");
+        if (this.exponent.getText().length() == 0)
+        {
+          this.exponent.setText(SPACE);
         }
       }
     }
     this.lowerOperand.removeDigit();
   }
 
-  private void switchSign() {
-    if (this.currIsNegative == false) {
+  private void switchSign()
+  {
+    if (!this.currIsNegative)
+    {
       this.signPanel.removeAll();
-      this.signPanel.add(new JLabel("-"));
+      this.signPanel.add(new JLabel(MINUS));
       this.currIsNegative = true;
-    } else {
+    }
+    else
+    {
       this.signPanel.removeAll();
       this.currIsNegative = false;
     }
   }
 
-  private void calculate() {
-    if (!this.lowerOperand.isComplete()) {
+  private void calculate()
+  {
+    if (!this.lowerOperand.isComplete())
+    {
       JOptionPane.showMessageDialog(dialogFrame, STRINGS.getString("COMPLETE"),
-    		  STRINGS.getString("ERROR"),
-          JOptionPane.ERROR_MESSAGE);
+          STRINGS.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
       return;
     }
     Fractions operand1 = null;
     Fractions result = null;
     this.gbc.gridy = gridY;
-    this.history.add(new SlashFractionDisplay(this.upperOperand.getWhole().replace(" ", ""),
-        this.upperOperand.getNumerator().replace(" ", ""),
-        this.upperOperand.getDenominator().replace(" ", ""), null), gbc);
+    this.history.add(new SlashFractionDisplay(this.upperOperand.getWhole().replace(SPACE, ""),
+        this.upperOperand.getNumerator().replace(SPACE, ""),
+        this.upperOperand.getDenominator().replace(SPACE, ""), null), gbc);
     this.history.add(new JLabel(this.currOperation), gbc);
-    this.history.add(new SlashFractionDisplay(this.lowerOperand.getWhole().replace(" ", ""),
-        this.lowerOperand.getNumerator().replace(" ", ""),
-        this.lowerOperand.getDenominator().replace(" ", ""), null), gbc);
-    if (!this.exponentMode) {
+    this.history.add(new SlashFractionDisplay(this.lowerOperand.getWhole().replace(SPACE, ""),
+        this.lowerOperand.getNumerator().replace(SPACE, ""),
+        this.lowerOperand.getDenominator().replace(SPACE, ""), null), gbc);
+    if (!this.exponentMode)
+    {
       operand1 = this.upperOperand.getFraction();
-      if (otherIsNegative) {
+      if (otherIsNegative)
+      {
         operand1.setSign();
       }
     }
     Fractions operand2 = this.lowerOperand.getFraction();
-    if (currIsNegative) {
+    if (currIsNegative)
+    {
       operand2.setSign();
     }
-    if (this.currOperation == "+") {
+    if (this.currOperation.equals(PLUS))
+    {
       result = Calculations.addition(operand1, operand2);
-    } else if (this.currOperation == "-") {
+    }
+    else if (this.currOperation.equals(MINUS))
+    {
       result = Calculations.subtraction(operand1, operand2);
-    } else if (this.currOperation == "x") {
+    }
+    else if (this.currOperation.equals(TIMES))
+    {
       result = Calculations.multiplication(operand1, operand2);
-    } else if (this.currOperation == "\u00F7") {
+    }
+    else if (this.currOperation.equals(DIVIDE))
+    {
       result = Calculations.division(operand1, operand2);
-    } else if (this.currOperation == "\u21F9") {
+    }
+    else if (this.currOperation.equals(MEDIANT))
+    {
       result = Calculations.mediant(operand1, operand2);
-    } else if (this.currOperation == "x\u207F") {
+    }
+    else if (this.currOperation.equals(EXPONENT))
+    {
       result = Calculations.power(operand2, Integer.parseInt(this.exponent.getText()));
-    } else if (this.currOperation == ">" || this.currOperation == "<" 
-        || this.currOperation == "≝") {
-      if (this.currOperation == ">") {
+    }
+    else if (this.currOperation.equals(GREATER) || this.currOperation.equals(LESSER)
+        || this.currOperation.equals(EQUALTO))
+    {
+      if (this.currOperation.equals(GREATER))
+      {
         JOptionPane.showMessageDialog(this,
-            operand1.toString() + " > " + operand2.toString() + " is "
+            operand1.toString() + " > " + operand2.toString() + IS
                 + Calculations.greater(operand1, operand2),
             "Greater Than", JOptionPane.INFORMATION_MESSAGE);
-      } else if (this.currOperation == "<") {
+      }
+      else if (this.currOperation.equals(LESSER))
+      {
         JOptionPane.showMessageDialog(this,
-            operand1.toString() + " < " + operand2.toString() + " is "
+            operand1.toString() + " < " + operand2.toString() + IS
                 + Calculations.less(operand1, operand2),
             "Less Than", JOptionPane.INFORMATION_MESSAGE);
-      } else if (this.currOperation == "≝") {
+      }
+      else if (this.currOperation.equals(EQUALTO))
+      {
         JOptionPane.showMessageDialog(this,
-            operand1.toString() + " = " + operand2.toString() + " is "
+            operand1.toString() + " = " + operand2.toString() + IS
                 + Calculations.equal(operand1, operand2),
             "Equal To", JOptionPane.INFORMATION_MESSAGE);
       }
@@ -291,13 +398,16 @@ public class Display extends JPanel {
       return;
     }
     clear(upperPanel);
-    if (result.getIsNegative()) {
-      upperPanel.add(new JLabel("-"));
+    if (result.getIsNegative())
+    {
+      upperPanel.add(new JLabel(MINUS));
     }
-    if (MenuListener.reduce) {
+    if (MenuListener.reduce)
+    {
       result = Calculations.reduce(result);
     }
-    if (MenuListener.proper) {
+    if (MenuListener.proper)
+    {
       result = Calculations.proper(result);
     }
     this.upperOperand = new BarFractionDisplay();
@@ -309,10 +419,10 @@ public class Display extends JPanel {
     lowerPanel.add(this.lowerOperand);
 
     // This is the stuff for copying over into the calculation history
-    this.history.add(new JLabel("="), gbc);
-    this.history.add(new SlashFractionDisplay(result.getWholeNumber().toString().replace(" ", ""),
-        result.getNumerator().toString().replace(" ", ""),
-        result.getDenominator().toString().replace(" ", ""), null), gbc);
+    this.history.add(new JLabel(EQUALS), gbc);
+    this.history.add(new SlashFractionDisplay(result.getWholeNumber().toString().replace(SPACE, ""),
+        result.getNumerator().toString().replace(SPACE, ""),
+        result.getDenominator().toString().replace(SPACE, ""), null), gbc);
 
     fw.addHistoryEntry(history);
     fw.calcHistoryArea.add(history);
@@ -323,75 +433,106 @@ public class Display extends JPanel {
     this.equationCompleted = true;
     this.currOperation = "";
     this.exponentMode = false;
-    this.exponent.setText(" ");
+    this.exponent.setText(SPACE);
   }
 
-  private void updateDisplay() {
+  private void updateDisplay()
+  {
     updateLoc(loc);
     updateLoc(loc);
     updateLoc(loc);
   }
 
-  private void clear(JPanel panel) {
+  private void clear(final JPanel panel)
+  {
     panel.removeAll();
     panel.repaint();
   }
 
-  private void setEmptyLowerOperandDisplay(TypesettingStyles style) {
-    if (style == TypesettingStyles.BAR) {
+  private void setEmptyLowerOperandDisplay(final TypesettingStyles style1)
+  {
+    if (style1 == TypesettingStyles.BAR)
+    {
       this.lowerOperand = new BarFractionDisplay();
-    } else if (style == TypesettingStyles.SLASH) {
+    }
+    else if (style1 == TypesettingStyles.SLASH)
+    {
       this.lowerOperand = new SlashFractionDisplay();
-    } else if (style == TypesettingStyles.SOLIDUS) {
+    }
+    else if (style1 == TypesettingStyles.SOLIDUS)
+    {
       this.lowerOperand = new SolidusFractionDisplay();
     }
   }
 
-  private void setUpperOperandDisplay(TypesettingStyles style, String whole, String numerator,
-      String denominator) {
+  private void setUpperOperandDisplay(final TypesettingStyles style1, final String whole1,
+      final String numerator1, final String denominator1)
+  {
 
-    if (style == TypesettingStyles.BAR) {
-      this.upperOperand = new BarFractionDisplay(whole, numerator, denominator, null);
-    } else if (style == TypesettingStyles.SLASH) {
-      this.upperOperand = new SlashFractionDisplay(whole, numerator, denominator, null);
-    } else if (style == TypesettingStyles.SOLIDUS) {
-      this.upperOperand = new SolidusFractionDisplay(whole, numerator, denominator, null);
+    if (style1 == TypesettingStyles.BAR)
+    {
+      this.upperOperand = new BarFractionDisplay(whole1, numerator1, denominator1, null);
+    }
+    else if (style1 == TypesettingStyles.SLASH)
+    {
+      this.upperOperand = new SlashFractionDisplay(whole1, numerator1, denominator1, null);
+    }
+    else if (style1 == TypesettingStyles.SOLIDUS)
+    {
+      this.upperOperand = new SolidusFractionDisplay(whole1, numerator1, denominator1, null);
     }
   }
 
-  private void setLowerOperandDisplay(TypesettingStyles style, String whole, String numerator,
-      String denominator, FocusLocation loc) {
-    if (whole == " " && numerator == " " && denominator == " ") {
-      if (style == TypesettingStyles.BAR) {
+  private void setLowerOperandDisplay(final TypesettingStyles style1, final String whole1,
+      final String numerator, final String denominator, final FocusLocation loc1)
+  {
+    if (whole1 == SPACE && numerator == SPACE && denominator == SPACE)
+    {
+      if (style1 == TypesettingStyles.BAR)
+      {
         this.lowerOperand = new BarFractionDisplay();
-      } else if (style == TypesettingStyles.SLASH) {
+      }
+      else if (style1 == TypesettingStyles.SLASH)
+      {
         this.lowerOperand = new SlashFractionDisplay();
-      } else if (style == TypesettingStyles.SOLIDUS) {
+      }
+      else if (style1 == TypesettingStyles.SOLIDUS)
+      {
         this.lowerOperand = new SolidusFractionDisplay();
       }
-    } else {
-      if (style == TypesettingStyles.BAR) {
-        this.lowerOperand = new BarFractionDisplay(whole, numerator, denominator, loc);
-      } else if (style == TypesettingStyles.SLASH) {
-        this.lowerOperand = new SlashFractionDisplay(whole, numerator, denominator, loc);
-      } else if (style == TypesettingStyles.SOLIDUS) {
-        this.lowerOperand = new SolidusFractionDisplay(whole, numerator, denominator, loc);
+    }
+    else
+    {
+      if (style1 == TypesettingStyles.BAR)
+      {
+        this.lowerOperand = new BarFractionDisplay(whole1, numerator, denominator, loc1);
+      }
+      else if (style1 == TypesettingStyles.SLASH)
+      {
+        this.lowerOperand = new SlashFractionDisplay(whole1, numerator, denominator, loc1);
+      }
+      else if (style1 == TypesettingStyles.SOLIDUS)
+      {
+        this.lowerOperand = new SolidusFractionDisplay(whole1, numerator, denominator, loc1);
       }
     }
   }
-  
+
   /**
    * Changes the style of all fraction displays in the display to the given style.
    *
-   * @param style The fraction display style to change to.
+   * @param style1
+   *          The fraction display style to change to.
    */
-  public void changeStyle(TypesettingStyles style) {
-    this.style = style;
+  public void changeStyle(final TypesettingStyles style1)
+  {
+    this.style = style1;
 
-    setLowerOperandDisplay(style, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(),
+    setLowerOperandDisplay(style1, this.lowerOperand.getWhole(), this.lowerOperand.getNumerator(),
         this.lowerOperand.getDenominator(), this.lowerOperand.getFocusLocation());
-    if (this.upperOperand != null) {
-      setUpperOperandDisplay(style, this.upperOperand.getWhole(), this.upperOperand.getNumerator(),
+    if (this.upperOperand != null)
+    {
+      setUpperOperandDisplay(style1, this.upperOperand.getWhole(), this.upperOperand.getNumerator(),
           this.upperOperand.getDenominator());
       clear(upperPanel);
       upperPanel.add(this.upperOperand);
@@ -401,15 +542,35 @@ public class Display extends JPanel {
     updateDisplay();
   }
 
-  public void separatorsOn(boolean on) {
-    if(on) {
+  /**
+   * Changes whether the thousands separators are on or off in the display.
+   *
+   * @param on
+   *          True if on, false if off.
+   */
+  public void separatorsOn(final boolean on)
+  {
+    if (on)
+    {
       this.lowerOperand.addSeparators();
-      if(this.upperOperand != null) {
+      if (this.upperOperand != null)
+      {
         this.upperOperand.addSeparators();
       }
-    } else {
+    }
+    else
+    {
       this.lowerOperand.removeSeparators();
     }
   }
 
+  /**
+   * Returns the fragile window this display is in.
+   *
+   * @return FragileWindow The window this display is in.
+   */
+  public FragileWindow getWindow()
+  {
+    return this.fw;
+  }
 }

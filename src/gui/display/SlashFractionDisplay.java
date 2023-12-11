@@ -8,24 +8,26 @@ import gui.PreferencesDialog;
 /**
  * Represents a fraction displayed in the slash style.
  */
-public class SlashFractionDisplay extends FractionDisplay {
-
-  private JLabel slash = new JLabel("/");
+public class SlashFractionDisplay extends FractionDisplay
+{
+  private static final String SPACE = " ";
+  private static final String SLASH = "/";
+  private JLabel slash = new JLabel(SLASH);
   private boolean addGap = true;
 
   /**
    * Creates an empty fraction display in the slash style.
    */
-  public SlashFractionDisplay() {
-    this.wholeNum = " ";
+  public SlashFractionDisplay()
+  {
+    this.wholeNum = SPACE;
     this.whole = new JLabel(wholeNum);
-    this.numeratorNum = " ";
+    this.numeratorNum = SPACE;
     this.numerator = new JLabel(numeratorNum);
-    this.denominatorNum = " ";
+    this.denominatorNum = SPACE;
     this.denominator = new JLabel(denominatorNum);
     draw();
-    
-    
+
   }
 
   /**
@@ -40,8 +42,9 @@ public class SlashFractionDisplay extends FractionDisplay {
    * @param loc
    *          The location of the focus indicator.
    */
-  public SlashFractionDisplay(String whole, String numerator, String denominator, 
-      FocusLocation loc) {
+  public SlashFractionDisplay(final String whole, final String numerator, final String denominator,
+      final FocusLocation loc)
+  {
     this.wholeNum = whole;
     this.whole = new JLabel(wholeNum);
     this.numeratorNum = numerator;
@@ -49,13 +52,19 @@ public class SlashFractionDisplay extends FractionDisplay {
     this.denominatorNum = denominator;
     this.denominator = new JLabel(denominatorNum);
     this.loc = loc;
-    if (PreferencesDialog.separatorsCheckbox.isSelected()) {
+    if (PreferencesDialog.separatorsCheckbox.isSelected())
+    {
       super.addSeparators();
-    } else if (!this.whole.getText().equals(" ")) {
-      this.slash.setText("/");
-    } else {
-      if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
-          || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
+    }
+    else if (!this.whole.getText().equals(SPACE))
+    {
+      this.slash.setText(SLASH);
+    }
+    else
+    {
+      if (this.numerator.getText().equals(SPACE) && this.denominator.getText().equals(SPACE)
+          || this.numerator.getText().equals("") && this.denominator.getText().equals(""))
+      {
         this.slash.setText("");
         this.addGap = false;
       }
@@ -65,11 +74,13 @@ public class SlashFractionDisplay extends FractionDisplay {
   }
 
   @Override
-  public void draw() {
+  public void draw()
+  {
     setLayout(new FlowLayout());
     add(whole);
     // Creates a gap between numerator and whole to make them easier to differentiate.
-    if (this.addGap) {
+    if (this.addGap)
+    {
       add(new JLabel("  "));
     }
     add(numerator);

@@ -8,25 +8,27 @@ import javax.swing.SwingConstants;
 
 import gui.PreferencesDialog;
 
-
 /**
  * Represents a fraction in the solidus style.
  */
-public class SolidusFractionDisplay extends FractionDisplay {
-
-  private JLabel slash = new JLabel("/");
+public class SolidusFractionDisplay extends FractionDisplay
+{
+  private static final String SLASH = "/";
+  private static final String SPACE = " ";
+  private JLabel slash = new JLabel(SLASH);
   private JPanel numeratorPanel = new JPanel();
   private JPanel denominatorPanel = new JPanel();
 
   /**
    * Creates a new empty fraction display in the solidus style.
    */
-  public SolidusFractionDisplay() {
-    this.wholeNum = " ";
+  public SolidusFractionDisplay()
+  {
+    this.wholeNum = SPACE;
     this.whole = new JLabel(wholeNum);
-    this.numeratorNum = " ";
+    this.numeratorNum = SPACE;
     this.numerator = new JLabel(numeratorNum);
-    this.denominatorNum = " ";
+    this.denominatorNum = SPACE;
     this.denominator = new JLabel(denominatorNum);
     draw();
   }
@@ -43,21 +45,28 @@ public class SolidusFractionDisplay extends FractionDisplay {
    * @param loc
    *          The location of the focus indicator.
    */
-  public SolidusFractionDisplay(String whole, String numerator, String denominator,
-      FocusLocation loc) {
+  public SolidusFractionDisplay(final String whole, final String numerator,
+      final String denominator, final FocusLocation loc)
+  {
     this.wholeNum = whole;
     this.whole = new JLabel(wholeNum);
     this.numeratorNum = numerator;
     this.numerator = new JLabel(numeratorNum);
     this.denominatorNum = denominator;
     this.denominator = new JLabel(denominatorNum);
-    if (PreferencesDialog.separatorsCheckbox.isSelected()) {
+    if (PreferencesDialog.separatorsCheckbox.isSelected())
+    {
       super.addSeparators();
-    } else if (!this.whole.getText().equals(" ")) {
-      this.slash.setText("/");
-    } else {
-      if (this.numerator.getText().equals(" ") && this.denominator.getText().equals(" ")
-          || this.numerator.getText().equals("") && this.denominator.getText().equals("")) {
+    }
+    else if (!this.whole.getText().equals(SPACE))
+    {
+      this.slash.setText(SLASH);
+    }
+    else
+    {
+      if (this.numerator.getText().equals(SPACE) && this.denominator.getText().equals(SPACE)
+          || this.numerator.getText().equals("") && this.denominator.getText().equals(""))
+      {
         this.slash.setText("");
       }
     }
@@ -65,21 +74,23 @@ public class SolidusFractionDisplay extends FractionDisplay {
   }
 
   @Override
-  public void draw() {
+  public void draw()
+  {
     numerator.setHorizontalAlignment(SwingConstants.CENTER);
     denominator.setHorizontalAlignment(SwingConstants.CENTER);
 
     setLayout(new FlowLayout());
-    if (!this.whole.getText().equals("0")) {
+    if (!this.whole.getText().equals("0"))
+    {
       add(whole);
     }
     numeratorPanel.setLayout(new BoxLayout(numeratorPanel, BoxLayout.Y_AXIS));
 
     numeratorPanel.add(numerator);
-    numeratorPanel.add(new JLabel(" "));
+    numeratorPanel.add(new JLabel(SPACE));
 
     denominatorPanel.setLayout(new BoxLayout(denominatorPanel, BoxLayout.Y_AXIS));
-    denominatorPanel.add(new JLabel(" "));
+    denominatorPanel.add(new JLabel(SPACE));
     denominatorPanel.add(denominator);
 
     setLayout(new FlowLayout());
