@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.util.*;
 import javax.swing.*;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 /**
@@ -14,6 +15,9 @@ import java.io.IOException;
 * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 * https://stackoverflow.com/questions/6555040/multiple-input-in-joptionpane-showinputdialog
 * https://www.youtube.com/watch?v=uaQ1bBoK7HU
+* 
+* and this for saving/loading preferences:
+* https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html
 *
 * @author      Connor Dunn
 * @version     1.3
@@ -110,30 +114,54 @@ public class PreferencesDialog extends JDialog
 		}
 		return list;
 	}
-	
+
 	public void saveToFile() {
-		try {
-	        FileWriter fileWriter = new FileWriter("./src/gui/Preferences.txt");
-	        String[] preferences = getPreferences();
-	        for (String pref : preferences) {
-	            fileWriter.write(pref + "\n");
-	        }
-	        fileWriter.close();
-	    } catch (IOException e) {
-	        e.printStackTrace();
+	  try {
+	    Properties properties = new Properties();
+
+	    for (Map.Entry<String, JTextField> entry : menuShortcuts.entrySet()) {
+	      properties.setProperty(entry.getKey(), entry.getValue().getText());
 	    }
-    }
-	
+
+	    properties.setProperty("separators", separatorsCheckbox.isSelected() ? "TRUE" : "FALSE");
+
+	    try (FileWriter fileWriter = new FileWriter("./src/gui/Preferences.properties")) {
+	      properties.store(fileWriter, STRINGS.getString("CALC_PREF"));
+	    }
+
+	  } catch (IOException e) {
+	    e.printStackTrace();
+	  }
+	}
+
 	public void loadFromFile() {
-		// TODO
-    }
-	
+	  try {
+	    Properties properties = new Properties();
+
+	    try (FileReader fileReader = new FileReader("./src/gui/Preferences.properties")) {
+	      properties.load(fileReader);
+	    }
+
+	    for (Map.Entry<String, JTextField> entry : menuShortcuts.entrySet()) {
+	      String menuItemName = entry.getKey();
+	      String shortcut = properties.getProperty(menuItemName, "");
+	      entry.getValue().setText(shortcut);
+	    }
+
+	    String separatorsValue = properties.getProperty("separators", "FALSE");
+	    separatorsCheckbox.setSelected(separatorsValue.equals("TRUE"));
+
+	  } catch (IOException e) {
+	    e.printStackTrace();
+	  }
+	}
+
 	/**
 	 * The getter for the shortcuts
 	 *
 	 * @return the menuShortcuts
 	 */
 	public Map<String, JTextField> getMenuShortcuts() {
-		return menuShortcuts;
+	  return menuShortcuts;
 	}
 }

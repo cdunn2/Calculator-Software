@@ -42,7 +42,7 @@ public class MenuListener implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getActionCommand().equals(STRINGS.getString("EXIT"))) {
-			System.exit(0);
+		  fw.dispose();
 		} else if (e.getActionCommand().equals(STRINGS.getString("ABOUT"))) {
 			AboutWindow.main(null);
 		} else if (e.getActionCommand().equals(STRINGS.getString("NEW"))) {

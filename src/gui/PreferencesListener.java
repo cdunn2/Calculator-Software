@@ -70,7 +70,7 @@ public class PreferencesListener implements ActionListener {
     {
       String menuItemName = entry.getKey();
       JTextField textField = entry.getValue();
-      String shortcut = textField.getText().trim();
+      String shortcut = textField.getText().trim().toUpperCase();
       addShortcut(menuItemName, shortcut);
     }
   }
