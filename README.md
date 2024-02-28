@@ -5,7 +5,8 @@ Welcome to the Calculator Software repository! This project is a Java-based calc
 
 ## Features
 - Basic arithmetic operations (addition, subtraction, multiplication, division)
-- Advanced functions (square root, exponentiation, trigonometric functions)
+- Advanced functions (exponentiation, inverse, reduce/simplify)
+- Menu functionality (file options, mode, style, saving preferences, help, and about)
 - User-friendly interface with intuitive design
 - Error handling for invalid inputs
 
@@ -29,6 +30,9 @@ Welcome to the Calculator Software repository! This project is a Java-based calc
 1. Launch the calculator application.
 2. Enter mathematical expressions or use the buttons for basic and advanced operations.
 3. Experience a smooth and efficient calculation process.
+
+## Help
+- For help using the software, simply select the "Help" menu item, and select the "Help" dropdown.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
